@@ -108,6 +108,18 @@
                         <li>
                             <%: Html.ActionLink("Dashboard","Index","Dashboard") %>
                         </li>
+                         <li>
+                            <%: Html.ActionLink("Audit Trail","Index","Audit") %>
+                        </li>
+                         <li>
+                            <%: Html.ActionLink("Admin Login Logs","Index","AdminLog") %>
+                        </li>
+                         <li>
+                            <%: Html.ActionLink("User List","Index","User") %>
+                        </li>
+                         <li>
+                            <%: Html.ActionLink("Company Info","Index","CompanyInfo") %>
+                        </li>
                         <li>
                             <%: Html.ActionLink("Product Category","Index","ProductCategory") %>
                         </li>
@@ -124,11 +136,11 @@
                         </li>
 
                         <li>
-                            <%: Html.ActionLink("Common Paper terms","Index","CommonTerm") %>
+                            <%: Html.ActionLink("Common Paper terms","Index","CommonTerms") %>
                         </li>
 
                         <li>
-                            <%: Html.ActionLink("Common Printing terms","Index","CommonTerm") %>
+                            <%: Html.ActionLink("Common Printing terms","Index","CommonTerms") %>
                         </li>
 
                         <li>

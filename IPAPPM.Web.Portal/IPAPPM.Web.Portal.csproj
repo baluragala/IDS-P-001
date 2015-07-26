@@ -170,11 +170,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminLogController.cs" />
+    <Compile Include="Controllers\CommonTermsController.cs" />
+    <Compile Include="Controllers\CompanyInfoController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProductCategoryController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SellerController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserQuestionController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -267,6 +271,10 @@
     <Content Include="Images\Dustbin.png" />
     <Content Include="Images\Edit.png" />
     <Content Include="Images\ip-logo.png" />
+    <Content Include="Images\LD_iPhone6_userscreen.jpg" />
+    <Content Include="Images\Product\2_feature_importance.png" />
+    <Content Include="Images\Product\AXdiagramFlow2.png" />
+    <Content Include="Images\Product\VS_SPEvents-1.png" />
     <Content Include="Images\sort_asc.png" />
     <Content Include="Images\sort_both.png" />
     <Content Include="Images\sort_desc.png" />
@@ -379,6 +387,21 @@
     <Content Include="Scripts\tinymce\skins\lightgray\skin.min.css" />
     <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
+    <Content Include="Views\AdminLog\Create.aspx" />
+    <Content Include="Views\AdminLog\Delete.aspx" />
+    <Content Include="Views\AdminLog\Details.aspx" />
+    <Content Include="Views\AdminLog\Edit.aspx" />
+    <Content Include="Views\AdminLog\Index.aspx" />
+    <Content Include="Views\CommonTerms\Create.aspx" />
+    <Content Include="Views\CommonTerms\Delete.aspx" />
+    <Content Include="Views\CommonTerms\Details.aspx" />
+    <Content Include="Views\CommonTerms\Edit.aspx" />
+    <Content Include="Views\CommonTerms\Index.aspx" />
+    <Content Include="Views\CompanyInfo\Create.aspx" />
+    <Content Include="Views\CompanyInfo\Delete.aspx" />
+    <Content Include="Views\CompanyInfo\Details.aspx" />
+    <Content Include="Views\CompanyInfo\Edit.aspx" />
+    <Content Include="Views\CompanyInfo\Index.aspx" />
     <Content Include="Views\Dashboard\Index.aspx" />
     <Content Include="Views\Notification\Create.aspx" />
     <Content Include="Views\Notification\Delete.aspx" />
@@ -405,6 +428,11 @@
     <Content Include="Views\UserQuestion\Details.aspx" />
     <Content Include="Views\UserQuestion\Edit.aspx" />
     <Content Include="Views\UserQuestion\Index.aspx" />
+    <Content Include="Views\User\Create.aspx" />
+    <Content Include="Views\User\Delete.aspx" />
+    <Content Include="Views\User\Details.aspx" />
+    <Content Include="Views\User\Edit.aspx" />
+    <Content Include="Views\User\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -412,7 +440,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
@@ -444,7 +471,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\ProductCategory\" />
-    <Folder Include="Images\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

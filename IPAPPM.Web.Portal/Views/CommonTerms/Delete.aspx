@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IPAPPM.Web.Portal.Models.tbl_SellerDetails>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IPAPPM.Web.Portal.Models.tbl_CommonTerms>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Delete
@@ -10,57 +10,63 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
-    <legend>tbl_SellerDetails</legend>
+    <legend>tbl_CommonTerms</legend>
 
     <div class="display-label">
-        <%: Html.DisplayNameFor(model => model.Seller_Name) %>
+        <%: Html.DisplayNameFor(model => model.Title) %>
     </div>
     <div class="display-field">
-        <%: Html.DisplayFor(model => model.Seller_Name) %>
-    </div>
-
-    <div class="display-label">
-        <%: Html.DisplayNameFor(model => model.Seller_code) %>
-    </div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.Seller_code) %>
+        <%: Html.DisplayFor(model => model.Title) %>
     </div>
 
     <div class="display-label">
-        <%: Html.DisplayNameFor(model => model.Address) %>
+        <%: Html.DisplayNameFor(model => model.Description) %>
     </div>
     <div class="display-field">
-        <%: Html.Raw(Model.Address) %>
-    </div>
-    <div class="display-label">
-        <%: Html.DisplayNameFor(model => model.PhoneNumbers) %>
-    </div>
-    <div class="display-field">
-         <%: Html.Raw(Model.PhoneNumbers) %>
+        <%: Html.DisplayFor(model => model.Description) %>
     </div>
 
     <div class="display-label">
-        <%: Html.DisplayNameFor(model => model.tbl_SellerType.Seller_Type) %>
+        <%: Html.DisplayNameFor(model => model.TermType) %>
     </div>
     <div class="display-field">
-        <%: Html.DisplayFor(model => model.tbl_SellerType.Seller_Type) %>
+        <%: Html.DisplayFor(model => model.TermType) %>
     </div>
 
     <div class="display-label">
-        <%: Html.DisplayNameFor(model => model.tbl_State.State_Name) %>
+        <%: Html.DisplayNameFor(model => model.ISActive) %>
     </div>
     <div class="display-field">
-        <%: Html.DisplayFor(model => model.tbl_State.State_Name) %>
+        <%: Html.DisplayFor(model => model.ISActive) %>
     </div>
 
     <div class="display-label">
-        <%: Html.DisplayNameFor(model => model.tbl_City.City_Name) %>
+        <%: Html.DisplayNameFor(model => model.CreatedBy) %>
     </div>
     <div class="display-field">
-        <%: Html.DisplayFor(model => model.tbl_City.City_Name) %>
+        <%: Html.DisplayFor(model => model.CreatedBy) %>
     </div>
 
-   
+    <div class="display-label">
+        <%: Html.DisplayNameFor(model => model.CaretedDate) %>
+    </div>
+    <div class="display-field">
+        <%: Html.DisplayFor(model => model.CaretedDate) %>
+    </div>
+
+    <div class="display-label">
+        <%: Html.DisplayNameFor(model => model.ModifiedBy) %>
+    </div>
+    <div class="display-field">
+        <%: Html.DisplayFor(model => model.ModifiedBy) %>
+    </div>
+
+    <div class="display-label">
+        <%: Html.DisplayNameFor(model => model.ModifiedDate) %>
+    </div>
+    <div class="display-field">
+        <%: Html.DisplayFor(model => model.ModifiedDate) %>
+    </div>
 </fieldset>
 <% using (Html.BeginForm()) { %>
     <p>

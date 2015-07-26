@@ -10,7 +10,6 @@
           <EntitySet Name="tbl_CommonTerms" EntityType="IPAPPM.Model.Store.tbl_CommonTerms" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_CompanyInfo" EntityType="IPAPPM.Model.Store.tbl_CompanyInfo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_CompanyType" EntityType="IPAPPM.Model.Store.tbl_CompanyType" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="tbl_FavoriteProduct" EntityType="IPAPPM.Model.Store.tbl_FavoriteProduct" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_LoginAudit" EntityType="IPAPPM.Model.Store.tbl_LoginAudit" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_Mobile_Verification" EntityType="IPAPPM.Model.Store.tbl_Mobile_Verification" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_MRoles" EntityType="IPAPPM.Model.Store.tbl_MRoles" store:Type="Tables" Schema="dbo" />
@@ -18,6 +17,7 @@
           <EntitySet Name="tbl_ProductCategory" EntityType="IPAPPM.Model.Store.tbl_ProductCategory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_ProductDetails" EntityType="IPAPPM.Model.Store.tbl_ProductDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_SellerDetails" EntityType="IPAPPM.Model.Store.tbl_SellerDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_SellerProductCategories" EntityType="IPAPPM.Model.Store.tbl_SellerProductCategories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_SellerType" EntityType="IPAPPM.Model.Store.tbl_SellerType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_State" EntityType="IPAPPM.Model.Store.tbl_State" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_UserDetails" EntityType="IPAPPM.Model.Store.tbl_UserDetails" store:Type="Tables" Schema="dbo" />
@@ -27,17 +27,21 @@
             <End Role="tbl_State" EntitySet="tbl_State" />
             <End Role="tbl_City" EntitySet="tbl_City" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_Login__UserI__5DCAEF64" Association="IPAPPM.Model.Store.FK__tbl_Login__UserI__5DCAEF64">
-            <End Role="tbl_UserDetails" EntitySet="tbl_UserDetails" />
-            <End Role="tbl_LoginAudit" EntitySet="tbl_LoginAudit" />
-          </AssociationSet>
           <AssociationSet Name="FK__tbl_Produ__Categ__25518C17" Association="IPAPPM.Model.Store.FK__tbl_Produ__Categ__25518C17">
             <End Role="tbl_ProductCategory" EntitySet="tbl_ProductCategory" />
             <End Role="tbl_ProductDetails" EntitySet="tbl_ProductDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK__tbl_Selle__Produ__6DCC4D03" Association="IPAPPM.Model.Store.FK__tbl_Selle__Produ__6DCC4D03">
+            <End Role="tbl_ProductCategory" EntitySet="tbl_ProductCategory" />
+            <End Role="tbl_SellerProductCategories" EntitySet="tbl_SellerProductCategories" />
+          </AssociationSet>
           <AssociationSet Name="FK__tbl_Selle__Selle__2B0A656D" Association="IPAPPM.Model.Store.FK__tbl_Selle__Selle__2B0A656D">
             <End Role="tbl_SellerType" EntitySet="tbl_SellerType" />
             <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Selle__Selle__6CD828CA" Association="IPAPPM.Model.Store.FK__tbl_Selle__Selle__6CD828CA">
+            <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
+            <End Role="tbl_SellerProductCategories" EntitySet="tbl_SellerProductCategories" />
           </AssociationSet>
           <AssociationSet Name="FK__tbl_Selle__State__2BFE89A6" Association="IPAPPM.Model.Store.FK__tbl_Selle__State__2BFE89A6">
             <End Role="tbl_State" EntitySet="tbl_State" />
@@ -108,14 +112,6 @@
           <Property Name="Description" Type="varchar" MaxLength="100" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
-        <EntityType Name="tbl_FavoriteProduct">
-          <Key>
-            <PropertyRef Name="FavoriteProduct_Id" />
-          </Key>
-          <Property Name="FavoriteProduct_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="Product_Id" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="tbl_LoginAudit">
           <Key>
             <PropertyRef Name="LAudit_Id" />
@@ -123,7 +119,7 @@
           <Property Name="LAudit_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="LoginTime" Type="datetime" Nullable="false" />
           <Property Name="LogOutTime" Type="datetime" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="56" />
         </EntityType>
         <EntityType Name="tbl_Mobile_Verification">
           <Key>
@@ -203,6 +199,14 @@
           <Property Name="ModifiedBy" Type="varchar" MaxLength="20" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbl_SellerProductCategories">
+          <Key>
+            <PropertyRef Name="Seller_Id" />
+            <PropertyRef Name="ProductCategory_Id" />
+          </Key>
+          <Property Name="Seller_Id" Type="int" Nullable="false" />
+          <Property Name="ProductCategory_Id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbl_SellerType">
           <Key>
             <PropertyRef Name="SellerType_Id" />
@@ -277,18 +281,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_Login__UserI__5DCAEF64">
-          <End Role="tbl_UserDetails" Type="IPAPPM.Model.Store.tbl_UserDetails" Multiplicity="1" />
-          <End Role="tbl_LoginAudit" Type="IPAPPM.Model.Store.tbl_LoginAudit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_UserDetails">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="tbl_LoginAudit">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__tbl_Produ__Categ__25518C17">
           <End Role="tbl_ProductCategory" Type="IPAPPM.Model.Store.tbl_ProductCategory" Multiplicity="0..1" />
           <End Role="tbl_ProductDetails" Type="IPAPPM.Model.Store.tbl_ProductDetails" Multiplicity="*" />
@@ -301,6 +293,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__tbl_Selle__Produ__6DCC4D03">
+          <End Role="tbl_ProductCategory" Type="IPAPPM.Model.Store.tbl_ProductCategory" Multiplicity="1" />
+          <End Role="tbl_SellerProductCategories" Type="IPAPPM.Model.Store.tbl_SellerProductCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ProductCategory">
+              <PropertyRef Name="Category_Id" />
+            </Principal>
+            <Dependent Role="tbl_SellerProductCategories">
+              <PropertyRef Name="ProductCategory_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__tbl_Selle__Selle__2B0A656D">
           <End Role="tbl_SellerType" Type="IPAPPM.Model.Store.tbl_SellerType" Multiplicity="1" />
           <End Role="tbl_SellerDetails" Type="IPAPPM.Model.Store.tbl_SellerDetails" Multiplicity="*" />
@@ -310,6 +314,18 @@
             </Principal>
             <Dependent Role="tbl_SellerDetails">
               <PropertyRef Name="SellerType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Selle__Selle__6CD828CA">
+          <End Role="tbl_SellerDetails" Type="IPAPPM.Model.Store.tbl_SellerDetails" Multiplicity="1" />
+          <End Role="tbl_SellerProductCategories" Type="IPAPPM.Model.Store.tbl_SellerProductCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_SellerDetails">
+              <PropertyRef Name="Seller_Id" />
+            </Principal>
+            <Dependent Role="tbl_SellerProductCategories">
+              <PropertyRef Name="Seller_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -381,7 +397,6 @@
           <EntitySet Name="tbl_City" EntityType="IPAPPM.Model.tbl_City" />
           <EntitySet Name="tbl_CommonTerms" EntityType="IPAPPM.Model.tbl_CommonTerms" />
           <EntitySet Name="tbl_CompanyType" EntityType="IPAPPM.Model.tbl_CompanyType" />
-          <EntitySet Name="tbl_LoginAudit" EntityType="IPAPPM.Model.tbl_LoginAudit" />
           <EntitySet Name="tbl_Mobile_Verification" EntityType="IPAPPM.Model.tbl_Mobile_Verification" />
           <EntitySet Name="tbl_MRoles" EntityType="IPAPPM.Model.tbl_MRoles" />
           <EntitySet Name="tbl_Notifications" EntityType="IPAPPM.Model.tbl_Notifications" />
@@ -398,10 +413,6 @@
           <AssociationSet Name="FK__tbl_UserD__Compa__145C0A3F" Association="IPAPPM.Model.FK__tbl_UserD__Compa__145C0A3F">
             <End Role="tbl_CompanyType" EntitySet="tbl_CompanyType" />
             <End Role="tbl_UserDetails" EntitySet="tbl_UserDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tbl_Login__UserI__5DCAEF64" Association="IPAPPM.Model.FK__tbl_Login__UserI__5DCAEF64">
-            <End Role="tbl_UserDetails" EntitySet="tbl_UserDetails" />
-            <End Role="tbl_LoginAudit" EntitySet="tbl_LoginAudit" />
           </AssociationSet>
           <AssociationSet Name="FK__tbl_UserD__RoleI__15502E78" Association="IPAPPM.Model.FK__tbl_UserD__RoleI__15502E78">
             <End Role="tbl_MRoles" EntitySet="tbl_MRoles" />
@@ -428,9 +439,13 @@
             <End Role="tbl_State" EntitySet="tbl_State" />
             <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
           </AssociationSet>
-          <EntitySet Name="tbl_FavoriteProduct" EntityType="IPAPPM.Model.tbl_FavoriteProduct" />
           <EntitySet Name="tbl_CompanyInfo" EntityType="IPAPPM.Model.tbl_CompanyInfo" />
           <EntitySet Name="tbl_UserNotifications" EntityType="IPAPPM.Model.tbl_UserNotifications" />
+          <AssociationSet Name="tbl_SellerProductCategories" Association="IPAPPM.Model.tbl_SellerProductCategories">
+            <End Role="tbl_ProductCategory" EntitySet="tbl_ProductCategory" />
+            <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
+          </AssociationSet>
+          <EntitySet Name="tbl_LoginAudit" EntityType="IPAPPM.Model.tbl_LoginAudit" />
         </EntityContainer>
         <EntityType Name="tbl_City">
           <Key>
@@ -467,16 +482,6 @@
           <Property Name="Description" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="tbl_UserDetails" Relationship="IPAPPM.Model.FK__tbl_UserD__Compa__145C0A3F" FromRole="tbl_CompanyType" ToRole="tbl_UserDetails" />
-        </EntityType>
-        <EntityType Name="tbl_LoginAudit">
-          <Key>
-            <PropertyRef Name="LAudit_Id" />
-          </Key>
-          <Property Name="LAudit_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LoginTime" Type="DateTime" Nullable="false" />
-          <Property Name="LogOutTime" Type="DateTime" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tbl_UserDetails" Relationship="IPAPPM.Model.FK__tbl_Login__UserI__5DCAEF64" FromRole="tbl_LoginAudit" ToRole="tbl_UserDetails" />
         </EntityType>
         <EntityType Name="tbl_Mobile_Verification">
           <Key>
@@ -519,6 +524,7 @@
           <Property Name="ModifiedDate" Type="DateTime" />
           <Property Name="ImagePath" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="tbl_ProductDetails" Relationship="IPAPPM.Model.FK__tbl_Produ__Categ__25518C17" FromRole="tbl_ProductCategory" ToRole="tbl_ProductDetails" />
+          <NavigationProperty Name="tbl_SellerDetails" Relationship="IPAPPM.Model.tbl_SellerProductCategories" FromRole="tbl_ProductCategory" ToRole="tbl_SellerDetails" />
         </EntityType>
         <EntityType Name="tbl_ProductDetails">
           <Key>
@@ -584,7 +590,6 @@
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="tbl_CompanyType" Relationship="IPAPPM.Model.FK__tbl_UserD__Compa__145C0A3F" FromRole="tbl_UserDetails" ToRole="tbl_CompanyType" />
-          <NavigationProperty Name="tbl_LoginAudit" Relationship="IPAPPM.Model.FK__tbl_Login__UserI__5DCAEF64" FromRole="tbl_UserDetails" ToRole="tbl_LoginAudit" />
           <NavigationProperty Name="tbl_MRoles" Relationship="IPAPPM.Model.FK__tbl_UserD__RoleI__15502E78" FromRole="tbl_UserDetails" ToRole="tbl_MRoles" />
           <NavigationProperty Name="tbl_UserQuestions" Relationship="IPAPPM.Model.FK__tbl_UserQ__UserI__534D60F1" FromRole="tbl_UserDetails" ToRole="tbl_UserQuestions" />
         </EntityType>
@@ -624,18 +629,6 @@
             </Principal>
             <Dependent Role="tbl_UserDetails">
               <PropertyRef Name="CompanyType_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__tbl_Login__UserI__5DCAEF64">
-          <End Role="tbl_UserDetails" Type="IPAPPM.Model.tbl_UserDetails" Multiplicity="1" />
-          <End Role="tbl_LoginAudit" Type="IPAPPM.Model.tbl_LoginAudit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_UserDetails">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="tbl_LoginAudit">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -695,6 +688,7 @@
           <NavigationProperty Name="tbl_City" Relationship="IPAPPM.Model.FK__tbl_Seller__City__2CF2ADDF" FromRole="tbl_SellerDetails" ToRole="tbl_City" />
           <NavigationProperty Name="tbl_SellerType" Relationship="IPAPPM.Model.FK__tbl_Selle__Selle__2B0A656D" FromRole="tbl_SellerDetails" ToRole="tbl_SellerType" />
           <NavigationProperty Name="tbl_State" Relationship="IPAPPM.Model.FK__tbl_Selle__State__2BFE89A6" FromRole="tbl_SellerDetails" ToRole="tbl_State" />
+          <NavigationProperty Name="tbl_ProductCategory" Relationship="IPAPPM.Model.tbl_SellerProductCategories" FromRole="tbl_SellerDetails" ToRole="tbl_ProductCategory" />
         </EntityType>
         <Association Name="FK__tbl_Seller__City__2CF2ADDF">
           <End Type="IPAPPM.Model.tbl_City" Role="tbl_City" Multiplicity="1" />
@@ -732,14 +726,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tbl_FavoriteProduct">
-          <Key>
-            <PropertyRef Name="FavoriteProduct_Id" />
-          </Key>
-          <Property Type="Int32" Name="FavoriteProduct_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="UserId" />
-          <Property Type="Int32" Name="Product_Id" Nullable="false" />
-        </EntityType>
         <EntityType Name="tbl_CompanyInfo">
           <Key>
             <PropertyRef Name="Comapny_Id" />
@@ -762,6 +748,19 @@
           <Property Type="Int64" Name="UserNotification_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="Notification_Id" Nullable="false" />
           <Property Type="Int32" Name="UserId" Nullable="false" />
+        </EntityType>
+        <Association Name="tbl_SellerProductCategories">
+          <End Type="IPAPPM.Model.tbl_ProductCategory" Role="tbl_ProductCategory" Multiplicity="*" />
+          <End Type="IPAPPM.Model.tbl_SellerDetails" Role="tbl_SellerDetails" Multiplicity="*" />
+        </Association>
+        <EntityType Name="tbl_LoginAudit">
+          <Key>
+            <PropertyRef Name="LAudit_Id" />
+          </Key>
+          <Property Type="Int32" Name="LAudit_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="LoginTime" Nullable="false" />
+          <Property Type="DateTime" Name="LogOutTime" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -802,16 +801,6 @@
                 <ScalarProperty Name="Target_Type" ColumnName="Target_Type" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_LoginAudit">
-            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_LoginAudit">
-              <MappingFragment StoreEntitySet="tbl_LoginAudit">
-                <ScalarProperty Name="LAudit_Id" ColumnName="LAudit_Id" />
-                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
-                <ScalarProperty Name="LogOutTime" ColumnName="LogOutTime" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -957,15 +946,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_FavoriteProduct">
-            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_FavoriteProduct">
-              <MappingFragment StoreEntitySet="tbl_FavoriteProduct">
-                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FavoriteProduct_Id" ColumnName="FavoriteProduct_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbl_CompanyInfo">
             <EntityTypeMapping TypeName="IPAPPM.Model.tbl_CompanyInfo">
               <MappingFragment StoreEntitySet="tbl_CompanyInfo">
@@ -988,6 +968,24 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Notification_Id" ColumnName="Notification_Id" />
                 <ScalarProperty Name="UserNotification_Id" ColumnName="UserNotification_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="tbl_SellerProductCategories" TypeName="IPAPPM.Model.tbl_SellerProductCategories" StoreEntitySet="tbl_SellerProductCategories">
+            <EndProperty Name="tbl_SellerDetails">
+              <ScalarProperty Name="Seller_Id" ColumnName="Seller_Id" />
+            </EndProperty>
+            <EndProperty Name="tbl_ProductCategory">
+              <ScalarProperty Name="Category_Id" ColumnName="ProductCategory_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="tbl_LoginAudit">
+            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_LoginAudit">
+              <MappingFragment StoreEntitySet="tbl_LoginAudit">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LogOutTime" ColumnName="LogOutTime" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="LAudit_Id" ColumnName="LAudit_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1015,7 +1013,6 @@
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_City" Width="1.5" PointX="10" PointY="3" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_CommonTerms" Width="1.5" PointX="5.75" PointY="11.375" Height="2.7494921874999996" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_CompanyType" Width="1.5" PointX="0.75" PointY="3.5" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="IPAPPM.Model.tbl_LoginAudit" Width="1.5" PointX="5.25" PointY="1.75" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_Mobile_Verification" Width="1.5" PointX="11.75" PointY="11.375" Height="1.7879850260416674" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_MRoles" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5956835937499996" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_Notifications" Width="1.5" PointX="12.75" PointY="7.375" Height="1.9802864583333326" IsExpanded="true" />
@@ -1033,18 +1030,14 @@
           <ConnectorPoint PointX="2.25" PointY="4.5862939453125" />
           <ConnectorPoint PointX="3" PointY="4.5862939453125" />
         </AssociationConnector>
-        <AssociationConnector Association="IPAPPM.Model.FK__tbl_Login__UserI__5DCAEF64" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="2.9901432291666659" />
-          <ConnectorPoint PointX="5.25" PointY="2.9901432291666659" />
-        </AssociationConnector>
         <AssociationConnector Association="IPAPPM.Model.FK__tbl_UserD__RoleI__15502E78" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="1.4999995" />
           <ConnectorPoint PointX="3.75" PointY="1.4999995" />
           <ConnectorPoint PointX="3.75" PointY="2.25" />
         </AssociationConnector>
         <AssociationConnector Association="IPAPPM.Model.FK__tbl_Produ__Categ__25518C17" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="10.720896809895837" />
-          <ConnectorPoint PointX="3" PointY="10.720896809895837" />
+          <ConnectorPoint PointX="2.25" PointY="10.817047526041666" />
+          <ConnectorPoint PointX="3" PointY="10.817047526041666" />
         </AssociationConnector>
         <AssociationConnector Association="IPAPPM.Model.FK__tbl_UserQ__UserI__534D60F1" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="5.6151025390625016" />
@@ -1056,18 +1049,29 @@
           <ConnectorPoint PointX="12.25" PointY="4.0862939453125" />
         </AssociationConnector>
         <AssociationConnector Association="IPAPPM.Model.FK__tbl_Selle__Selle__2B0A656D" >
-          <ConnectorPoint PointX="11.5" PointY="9.9586393229166656" />
-          <ConnectorPoint PointX="12.46875" PointY="9.9586393229166656" />
-          <ConnectorPoint PointX="12.46875" PointY="5.8456022135416674" />
+          <ConnectorPoint PointX="11.5" PointY="9.9586393229166674" />
+          <ConnectorPoint PointX="12.46875" PointY="9.9586393229166674" />
+          <ConnectorPoint PointX="12.46875" PointY="6.0379036458333317" />
         </AssociationConnector>
         <AssociationConnector Association="IPAPPM.Model.FK__tbl_Selle__State__2BFE89A6" >
-          <ConnectorPoint PointX="8.5" PointY="5.1052864583333326" />
-          <ConnectorPoint PointX="8.5" PointY="5.5403450520833335" />
-          <ConnectorPoint PointX="12.25" PointY="5.5403450520833335" />
+          <ConnectorPoint PointX="8.5" PointY="5.1052864583333388" />
+          <ConnectorPoint PointX="8.5" PointY="5.6364957682291656" />
+          <ConnectorPoint PointX="12.25" PointY="5.6364957682291656" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="IPAPPM.Model.tbl_FavoriteProduct" Width="1.5" PointX="5.375" PointY="8.75" Height="1.5956835937500031" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_CompanyInfo" Width="1.5" PointX="8.375" PointY="11.75" Height="2.9417936197916674" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_UserNotifications" Width="1.5" PointX="0.75" PointY="13.75" Height="1.5956835937500031" />
+        <AssociationConnector Association="IPAPPM.Model.tbl_SellerProductCategories" >
+          <ConnectorPoint PointX="2.25" PointY="10.002271763020833" />
+          <ConnectorPoint PointX="2.75" PointY="10.002271763020833" />
+          <ConnectorPoint PointX="2.75" PointY="8.375" />
+          <ConnectorPoint PointX="9.75" PointY="8.375" />
+          <ConnectorPoint PointX="9.75" PointY="7.125" />
+          <ConnectorPoint PointX="12.385416666666666" PointY="7.1249999999999991" />
+          <ConnectorPoint PointX="12.552083333333334" PointY="7.125" />
+          <ConnectorPoint PointX="13.140627" PointY="7.125" />
+          <ConnectorPoint PointX="13.140627" PointY="6.0379036458333317" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="IPAPPM.Model.tbl_LoginAudit" Width="1.5" PointX="5.375" PointY="8.75" Height="1.7879850260416674" />
       </Diagram>
     </Diagrams>
   </Designer>

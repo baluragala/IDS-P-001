@@ -38,28 +38,29 @@ namespace IPAPPM.Web.Portal.Controllers
         //
         // GET: /UserQuestion/Create
 
-        public ActionResult Create()
-        {
-            ViewBag.UserId = new SelectList(db.tbl_UserDetails, "UserId", "Name");
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    ViewBag.UserId = new SelectList(db.tbl_UserDetails, "UserId", "Name");
+        //    return View();
+        //}
 
         //
         // POST: /UserQuestion/Create
 
-        [HttpPost]
-        public ActionResult Create(tbl_UserQuestions tbl_userquestions)
-        {
-            if (ModelState.IsValid)
-            {
-                db.tbl_UserQuestions.AddObject(tbl_userquestions);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateInput(false)]
+        //public ActionResult Create(tbl_UserQuestions tbl_userquestions)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.tbl_UserQuestions.AddObject(tbl_userquestions);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.UserId = new SelectList(db.tbl_UserDetails, "UserId", "Name", tbl_userquestions.UserId);
-            return View(tbl_userquestions);
-        }
+        //    ViewBag.UserId = new SelectList(db.tbl_UserDetails, "UserId", "Name", tbl_userquestions.UserId);
+        //    return View(tbl_userquestions);
+        //}
 
         //
         // GET: /UserQuestion/Edit/5
@@ -79,10 +80,14 @@ namespace IPAPPM.Web.Portal.Controllers
         // POST: /UserQuestion/Edit/5
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(tbl_UserQuestions tbl_userquestions)
         {
+            tbl_userquestions.ModifiedBy = User.Identity.Name;
+            tbl_userquestions.ModifiedDate = DateTime.Now;
             if (ModelState.IsValid)
             {
+                
                 db.tbl_UserQuestions.Attach(tbl_userquestions);
                 db.ObjectStateManager.ChangeObjectState(tbl_userquestions, EntityState.Modified);
                 db.SaveChanges();

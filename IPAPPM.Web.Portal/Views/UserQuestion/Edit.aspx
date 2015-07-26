@@ -6,13 +6,13 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<h2>Edit</h2>
+<h2>Update</h2>
 
 <% using (Html.BeginForm()) { %>
     <%: Html.ValidationSummary(true) %>
 
     <fieldset>
-        <legend>tbl_UserQuestions</legend>
+        
 
         <%: Html.HiddenFor(model => model.Question_Id) %>
 
@@ -28,60 +28,24 @@
             <%: Html.LabelFor(model => model.Answer) %>
         </div>
         <div class="editor-field">
-            <%: Html.EditorFor(model => model.Answer) %>
+            <%: Html.TextAreaFor(model => model.Answer) %>
             <%: Html.ValidationMessageFor(model => model.Answer) %>
         </div>
 
-        <div class="editor-label">
+        <%: Html.HiddenFor(model => model.CreatedBy) %>
+        <%: Html.HiddenFor(model => model.CreatedDate) %>
+        <%: Html.HiddenFor(model => model.ModifiedBy) %>
+        <%: Html.HiddenFor(model => model.ModifiedDate) %>
+        <%: Html.HiddenFor(model => model.UserId) %>
+        <%--<div class="editor-label">
             <%: Html.LabelFor(model => model.UserId, "tbl_UserDetails") %>
         </div>
         <div class="editor-field">
             <%: Html.DropDownList("UserId", String.Empty) %>
             <%: Html.ValidationMessageFor(model => model.UserId) %>
-        </div>
-
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.IsActive) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.IsActive) %>
-            <%: Html.ValidationMessageFor(model => model.IsActive) %>
-        </div>
-
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.CreatedBy) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.CreatedBy) %>
-            <%: Html.ValidationMessageFor(model => model.CreatedBy) %>
-        </div>
-
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.CreatedDate) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.CreatedDate) %>
-            <%: Html.ValidationMessageFor(model => model.CreatedDate) %>
-        </div>
-
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.ModifiedBy) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.ModifiedBy) %>
-            <%: Html.ValidationMessageFor(model => model.ModifiedBy) %>
-        </div>
-
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.ModifiedDate) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.ModifiedDate) %>
-            <%: Html.ValidationMessageFor(model => model.ModifiedDate) %>
-        </div>
-
+        </div>--%>
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Update" />
         </p>
     </fieldset>
 <% } %>
@@ -93,6 +57,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
+Answer Questions
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">

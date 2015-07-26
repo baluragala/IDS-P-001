@@ -30,10 +30,10 @@ namespace IPAPPM.Web.Api.Controllers
             return new Product().GetProducts(fromTime);
         }
 
-        public List<Product> GetFavoriteProducts(String userId)
-        {
-            return new Product().GetFavoriteProductsByUser(userId);
-        }
+        //public List<Product> GetFavoriteProducts(String userId)
+        //{
+        //    return new Product().GetFavoriteProductsByUser(userId);
+        //}
        
 
         public CompanyInfo GetCompanyInfo(DateTime fromTime)
@@ -57,16 +57,27 @@ namespace IPAPPM.Web.Api.Controllers
             return new UserDetails().GetUser(mobileNumber);
         }
 
+        public List<UserQuestion> GetUserQuestions(DateTime fromTime)
+        {
+            return new UserQuestion().GeUserQuestions(fromTime);
+        }
+
         [HttpPost]
         public void Register(UserDetails userDetails)
         {
             new UserDetails().Register(userDetails);
         }
 
+        //[HttpPost]
+        //public void SetFavoriteProduct(FavoriteProduct favoriteProduct)
+        //{
+        //    new FavoriteProduct().SetFavouriteProduct(favoriteProduct);
+        //}
+
         [HttpPost]
-        public void SetFavoriteProduct(FavoriteProduct favoriteProduct)
+        public void SaveQuestion(UserQuestion userQuestion)
         {
-            new FavoriteProduct().SetFavouriteProduct(favoriteProduct);
+            new UserQuestion().SaveQuestion(userQuestion);
         }
 
 

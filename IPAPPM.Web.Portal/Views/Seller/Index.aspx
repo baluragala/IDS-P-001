@@ -12,26 +12,29 @@
 <table class="table table-bordered table-highlight">
     <tr>
         <th>
-            <%: Html.DisplayNameFor(model => model.Seller_Name) %>
+            Name
         </th>
         <th>
-            <%: Html.DisplayNameFor(model => model.Seller_code) %>
+            Code
         </th>
         <th>
-            <%: Html.DisplayNameFor(model => model.Address) %>
+            Address
         </th>
         
         <th>
-            <%: Html.DisplayNameFor(model => model.PhoneNumbers) %>
+            PhoneNumbers
         </th>
         <th>
-            <%: Html.DisplayNameFor(model => model.tbl_SellerType.Seller_Type) %>
+            Type
         </th>
         <th>
-            <%: Html.DisplayNameFor(model => model.tbl_State.State_Name) %>
+            State
         </th>
         <th>
-            <%: Html.DisplayNameFor(model => model.tbl_City.City_Name) %>
+            City
+        </th>
+        <th>
+            Product Categories
         </th>
         
         <th></th>
@@ -62,6 +65,15 @@
         <td>
             <%: Html.DisplayFor(modelItem => item.tbl_City.City_Name) %>
         </td>
+
+        <td>
+        <ul>
+        <%foreach (var pc in item.tbl_ProductCategory)
+          { %>
+            <li><%: pc.Category_Name %></li>
+        <% } %>
+        </ul>
+        </td>
         
         <td>
            <a href="<%= Url.Action("Edit/"+item.Seller_Id)  %>"><img src="../../Images/Edit.png" /></a>
@@ -75,6 +87,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
+ Seller Management
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">

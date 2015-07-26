@@ -3,17 +3,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Edit
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-<h2>Update Seller</h2>
-
-<% using (Html.BeginForm()) { %>
+    <h2>
+        Update Seller</h2>
+    <% using (Html.BeginForm())
+       { %>
     <%: Html.ValidationSummary(true) %>
     <%: Html.HiddenFor(model=>model.Seller_Id) %>
     <%: Html.HiddenFor(model=>model.CreatedBy) %>
     <%: Html.HiddenFor(model=>model.CreatedDate) %>
-      <div class="row">
+    <div class="row">
         <div class="col-md-4">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.SellerType_Id, "Seller Type") %>
@@ -82,23 +81,61 @@
             </div>
         </div>
     </div>
-   <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.tbl_ProductCategory, "Product Category")%>
+            </div>
+            <div class="editor-field">
+                <div id="divProductCategories" style="height: 200px; overflow: auto;">
+                    <%
+                        string selected=String.Empty;
+                    %>
+                    <% foreach (var item in ViewBag.ProductCategories)
+                       {
+                           selected = String.Empty;
+                    %>
+                        
+                    <%
+                           foreach (var spc in  ViewBag.SelectedProductCategories)
+                           {
+                               if (spc.ToString() == item.Value)
+                               {
+                                    selected = "checked";
+                               }
+                           }
+                         %>
+                          
+                          <% if (selected.Equals("checked")) {%> 
+                            <input type="checkbox" name="ProductCategories" value="<%:item.Value%>" id="<%:item.Value%>"
+                        checked="checked" />
+                        <%} else{%>
+                         <input type="checkbox" name="ProductCategories" value="<%:item.Value%>" id="<%:item.Value%>"/>
+                        <%} %>
+                    <label for="<%:item.Value%>">
+                        <%:item.Text%></label>
+                    <br />
+                    <%
+                       }
+                    %>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+    <br />
     <p>
         <input type="submit" value="Update" />
     </p>
-<% } %>
-
-<div>
-    <%: Html.ActionLink("Back to List", "All Sellers") %>
-</div>
-
+    <% } %>
+    <div>
+        <%: Html.ActionLink("Back to List", "All Sellers") %>
+    </div>
 </asp:Content>
-
-
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
-Seller Management
+    Seller Management
 </asp:Content>
-
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">
     <%: Scripts.Render("~/bundles/jqueryval") %>
 </asp:Content>

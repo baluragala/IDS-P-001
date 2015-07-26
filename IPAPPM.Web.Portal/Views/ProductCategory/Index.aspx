@@ -61,10 +61,5 @@
     </table>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">
-    <script>
-        function deleteElement() {
-            alert('deleted');
-            window.location.reload();
-        }
-    </script>
+    
 </asp:Content>

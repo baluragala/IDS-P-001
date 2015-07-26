@@ -18,7 +18,11 @@ namespace IPAPPM.Web.Portal.Controllers
 
         public ActionResult Index()
         {
-            var tbl_sellerdetails = db.tbl_SellerDetails.Include("tbl_City").Include("tbl_SellerType").Include("tbl_State");
+            var tbl_sellerdetails = db.tbl_SellerDetails
+                                       .Include("tbl_City")
+                                       .Include("tbl_SellerType")
+                                       .Include("tbl_State")
+                                       .Include("tbl_ProductCategory");
             return View(tbl_sellerdetails.ToList());
         }
 
@@ -58,10 +62,20 @@ namespace IPAPPM.Web.Portal.Controllers
             {
                 tbl_sellerdetails.CreatedBy = User.Identity.Name;
                 tbl_sellerdetails.CreatedDate = DateTime.Now;
-                tbl_sellerdetails.IsActive = true;                
-                db.tbl_SellerDetails.AddObject(tbl_sellerdetails);                
-                db.SaveChanges();          
-                
+                tbl_sellerdetails.IsActive = true;
+                foreach (var categoryId in Request.Form["ProductCategories"].Split(','))
+                {
+                    int cid = Convert.ToInt32(categoryId);
+                    tbl_ProductCategory entity = (from c in db.tbl_ProductCategory
+                                                  where c.Category_Id == cid
+                                                  select c
+                                                      ).First();
+                    tbl_sellerdetails.tbl_ProductCategory.Add(entity);
+                }
+
+                db.tbl_SellerDetails.AddObject(tbl_sellerdetails);
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -84,6 +98,8 @@ namespace IPAPPM.Web.Portal.Controllers
             ViewBag.City = new SelectList(db.tbl_City, "City_Id", "City_Name", tbl_sellerdetails.City);
             ViewBag.SellerType_Id = new SelectList(db.tbl_SellerType, "SellerType_Id", "Seller_Type", tbl_sellerdetails.SellerType_Id);
             ViewBag.State = new SelectList(db.tbl_State, "State_Id", "State_Name", tbl_sellerdetails.State);
+            ViewBag.ProductCategories = new SelectList(db.tbl_ProductCategory, "Category_Id", "Category_Name");
+            ViewBag.SelectedProductCategories = tbl_sellerdetails.tbl_ProductCategory.Select(t => t.Category_Id).ToArray();
             return View(tbl_sellerdetails);
         }
 
@@ -100,11 +116,24 @@ namespace IPAPPM.Web.Portal.Controllers
 
             if (ModelState.IsValid)
             {
-                //tbl_sellerdetails.ModifiedBy = User.Identity.Name;
-                //tbl_sellerdetails.ModifiedDate = DateTime.Now;
-                //tbl_sellerdetails.CreatedBy = User.Identity.Name;
+                String sql  = String.Format("DELETE FROM [tbl_SellerProductCategories] WHERE Seller_Id={0}",tbl_sellerdetails.Seller_Id);
+                db.ExecuteStoreCommand(sql);
+                if (Request.Form["ProductCategories"] != null)
+                {
+                    foreach (var categoryId in Request.Form["ProductCategories"].Split(','))
+                    {
+                        int cid = Convert.ToInt32(categoryId);
+                        tbl_ProductCategory entity = (from c in db.tbl_ProductCategory
+                                                      where c.Category_Id == cid
+                                                      select c
+                                                              ).First();
+                        tbl_sellerdetails.tbl_ProductCategory.Add(entity);
+                    }
+                }
+                
+                if( tbl_sellerdetails.EntityState ==  System.Data.EntityState.Detached)
+                    db.tbl_SellerDetails.Attach(tbl_sellerdetails);
 
-                db.tbl_SellerDetails.Attach(tbl_sellerdetails);
                 db.ObjectStateManager.ChangeObjectState(tbl_sellerdetails, EntityState.Modified);
                 db.SaveChanges();
                 return RedirectToAction("Index");

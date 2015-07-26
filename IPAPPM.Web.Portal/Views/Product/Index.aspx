@@ -28,7 +28,7 @@
             <%: Html.Raw(item.Description) %>
         </div>
         <div class="col-md-6">
-            <img src="<%:item.ImagePath%>" alt="Image" height="200" width="200" />
+            <img src="/<%:item.ImagePath%>" alt="Image" height="200" width="200" />
         </div>
     </div>
     <div class="row">

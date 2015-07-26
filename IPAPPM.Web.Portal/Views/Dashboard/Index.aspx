@@ -51,7 +51,7 @@
             </tbody>
             
         </table>
-        <a href="#" style="margin-left: 475px">More..</a>
+        <a href="/User/Index" style="margin-left: 475px">More..</a>
     </div>
     <!-- /.col -->
     <div class="col-md-6">
@@ -98,7 +98,7 @@
             %>
             </tbody>
         </table>
-        <a href="#" style="margin-left: 475px">More..</a>
+        <a href="/AdminLog/Index" style="margin-left: 475px">More..</a>
     </div>
      <div class="col-md-6">
         <h4 class="heading">

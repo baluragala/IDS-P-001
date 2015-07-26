@@ -6,12 +6,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<h2>Index</h2>
 
-<p>
-    <%: Html.ActionLink("Create New", "Create") %>
-</p>
-<table>
+<table class="table table-bordered table-highlight">
     <tr>
         <th>
             <%: Html.DisplayNameFor(model => model.Question) %>
@@ -22,21 +18,7 @@
         <th>
             <%: Html.DisplayNameFor(model => model.tbl_UserDetails.Name) %>
         </th>
-        <th>
-            <%: Html.DisplayNameFor(model => model.IsActive) %>
-        </th>
-        <th>
-            <%: Html.DisplayNameFor(model => model.CreatedBy) %>
-        </th>
-        <th>
-            <%: Html.DisplayNameFor(model => model.CreatedDate) %>
-        </th>
-        <th>
-            <%: Html.DisplayNameFor(model => model.ModifiedBy) %>
-        </th>
-        <th>
-            <%: Html.DisplayNameFor(model => model.ModifiedDate) %>
-        </th>
+        
         <th></th>
     </tr>
 
@@ -46,31 +28,18 @@
             <%: Html.DisplayFor(modelItem => item.Question) %>
         </td>
         <td>
-            <%: Html.DisplayFor(modelItem => item.Answer) %>
+            <%: Html.Raw(item.Answer) %>
         </td>
         <td>
             <%: Html.DisplayFor(modelItem => item.tbl_UserDetails.Name) %>
         </td>
+        
         <td>
-            <%: Html.DisplayFor(modelItem => item.IsActive) %>
-        </td>
-        <td>
-            <%: Html.DisplayFor(modelItem => item.CreatedBy) %>
-        </td>
-        <td>
-            <%: Html.DisplayFor(modelItem => item.CreatedDate) %>
-        </td>
-        <td>
-            <%: Html.DisplayFor(modelItem => item.ModifiedBy) %>
-        </td>
-        <td>
-            <%: Html.DisplayFor(modelItem => item.ModifiedDate) %>
-        </td>
-        <td>
-            <%: Html.ActionLink("Edit", "Edit", new { id=item.Question_Id }) %> |
-            <%: Html.ActionLink("Details", "Details", new { id=item.Question_Id }) %> |
-            <%: Html.ActionLink("Delete", "Delete", new { id=item.Question_Id }) %>
-        </td>
+                <a href="<%= Url.Action("Edit/"+item.Question_Id)  %>">
+                    <img src="../../Images/Edit.png" /></a> <a href="<%= Url.Action("Delete/"+item.Question_Id)  %>">
+                        <img src="../../Images/Dustbin.png" /></a>
+               
+            </td>
     </tr>
 <% } %>
 
@@ -79,6 +48,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
+Answer Questions
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">

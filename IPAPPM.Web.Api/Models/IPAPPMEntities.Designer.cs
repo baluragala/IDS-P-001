@@ -21,13 +21,13 @@ using System.Xml.Serialization;
 
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_City__State___45F365D3", "tbl_State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_State), "tbl_City", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_City), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserD__Compa__145C0A3F", "tbl_CompanyType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_CompanyType), "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_UserDetails), true)]
-[assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_Login__UserI__5DCAEF64", "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_UserDetails), "tbl_LoginAudit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_LoginAudit), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserD__RoleI__15502E78", "tbl_MRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_MRoles), "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_UserDetails), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_Produ__Categ__25518C17", "tbl_ProductCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(IPAPPM.Web.Api.Models.tbl_ProductCategory), "tbl_ProductDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_ProductDetails), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserQ__UserI__534D60F1", "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_UserDetails), "tbl_UserQuestions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_UserQuestions), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_Seller__City__2CF2ADDF", "tbl_City", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_City), "tbl_SellerDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_SellerDetails), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_Selle__Selle__2B0A656D", "tbl_SellerType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_SellerType), "tbl_SellerDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_SellerDetails), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_Selle__State__2BFE89A6", "tbl_State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_State), "tbl_SellerDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_SellerDetails), true)]
+[assembly: EdmRelationshipAttribute("IPAPPM.Model", "tbl_SellerProductCategories", "tbl_ProductCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_ProductCategory), "tbl_SellerDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_SellerDetails))]
 
 #endregion
 
@@ -126,22 +126,6 @@ namespace IPAPPM.Web.Api.Models
             }
         }
         private ObjectSet<tbl_CompanyType> _tbl_CompanyType;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<tbl_LoginAudit> tbl_LoginAudit
-        {
-            get
-            {
-                if ((_tbl_LoginAudit == null))
-                {
-                    _tbl_LoginAudit = base.CreateObjectSet<tbl_LoginAudit>("tbl_LoginAudit");
-                }
-                return _tbl_LoginAudit;
-            }
-        }
-        private ObjectSet<tbl_LoginAudit> _tbl_LoginAudit;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -306,22 +290,6 @@ namespace IPAPPM.Web.Api.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<tbl_FavoriteProduct> tbl_FavoriteProduct
-        {
-            get
-            {
-                if ((_tbl_FavoriteProduct == null))
-                {
-                    _tbl_FavoriteProduct = base.CreateObjectSet<tbl_FavoriteProduct>("tbl_FavoriteProduct");
-                }
-                return _tbl_FavoriteProduct;
-            }
-        }
-        private ObjectSet<tbl_FavoriteProduct> _tbl_FavoriteProduct;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<tbl_CompanyInfo> tbl_CompanyInfo
         {
             get
@@ -350,6 +318,22 @@ namespace IPAPPM.Web.Api.Models
             }
         }
         private ObjectSet<tbl_UserNotifications> _tbl_UserNotifications;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<tbl_LoginAudit> tbl_LoginAudit
+        {
+            get
+            {
+                if ((_tbl_LoginAudit == null))
+                {
+                    _tbl_LoginAudit = base.CreateObjectSet<tbl_LoginAudit>("tbl_LoginAudit");
+                }
+                return _tbl_LoginAudit;
+            }
+        }
+        private ObjectSet<tbl_LoginAudit> _tbl_LoginAudit;
 
         #endregion
 
@@ -377,14 +361,6 @@ namespace IPAPPM.Web.Api.Models
         public void AddTotbl_CompanyType(tbl_CompanyType tbl_CompanyType)
         {
             base.AddObject("tbl_CompanyType", tbl_CompanyType);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the tbl_LoginAudit EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTotbl_LoginAudit(tbl_LoginAudit tbl_LoginAudit)
-        {
-            base.AddObject("tbl_LoginAudit", tbl_LoginAudit);
         }
     
         /// <summary>
@@ -468,14 +444,6 @@ namespace IPAPPM.Web.Api.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the tbl_FavoriteProduct EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTotbl_FavoriteProduct(tbl_FavoriteProduct tbl_FavoriteProduct)
-        {
-            base.AddObject("tbl_FavoriteProduct", tbl_FavoriteProduct);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the tbl_CompanyInfo EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTotbl_CompanyInfo(tbl_CompanyInfo tbl_CompanyInfo)
@@ -489,6 +457,14 @@ namespace IPAPPM.Web.Api.Models
         public void AddTotbl_UserNotifications(tbl_UserNotifications tbl_UserNotifications)
         {
             base.AddObject("tbl_UserNotifications", tbl_UserNotifications);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the tbl_LoginAudit EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotbl_LoginAudit(tbl_LoginAudit tbl_LoginAudit)
+        {
+            base.AddObject("tbl_LoginAudit", tbl_LoginAudit);
         }
 
         #endregion
@@ -1422,113 +1398,6 @@ namespace IPAPPM.Web.Api.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="IPAPPM.Model", Name="tbl_FavoriteProduct")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class tbl_FavoriteProduct : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new tbl_FavoriteProduct object.
-        /// </summary>
-        /// <param name="favoriteProduct_Id">Initial value of the FavoriteProduct_Id property.</param>
-        /// <param name="product_Id">Initial value of the Product_Id property.</param>
-        public static tbl_FavoriteProduct Createtbl_FavoriteProduct(global::System.Int32 favoriteProduct_Id, global::System.Int32 product_Id)
-        {
-            tbl_FavoriteProduct tbl_FavoriteProduct = new tbl_FavoriteProduct();
-            tbl_FavoriteProduct.FavoriteProduct_Id = favoriteProduct_Id;
-            tbl_FavoriteProduct.Product_Id = product_Id;
-            return tbl_FavoriteProduct;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 FavoriteProduct_Id
-        {
-            get
-            {
-                return _FavoriteProduct_Id;
-            }
-            set
-            {
-                if (_FavoriteProduct_Id != value)
-                {
-                    OnFavoriteProduct_IdChanging(value);
-                    ReportPropertyChanging("FavoriteProduct_Id");
-                    _FavoriteProduct_Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("FavoriteProduct_Id");
-                    OnFavoriteProduct_IdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _FavoriteProduct_Id;
-        partial void OnFavoriteProduct_IdChanging(global::System.Int32 value);
-        partial void OnFavoriteProduct_IdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> UserId
-        {
-            get
-            {
-                return _UserId;
-            }
-            set
-            {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _UserId;
-        partial void OnUserIdChanging(Nullable<global::System.Int32> value);
-        partial void OnUserIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Product_Id
-        {
-            get
-            {
-                return _Product_Id;
-            }
-            set
-            {
-                OnProduct_IdChanging(value);
-                ReportPropertyChanging("Product_Id");
-                _Product_Id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Product_Id");
-                OnProduct_IdChanged();
-            }
-        }
-        private global::System.Int32 _Product_Id;
-        partial void OnProduct_IdChanging(global::System.Int32 value);
-        partial void OnProduct_IdChanged();
-
-        #endregion
-
-    
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="IPAPPM.Model", Name="tbl_LoginAudit")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -1541,13 +1410,13 @@ namespace IPAPPM.Web.Api.Models
         /// </summary>
         /// <param name="lAudit_Id">Initial value of the LAudit_Id property.</param>
         /// <param name="loginTime">Initial value of the LoginTime property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
-        public static tbl_LoginAudit Createtbl_LoginAudit(global::System.Int32 lAudit_Id, global::System.DateTime loginTime, global::System.Int32 userId)
+        /// <param name="userName">Initial value of the UserName property.</param>
+        public static tbl_LoginAudit Createtbl_LoginAudit(global::System.Int32 lAudit_Id, global::System.DateTime loginTime, global::System.String userName)
         {
             tbl_LoginAudit tbl_LoginAudit = new tbl_LoginAudit();
             tbl_LoginAudit.LAudit_Id = lAudit_Id;
             tbl_LoginAudit.LoginTime = loginTime;
-            tbl_LoginAudit.UserId = userId;
+            tbl_LoginAudit.UserName = userName;
             return tbl_LoginAudit;
         }
 
@@ -1635,70 +1504,28 @@ namespace IPAPPM.Web.Api.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 UserId
+        public global::System.String UserName
         {
             get
             {
-                return _UserId;
+                return _UserName;
             }
             set
             {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
+                OnUserNameChanging(value);
+                ReportPropertyChanging("UserName");
+                _UserName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("UserName");
+                OnUserNameChanged();
             }
         }
-        private global::System.Int32 _UserId;
-        partial void OnUserIdChanging(global::System.Int32 value);
-        partial void OnUserIdChanged();
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
 
         #endregion
 
     
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("IPAPPM.Model", "FK__tbl_Login__UserI__5DCAEF64", "tbl_UserDetails")]
-        public tbl_UserDetails tbl_UserDetails
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tbl_UserDetails>("IPAPPM.Model.FK__tbl_Login__UserI__5DCAEF64", "tbl_UserDetails").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tbl_UserDetails>("IPAPPM.Model.FK__tbl_Login__UserI__5DCAEF64", "tbl_UserDetails").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<tbl_UserDetails> tbl_UserDetailsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tbl_UserDetails>("IPAPPM.Model.FK__tbl_Login__UserI__5DCAEF64", "tbl_UserDetails");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tbl_UserDetails>("IPAPPM.Model.FK__tbl_Login__UserI__5DCAEF64", "tbl_UserDetails", value);
-                }
-            }
-        }
-
-        #endregion
-
     }
     
     /// <summary>
@@ -2369,6 +2196,28 @@ namespace IPAPPM.Web.Api.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<tbl_ProductDetails>("IPAPPM.Model.FK__tbl_Produ__Categ__25518C17", "tbl_ProductDetails", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IPAPPM.Model", "tbl_SellerProductCategories", "tbl_SellerDetails")]
+        public EntityCollection<tbl_SellerDetails> tbl_SellerDetails
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<tbl_SellerDetails>("IPAPPM.Model.tbl_SellerProductCategories", "tbl_SellerDetails");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<tbl_SellerDetails>("IPAPPM.Model.tbl_SellerProductCategories", "tbl_SellerDetails", value);
                 }
             }
         }
@@ -3286,6 +3135,28 @@ namespace IPAPPM.Web.Api.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IPAPPM.Model", "tbl_SellerProductCategories", "tbl_ProductCategory")]
+        public EntityCollection<tbl_ProductCategory> tbl_ProductCategory
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<tbl_ProductCategory>("IPAPPM.Model.tbl_SellerProductCategories", "tbl_ProductCategory");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<tbl_ProductCategory>("IPAPPM.Model.tbl_SellerProductCategories", "tbl_ProductCategory", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -4126,28 +3997,6 @@ namespace IPAPPM.Web.Api.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tbl_CompanyType>("IPAPPM.Model.FK__tbl_UserD__Compa__145C0A3F", "tbl_CompanyType", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("IPAPPM.Model", "FK__tbl_Login__UserI__5DCAEF64", "tbl_LoginAudit")]
-        public EntityCollection<tbl_LoginAudit> tbl_LoginAudit
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<tbl_LoginAudit>("IPAPPM.Model.FK__tbl_Login__UserI__5DCAEF64", "tbl_LoginAudit");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<tbl_LoginAudit>("IPAPPM.Model.FK__tbl_Login__UserI__5DCAEF64", "tbl_LoginAudit", value);
                 }
             }
         }

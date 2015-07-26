@@ -61,26 +61,26 @@ namespace IPAPPM.Web.Api.Models
 
         }
 
-        public List<Product> GetFavoriteProductsByUser(String userId)
-        {
-            List<Product> favoriteProducts;
-            favoriteProducts = (from d in db.tbl_FavoriteProduct
-                                join c in db.tbl_ProductDetails
-                                on d.Product_Id equals c.Product_Id
-                                //where d.ModifiedDate >= fromTime
-                                select new Product
-                                {
-                                    ProductId = c.Product_Id,
-                                    Name = c.Product_Name,
-                                    Description = c.Description,
-                                    ImagePath = c.ImagePath,
-                                    Benefits = c.Benefits,
-                                    Features = c.Features,
-                                    Specifications = c.Specifications,
-                                    Category = c.tbl_ProductCategory.Category_Name,
-                                    EndUses = c.EndUses
-                                }).ToList();
-            return favoriteProducts;
-        }
+        //public List<Product> GetFavoriteProductsByUser(String userId)
+        //{
+        //    List<Product> favoriteProducts;
+        //    favoriteProducts = (from d in db.tbl_FavoriteProduct
+        //                        join c in db.tbl_ProductDetails
+        //                        on d.Product_Id equals c.Product_Id
+        //                        //where d.ModifiedDate >= fromTime
+        //                        select new Product
+        //                        {
+        //                            ProductId = c.Product_Id,
+        //                            Name = c.Product_Name,
+        //                            Description = c.Description,
+        //                            ImagePath = c.ImagePath,
+        //                            Benefits = c.Benefits,
+        //                            Features = c.Features,
+        //                            Specifications = c.Specifications,
+        //                            Category = c.tbl_ProductCategory.Category_Name,
+        //                            EndUses = c.EndUses
+        //                        }).ToList();
+        //    return favoriteProducts;
+        //}
     }
 }
