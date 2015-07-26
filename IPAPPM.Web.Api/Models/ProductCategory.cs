@@ -12,10 +12,11 @@ namespace IPAPPM.Web.Api.Models
         public String ImagePath;
         private IPAPPMLIVEEntities db = new IPAPPMLIVEEntities();
 
-        public List<ProductCategory> GetCategories()
+        public List<ProductCategory> GetCategories(DateTime fromTime)
         {
            List<ProductCategory> categories;
            categories = (from c in db.tbl_ProductCategory.ToList()
+                         where c.ModifiedDate >= fromTime
                          select new ProductCategory
                          {
                              Name = c.Category_Name,

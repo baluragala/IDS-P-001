@@ -3,14 +3,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Create
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-<h2>Create Seller</h2>
-
-<% using (Html.BeginForm()) { %>
+    <h2>
+        Create Seller</h2>
+    <% using (Html.BeginForm())
+       { %>
     <%: Html.ValidationSummary(true) %>
-      <div class="row">
+    <div class="row">
         <div class="col-md-4">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.SellerType_Id, "Seller Type") %>
@@ -79,22 +78,45 @@
             </div>
         </div>
     </div>
-   <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.tbl_ProductCategory, "Product Category")%>
+            </div>
+            <div class="editor-field">
+                <div id="divProductCategories" style="height: 200px; overflow: auto;">
+                    
+                        <% foreach (var item in ViewBag.ProductCategories)
+                           { 
+                        %>
+                        
+                            <input type="checkbox" name="ProductCategories" value="<%:item.Value%>" id="<%:item.Value%>" />
+                            <label for="<%:item.Value%>">
+                                <%:item.Text%></label>
+                                <br />
+                        
+                        <% 
+                       }
+                        %>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+    <br />
     <p>
         <input type="submit" value="Create" />
     </p>
-<% } %>
-
-<div>
-    <%: Html.ActionLink("Back to List", "Index") %>
-</div>
-
+    <% } %>
+    <div>
+        <%: Html.ActionLink("Back to List", "Index") %>
+    </div>
 </asp:Content>
-
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
     Seller Management
 </asp:Content>
-
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">
     <%: Scripts.Render("~/bundles/jqueryval") %>
 </asp:Content>

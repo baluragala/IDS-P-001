@@ -10,6 +10,9 @@
 
 <% using (Html.BeginForm()) { %>
     <%: Html.ValidationSummary(true) %>
+    <%: Html.HiddenFor(model=>model.Seller_Id) %>
+    <%: Html.HiddenFor(model=>model.CreatedBy) %>
+    <%: Html.HiddenFor(model=>model.CreatedDate) %>
       <div class="row">
         <div class="col-md-4">
             <div class="editor-label">

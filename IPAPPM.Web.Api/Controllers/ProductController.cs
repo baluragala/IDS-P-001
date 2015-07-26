@@ -10,12 +10,9 @@ namespace IPAPPM.Web.Api.Controllers
 {
     public class ProductController : ApiController
     {
-
-        public List<Product> GetProductsByCategory(String category)
+        public List<Product> GetProducts(DateTime fromTime)
         {
-            System.Diagnostics.Trace.WriteLine("GetProductsByCategory :" + category);
-            return new Product().GetByCategory(category);
+            return new Product().GetProducts(fromTime);
         }
-
     }
 }

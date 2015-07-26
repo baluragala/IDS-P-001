@@ -43,6 +43,7 @@ namespace IPAPPM.Web.Portal.Controllers
             ViewBag.City = new SelectList(db.tbl_City, "City_Id", "City_Name");
             ViewBag.SellerType_Id = new SelectList(db.tbl_SellerType, "SellerType_Id", "Seller_Type");
             ViewBag.State = new SelectList(db.tbl_State, "State_Id", "State_Name");
+            ViewBag.ProductCategories = new SelectList(db.tbl_ProductCategory, "Category_Id", "Category_Name");
             return View();
         }
 
@@ -57,9 +58,10 @@ namespace IPAPPM.Web.Portal.Controllers
             {
                 tbl_sellerdetails.CreatedBy = User.Identity.Name;
                 tbl_sellerdetails.CreatedDate = DateTime.Now;
-                tbl_sellerdetails.IsActive = true;
-                db.tbl_SellerDetails.AddObject(tbl_sellerdetails);
-                db.SaveChanges();
+                tbl_sellerdetails.IsActive = true;                
+                db.tbl_SellerDetails.AddObject(tbl_sellerdetails);                
+                db.SaveChanges();          
+                
                 return RedirectToAction("Index");
             }
 
@@ -92,10 +94,15 @@ namespace IPAPPM.Web.Portal.Controllers
         [ValidateInput(false)]
         public ActionResult Edit(tbl_SellerDetails tbl_sellerdetails)
         {
+            tbl_sellerdetails.ModifiedBy = User.Identity.Name;
+            tbl_sellerdetails.ModifiedDate = DateTime.Now;
+            tbl_sellerdetails.CreatedBy = User.Identity.Name;
+
             if (ModelState.IsValid)
             {
-                tbl_sellerdetails.ModifiedBy = User.Identity.Name;
-                tbl_sellerdetails.ModifiedDate = DateTime.Now;
+                //tbl_sellerdetails.ModifiedBy = User.Identity.Name;
+                //tbl_sellerdetails.ModifiedDate = DateTime.Now;
+                //tbl_sellerdetails.CreatedBy = User.Identity.Name;
 
                 db.tbl_SellerDetails.Attach(tbl_sellerdetails);
                 db.ObjectStateManager.ChangeObjectState(tbl_sellerdetails, EntityState.Modified);

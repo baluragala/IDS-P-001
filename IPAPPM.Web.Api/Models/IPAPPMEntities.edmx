@@ -4,9 +4,8 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="IPAPPM.Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="IPAPPM.Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="IPAPPMModelStoreContainer">
-          <EntitySet Name="sysdiagrams" EntityType="IPAPPM.Model.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_City" EntityType="IPAPPM.Model.Store.tbl_City" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_CommonTerms" EntityType="IPAPPM.Model.Store.tbl_CommonTerms" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_CompanyInfo" EntityType="IPAPPM.Model.Store.tbl_CompanyInfo" store:Type="Tables" Schema="dbo" />
@@ -22,6 +21,7 @@
           <EntitySet Name="tbl_SellerType" EntityType="IPAPPM.Model.Store.tbl_SellerType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_State" EntityType="IPAPPM.Model.Store.tbl_State" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_UserDetails" EntityType="IPAPPM.Model.Store.tbl_UserDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_UserNotifications" EntityType="IPAPPM.Model.Store.tbl_UserNotifications" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_UserQuestions" EntityType="IPAPPM.Model.Store.tbl_UserQuestions" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK__tbl_City__State___45F365D3" Association="IPAPPM.Model.Store.FK__tbl_City__State___45F365D3">
             <End Role="tbl_State" EntitySet="tbl_State" />
@@ -35,15 +35,15 @@
             <End Role="tbl_ProductCategory" EntitySet="tbl_ProductCategory" />
             <End Role="tbl_ProductDetails" EntitySet="tbl_ProductDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_Selle__Selle__4BAC3F29" Association="IPAPPM.Model.Store.FK__tbl_Selle__Selle__4BAC3F29">
+          <AssociationSet Name="FK__tbl_Selle__Selle__2B0A656D" Association="IPAPPM.Model.Store.FK__tbl_Selle__Selle__2B0A656D">
             <End Role="tbl_SellerType" EntitySet="tbl_SellerType" />
             <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_Selle__State__4CA06362" Association="IPAPPM.Model.Store.FK__tbl_Selle__State__4CA06362">
+          <AssociationSet Name="FK__tbl_Selle__State__2BFE89A6" Association="IPAPPM.Model.Store.FK__tbl_Selle__State__2BFE89A6">
             <End Role="tbl_State" EntitySet="tbl_State" />
             <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_Seller__City__4D94879B" Association="IPAPPM.Model.Store.FK__tbl_Seller__City__4D94879B">
+          <AssociationSet Name="FK__tbl_Seller__City__2CF2ADDF" Association="IPAPPM.Model.Store.FK__tbl_Seller__City__2CF2ADDF">
             <End Role="tbl_City" EntitySet="tbl_City" />
             <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
           </AssociationSet>
@@ -60,16 +60,6 @@
             <End Role="tbl_UserQuestions" EntitySet="tbl_UserQuestions" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="tbl_City">
           <Key>
             <PropertyRef Name="City_Id" />
@@ -105,6 +95,8 @@
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_CompanyType">
           <Key>
@@ -123,11 +115,6 @@
           <Property Name="FavoriteProduct_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="int" />
           <Property Name="Product_Id" Type="int" Nullable="false" />
-          <Property Name="IsActive" Type="bit" />
-          <Property Name="CreatedBy" Type="varchar" Nullable="false" MaxLength="20" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedBy" Type="varchar" MaxLength="20" />
-          <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="tbl_LoginAudit">
           <Key>
@@ -205,12 +192,8 @@
           <Property Name="Seller_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Seller_Name" Type="varchar" MaxLength="20" />
           <Property Name="Seller_code" Type="varchar" MaxLength="12" />
-          <Property Name="Address1" Type="varchar" MaxLength="50" />
-          <Property Name="Address2" Type="varchar" MaxLength="50" />
-          <Property Name="Address3" Type="varchar" MaxLength="50" />
-          <Property Name="PhoneNumber1" Type="varchar" MaxLength="12" />
-          <Property Name="PhoneNumber2" Type="varchar" MaxLength="12" />
-          <Property Name="PhoneNumber3" Type="varchar" MaxLength="12" />
+          <Property Name="Address" Type="varchar" MaxLength="2000" />
+          <Property Name="PhoneNumbers" Type="varchar" MaxLength="100" />
           <Property Name="SellerType_Id" Type="int" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="City" Type="int" Nullable="false" />
@@ -259,6 +242,14 @@
           <Property Name="CompanyType_Id" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_UserNotifications">
+          <Key>
+            <PropertyRef Name="Notification_Id" />
+          </Key>
+          <Property Name="UserNotification_Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Notification_Id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_UserQuestions">
           <Key>
@@ -310,7 +301,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_Selle__Selle__4BAC3F29">
+        <Association Name="FK__tbl_Selle__Selle__2B0A656D">
           <End Role="tbl_SellerType" Type="IPAPPM.Model.Store.tbl_SellerType" Multiplicity="1" />
           <End Role="tbl_SellerDetails" Type="IPAPPM.Model.Store.tbl_SellerDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -322,7 +313,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_Selle__State__4CA06362">
+        <Association Name="FK__tbl_Selle__State__2BFE89A6">
           <End Role="tbl_State" Type="IPAPPM.Model.Store.tbl_State" Multiplicity="1" />
           <End Role="tbl_SellerDetails" Type="IPAPPM.Model.Store.tbl_SellerDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -334,7 +325,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_Seller__City__4D94879B">
+        <Association Name="FK__tbl_Seller__City__2CF2ADDF">
           <End Role="tbl_City" Type="IPAPPM.Model.Store.tbl_City" Multiplicity="1" />
           <End Role="tbl_SellerDetails" Type="IPAPPM.Model.Store.tbl_SellerDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -382,25 +373,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IPAPPM.Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="IPAPPMLIVEEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="sysdiagrams" EntityType="IPAPPM.Model.sysdiagram" />
           <EntitySet Name="tbl_City" EntityType="IPAPPM.Model.tbl_City" />
           <EntitySet Name="tbl_CommonTerms" EntityType="IPAPPM.Model.tbl_CommonTerms" />
-          <EntitySet Name="tbl_CompanyInfo" EntityType="IPAPPM.Model.tbl_CompanyInfo" />
           <EntitySet Name="tbl_CompanyType" EntityType="IPAPPM.Model.tbl_CompanyType" />
-          <EntitySet Name="tbl_FavoriteProduct" EntityType="IPAPPM.Model.tbl_FavoriteProduct" />
           <EntitySet Name="tbl_LoginAudit" EntityType="IPAPPM.Model.tbl_LoginAudit" />
           <EntitySet Name="tbl_Mobile_Verification" EntityType="IPAPPM.Model.tbl_Mobile_Verification" />
           <EntitySet Name="tbl_MRoles" EntityType="IPAPPM.Model.tbl_MRoles" />
           <EntitySet Name="tbl_Notifications" EntityType="IPAPPM.Model.tbl_Notifications" />
           <EntitySet Name="tbl_ProductCategory" EntityType="IPAPPM.Model.tbl_ProductCategory" />
           <EntitySet Name="tbl_ProductDetails" EntityType="IPAPPM.Model.tbl_ProductDetails" />
-          <EntitySet Name="tbl_SellerDetails" EntityType="IPAPPM.Model.tbl_SellerDetails" />
           <EntitySet Name="tbl_SellerType" EntityType="IPAPPM.Model.tbl_SellerType" />
           <EntitySet Name="tbl_State" EntityType="IPAPPM.Model.tbl_State" />
           <EntitySet Name="tbl_UserDetails" EntityType="IPAPPM.Model.tbl_UserDetails" />
@@ -408,10 +394,6 @@
           <AssociationSet Name="FK__tbl_City__State___45F365D3" Association="IPAPPM.Model.FK__tbl_City__State___45F365D3">
             <End Role="tbl_State" EntitySet="tbl_State" />
             <End Role="tbl_City" EntitySet="tbl_City" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tbl_Seller__City__4D94879B" Association="IPAPPM.Model.FK__tbl_Seller__City__4D94879B">
-            <End Role="tbl_City" EntitySet="tbl_City" />
-            <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
           </AssociationSet>
           <AssociationSet Name="FK__tbl_UserD__Compa__145C0A3F" Association="IPAPPM.Model.FK__tbl_UserD__Compa__145C0A3F">
             <End Role="tbl_CompanyType" EntitySet="tbl_CompanyType" />
@@ -429,29 +411,27 @@
             <End Role="tbl_ProductCategory" EntitySet="tbl_ProductCategory" />
             <End Role="tbl_ProductDetails" EntitySet="tbl_ProductDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_Selle__Selle__4BAC3F29" Association="IPAPPM.Model.FK__tbl_Selle__Selle__4BAC3F29">
-            <End Role="tbl_SellerType" EntitySet="tbl_SellerType" />
-            <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tbl_Selle__State__4CA06362" Association="IPAPPM.Model.FK__tbl_Selle__State__4CA06362">
-            <End Role="tbl_State" EntitySet="tbl_State" />
-            <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK__tbl_UserQ__UserI__534D60F1" Association="IPAPPM.Model.FK__tbl_UserQ__UserI__534D60F1">
             <End Role="tbl_UserDetails" EntitySet="tbl_UserDetails" />
             <End Role="tbl_UserQuestions" EntitySet="tbl_UserQuestions" />
           </AssociationSet>
+          <EntitySet Name="tbl_SellerDetails" EntityType="IPAPPM.Model.tbl_SellerDetails" />
+          <AssociationSet Name="FK__tbl_Seller__City__2CF2ADDF" Association="IPAPPM.Model.FK__tbl_Seller__City__2CF2ADDF">
+            <End Role="tbl_City" EntitySet="tbl_City" />
+            <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Selle__Selle__2B0A656D" Association="IPAPPM.Model.FK__tbl_Selle__Selle__2B0A656D">
+            <End Role="tbl_SellerType" EntitySet="tbl_SellerType" />
+            <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Selle__State__2BFE89A6" Association="IPAPPM.Model.FK__tbl_Selle__State__2BFE89A6">
+            <End Role="tbl_State" EntitySet="tbl_State" />
+            <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
+          </AssociationSet>
+          <EntitySet Name="tbl_FavoriteProduct" EntityType="IPAPPM.Model.tbl_FavoriteProduct" />
+          <EntitySet Name="tbl_CompanyInfo" EntityType="IPAPPM.Model.tbl_CompanyInfo" />
+          <EntitySet Name="tbl_UserNotifications" EntityType="IPAPPM.Model.tbl_UserNotifications" />
         </EntityContainer>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="tbl_City">
           <Key>
             <PropertyRef Name="City_Id" />
@@ -461,7 +441,7 @@
           <Property Name="State_Id" Type="Int32" Nullable="false" />
           <Property Name="IsActive" Type="Int32" />
           <NavigationProperty Name="tbl_State" Relationship="IPAPPM.Model.FK__tbl_City__State___45F365D3" FromRole="tbl_City" ToRole="tbl_State" />
-          <NavigationProperty Name="tbl_SellerDetails" Relationship="IPAPPM.Model.FK__tbl_Seller__City__4D94879B" FromRole="tbl_City" ToRole="tbl_SellerDetails" />
+          <NavigationProperty Name="tbl_SellerDetails" Relationship="IPAPPM.Model.FK__tbl_Seller__City__2CF2ADDF" FromRole="tbl_City" ToRole="tbl_SellerDetails" />
         </EntityType>
         <EntityType Name="tbl_CommonTerms">
           <Key>
@@ -477,19 +457,6 @@
           <Property Name="ModifiedBy" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="ModifiedDate" Type="DateTime" />
         </EntityType>
-        <EntityType Name="tbl_CompanyInfo">
-          <Key>
-            <PropertyRef Name="Comapny_Id" />
-          </Key>
-          <Property Name="Comapny_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CompanyName" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="Text" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="Imagepath" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <Property Name="Website" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
-        </EntityType>
         <EntityType Name="tbl_CompanyType">
           <Key>
             <PropertyRef Name="CompanyType_Id" />
@@ -500,19 +467,6 @@
           <Property Name="Description" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="tbl_UserDetails" Relationship="IPAPPM.Model.FK__tbl_UserD__Compa__145C0A3F" FromRole="tbl_CompanyType" ToRole="tbl_UserDetails" />
-        </EntityType>
-        <EntityType Name="tbl_FavoriteProduct">
-          <Key>
-            <PropertyRef Name="FavoriteProduct_Id" />
-          </Key>
-          <Property Name="FavoriteProduct_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="Product_Id" Type="Int32" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="ModifiedDate" Type="DateTime" />
         </EntityType>
         <EntityType Name="tbl_LoginAudit">
           <Key>
@@ -587,31 +541,6 @@
           <Property Name="ModifiedDate" Type="DateTime" />
           <NavigationProperty Name="tbl_ProductCategory" Relationship="IPAPPM.Model.FK__tbl_Produ__Categ__25518C17" FromRole="tbl_ProductDetails" ToRole="tbl_ProductCategory" />
         </EntityType>
-        <EntityType Name="tbl_SellerDetails">
-          <Key>
-            <PropertyRef Name="Seller_Id" />
-          </Key>
-          <Property Name="Seller_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Seller_Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Seller_code" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
-          <Property Name="Address1" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Address2" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Address3" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="PhoneNumber1" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
-          <Property Name="PhoneNumber2" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
-          <Property Name="PhoneNumber3" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
-          <Property Name="SellerType_Id" Type="Int32" Nullable="false" />
-          <Property Name="State" Type="Int32" Nullable="false" />
-          <Property Name="City" Type="Int32" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="ModifiedDate" Type="DateTime" />
-          <NavigationProperty Name="tbl_City" Relationship="IPAPPM.Model.FK__tbl_Seller__City__4D94879B" FromRole="tbl_SellerDetails" ToRole="tbl_City" />
-          <NavigationProperty Name="tbl_SellerType" Relationship="IPAPPM.Model.FK__tbl_Selle__Selle__4BAC3F29" FromRole="tbl_SellerDetails" ToRole="tbl_SellerType" />
-          <NavigationProperty Name="tbl_State" Relationship="IPAPPM.Model.FK__tbl_Selle__State__4CA06362" FromRole="tbl_SellerDetails" ToRole="tbl_State" />
-        </EntityType>
         <EntityType Name="tbl_SellerType">
           <Key>
             <PropertyRef Name="SellerType_Id" />
@@ -624,7 +553,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="ModifiedBy" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="ModifiedDate" Type="DateTime" />
-          <NavigationProperty Name="tbl_SellerDetails" Relationship="IPAPPM.Model.FK__tbl_Selle__Selle__4BAC3F29" FromRole="tbl_SellerType" ToRole="tbl_SellerDetails" />
+          <NavigationProperty Name="tbl_SellerDetails" Relationship="IPAPPM.Model.FK__tbl_Selle__Selle__2B0A656D" FromRole="tbl_SellerType" ToRole="tbl_SellerDetails" />
         </EntityType>
         <EntityType Name="tbl_State">
           <Key>
@@ -634,7 +563,7 @@
           <Property Name="State_Name" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="IsActive" Type="Int32" />
           <NavigationProperty Name="tbl_City" Relationship="IPAPPM.Model.FK__tbl_City__State___45F365D3" FromRole="tbl_State" ToRole="tbl_City" />
-          <NavigationProperty Name="tbl_SellerDetails" Relationship="IPAPPM.Model.FK__tbl_Selle__State__4CA06362" FromRole="tbl_State" ToRole="tbl_SellerDetails" />
+          <NavigationProperty Name="tbl_SellerDetails" Relationship="IPAPPM.Model.FK__tbl_Selle__State__2BFE89A6" FromRole="tbl_State" ToRole="tbl_SellerDetails" />
         </EntityType>
         <EntityType Name="tbl_UserDetails">
           <Key>
@@ -686,18 +615,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_Seller__City__4D94879B">
-          <End Role="tbl_City" Type="IPAPPM.Model.tbl_City" Multiplicity="1" />
-          <End Role="tbl_SellerDetails" Type="IPAPPM.Model.tbl_SellerDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_City">
-              <PropertyRef Name="City_Id" />
-            </Principal>
-            <Dependent Role="tbl_SellerDetails">
-              <PropertyRef Name="City" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__tbl_UserD__Compa__145C0A3F">
           <End Role="tbl_CompanyType" Type="IPAPPM.Model.tbl_CompanyType" Multiplicity="1" />
           <End Role="tbl_UserDetails" Type="IPAPPM.Model.tbl_UserDetails" Multiplicity="*" />
@@ -746,30 +663,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_Selle__Selle__4BAC3F29">
-          <End Role="tbl_SellerType" Type="IPAPPM.Model.tbl_SellerType" Multiplicity="1" />
-          <End Role="tbl_SellerDetails" Type="IPAPPM.Model.tbl_SellerDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_SellerType">
-              <PropertyRef Name="SellerType_Id" />
-            </Principal>
-            <Dependent Role="tbl_SellerDetails">
-              <PropertyRef Name="SellerType_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__tbl_Selle__State__4CA06362">
-          <End Role="tbl_State" Type="IPAPPM.Model.tbl_State" Multiplicity="1" />
-          <End Role="tbl_SellerDetails" Type="IPAPPM.Model.tbl_SellerDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_State">
-              <PropertyRef Name="State_Id" />
-            </Principal>
-            <Dependent Role="tbl_SellerDetails">
-              <PropertyRef Name="State" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__tbl_UserQ__UserI__534D60F1">
           <End Role="tbl_UserDetails" Type="IPAPPM.Model.tbl_UserDetails" Multiplicity="1" />
           <End Role="tbl_UserQuestions" Type="IPAPPM.Model.tbl_UserQuestions" Multiplicity="*" />
@@ -782,23 +675,100 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tbl_SellerDetails">
+          <Key>
+            <PropertyRef Name="Seller_Id" />
+          </Key>
+          <Property Type="Int32" Name="Seller_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Seller_Name" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Seller_code" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PhoneNumbers" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="SellerType_Id" Nullable="false" />
+          <Property Type="Int32" Name="State" Nullable="false" />
+          <Property Type="Int32" Name="City" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="String" Name="ModifiedBy" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <NavigationProperty Name="tbl_City" Relationship="IPAPPM.Model.FK__tbl_Seller__City__2CF2ADDF" FromRole="tbl_SellerDetails" ToRole="tbl_City" />
+          <NavigationProperty Name="tbl_SellerType" Relationship="IPAPPM.Model.FK__tbl_Selle__Selle__2B0A656D" FromRole="tbl_SellerDetails" ToRole="tbl_SellerType" />
+          <NavigationProperty Name="tbl_State" Relationship="IPAPPM.Model.FK__tbl_Selle__State__2BFE89A6" FromRole="tbl_SellerDetails" ToRole="tbl_State" />
+        </EntityType>
+        <Association Name="FK__tbl_Seller__City__2CF2ADDF">
+          <End Type="IPAPPM.Model.tbl_City" Role="tbl_City" Multiplicity="1" />
+          <End Type="IPAPPM.Model.tbl_SellerDetails" Role="tbl_SellerDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_City">
+              <PropertyRef Name="City_Id" />
+            </Principal>
+            <Dependent Role="tbl_SellerDetails">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Selle__Selle__2B0A656D">
+          <End Type="IPAPPM.Model.tbl_SellerType" Role="tbl_SellerType" Multiplicity="1" />
+          <End Type="IPAPPM.Model.tbl_SellerDetails" Role="tbl_SellerDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_SellerType">
+              <PropertyRef Name="SellerType_Id" />
+            </Principal>
+            <Dependent Role="tbl_SellerDetails">
+              <PropertyRef Name="SellerType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Selle__State__2BFE89A6">
+          <End Type="IPAPPM.Model.tbl_State" Role="tbl_State" Multiplicity="1" />
+          <End Type="IPAPPM.Model.tbl_SellerDetails" Role="tbl_SellerDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_State">
+              <PropertyRef Name="State_Id" />
+            </Principal>
+            <Dependent Role="tbl_SellerDetails">
+              <PropertyRef Name="State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_FavoriteProduct">
+          <Key>
+            <PropertyRef Name="FavoriteProduct_Id" />
+          </Key>
+          <Property Type="Int32" Name="FavoriteProduct_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" />
+          <Property Type="Int32" Name="Product_Id" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_CompanyInfo">
+          <Key>
+            <PropertyRef Name="Comapny_Id" />
+          </Key>
+          <Property Type="Int32" Name="Comapny_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CompanyName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Imagepath" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Website" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsActive" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="String" Name="ModifiedBy" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_UserNotifications">
+          <Key>
+            <PropertyRef Name="Notification_Id" />
+          </Key>
+          <Property Type="Int64" Name="UserNotification_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Notification_Id" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="IPAPPMModelStoreContainer" CdmEntityContainer="IPAPPMLIVEEntities">
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="IPAPPM.Model.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbl_City">
             <EntityTypeMapping TypeName="IPAPPM.Model.tbl_City">
               <MappingFragment StoreEntitySet="tbl_City">
@@ -824,20 +794,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_CompanyInfo">
-            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_CompanyInfo">
-              <MappingFragment StoreEntitySet="tbl_CompanyInfo">
-                <ScalarProperty Name="Comapny_Id" ColumnName="Comapny_Id" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="Imagepath" ColumnName="Imagepath" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbl_CompanyType">
             <EntityTypeMapping TypeName="IPAPPM.Model.tbl_CompanyType">
               <MappingFragment StoreEntitySet="tbl_CompanyType">
@@ -846,20 +802,6 @@
                 <ScalarProperty Name="Target_Type" ColumnName="Target_Type" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_FavoriteProduct">
-            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_FavoriteProduct">
-              <MappingFragment StoreEntitySet="tbl_FavoriteProduct">
-                <ScalarProperty Name="FavoriteProduct_Id" ColumnName="FavoriteProduct_Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -938,29 +880,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_SellerDetails">
-            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_SellerDetails">
-              <MappingFragment StoreEntitySet="tbl_SellerDetails">
-                <ScalarProperty Name="Seller_Id" ColumnName="Seller_Id" />
-                <ScalarProperty Name="Seller_Name" ColumnName="Seller_Name" />
-                <ScalarProperty Name="Seller_code" ColumnName="Seller_code" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="Address3" ColumnName="Address3" />
-                <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
-                <ScalarProperty Name="PhoneNumber2" ColumnName="PhoneNumber2" />
-                <ScalarProperty Name="PhoneNumber3" ColumnName="PhoneNumber3" />
-                <ScalarProperty Name="SellerType_Id" ColumnName="SellerType_Id" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbl_SellerType">
             <EntityTypeMapping TypeName="IPAPPM.Model.tbl_SellerType">
               <MappingFragment StoreEntitySet="tbl_SellerType">
@@ -1019,6 +938,59 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SellerDetails">
+            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_SellerDetails">
+              <MappingFragment StoreEntitySet="tbl_SellerDetails">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="SellerType_Id" ColumnName="SellerType_Id" />
+                <ScalarProperty Name="PhoneNumbers" ColumnName="PhoneNumbers" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Seller_code" ColumnName="Seller_code" />
+                <ScalarProperty Name="Seller_Name" ColumnName="Seller_Name" />
+                <ScalarProperty Name="Seller_Id" ColumnName="Seller_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_FavoriteProduct">
+            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_FavoriteProduct">
+              <MappingFragment StoreEntitySet="tbl_FavoriteProduct">
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FavoriteProduct_Id" ColumnName="FavoriteProduct_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_CompanyInfo">
+            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_CompanyInfo">
+              <MappingFragment StoreEntitySet="tbl_CompanyInfo">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Imagepath" ColumnName="Imagepath" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Comapny_Id" ColumnName="Comapny_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_UserNotifications">
+            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_UserNotifications">
+              <MappingFragment StoreEntitySet="tbl_UserNotifications">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Notification_Id" ColumnName="Notification_Id" />
+                <ScalarProperty Name="UserNotification_Id" ColumnName="UserNotification_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1040,30 +1012,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="IPAPPMEntities">
-        <EntityTypeShape EntityType="IPAPPM.Model.sysdiagram" Width="1.5" PointX="5.75" PointY="8.375" Height="1.9802864583333335" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_City" Width="1.5" PointX="10" PointY="3" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_CommonTerms" Width="1.5" PointX="5.75" PointY="11.375" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="IPAPPM.Model.tbl_CompanyInfo" Width="1.5" PointX="7.75" PointY="11.375" Height="2.5571907552083317" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_CompanyType" Width="1.5" PointX="0.75" PointY="3.5" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="IPAPPM.Model.tbl_FavoriteProduct" Width="1.5" PointX="9.75" PointY="11.375" Height="2.5571907552083317" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_LoginAudit" Width="1.5" PointX="5.25" PointY="1.75" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_Mobile_Verification" Width="1.5" PointX="11.75" PointY="11.375" Height="1.7879850260416674" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_MRoles" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5956835937499996" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_Notifications" Width="1.5" PointX="12.75" PointY="7.375" Height="1.9802864583333326" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_ProductCategory" Width="1.5" PointX="0.75" PointY="9.25" Height="2.9417936197916745" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_ProductDetails" Width="1.5" PointX="3" PointY="8.625" Height="4.0956022135416745" IsExpanded="true" />
-        <EntityTypeShape EntityType="IPAPPM.Model.tbl_SellerDetails" Width="1.5" PointX="12.25" PointY="1.625" Height="4.8648079427083317" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_SellerType" Width="1.5" PointX="10" PointY="7.75" Height="2.7494921875000022" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_State" Width="1.5" PointX="7.75" PointY="3.125" Height="1.9802864583333393" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_UserDetails" Width="1.5" PointX="3" PointY="2.25" Height="4.4802050781250031" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_UserQuestions" Width="1.5" PointX="5.25" PointY="4.5" Height="2.9417936197916674" IsExpanded="true" />
         <AssociationConnector Association="IPAPPM.Model.FK__tbl_City__State___45F365D3" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.25" PointY="4.1151432291666694" />
-          <ConnectorPoint PointX="10" PointY="4.1151432291666694" />
-        </AssociationConnector>
-        <AssociationConnector Association="IPAPPM.Model.FK__tbl_Seller__City__4D94879B" ManuallyRouted="false">
-          <ConnectorPoint PointX="11.5" PointY="4.0862939453125" />
-          <ConnectorPoint PointX="12.25" PointY="4.0862939453125" />
+          <ConnectorPoint PointX="9.25" PointY="4.1151432291666659" />
+          <ConnectorPoint PointX="10" PointY="4.1151432291666659" />
         </AssociationConnector>
         <AssociationConnector Association="IPAPPM.Model.FK__tbl_UserD__Compa__145C0A3F" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="4.5862939453125" />
@@ -1082,20 +1046,28 @@
           <ConnectorPoint PointX="2.25" PointY="10.720896809895837" />
           <ConnectorPoint PointX="3" PointY="10.720896809895837" />
         </AssociationConnector>
-        <AssociationConnector Association="IPAPPM.Model.FK__tbl_Selle__Selle__4BAC3F29" ManuallyRouted="false">
-          <ConnectorPoint PointX="11.5" PointY="9.9586393229166674" />
-          <ConnectorPoint PointX="12.46875" PointY="9.9586393229166674" />
-          <ConnectorPoint PointX="12.46875" PointY="6.4898079427083317" />
-        </AssociationConnector>
-        <AssociationConnector Association="IPAPPM.Model.FK__tbl_Selle__State__4CA06362" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.5" PointY="5.1052864583333388" />
-          <ConnectorPoint PointX="8.5" PointY="5.8624479166666656" />
-          <ConnectorPoint PointX="12.25" PointY="5.8624479166666656" />
-        </AssociationConnector>
         <AssociationConnector Association="IPAPPM.Model.FK__tbl_UserQ__UserI__534D60F1" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="5.6151025390625016" />
           <ConnectorPoint PointX="5.25" PointY="5.6151025390625016" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="IPAPPM.Model.tbl_SellerDetails" Width="1.5" PointX="12.25" PointY="1.75" Height="4.0956022135416674" />
+        <AssociationConnector Association="IPAPPM.Model.FK__tbl_Seller__City__2CF2ADDF" >
+          <ConnectorPoint PointX="11.5" PointY="4.0862939453125" />
+          <ConnectorPoint PointX="12.25" PointY="4.0862939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="IPAPPM.Model.FK__tbl_Selle__Selle__2B0A656D" >
+          <ConnectorPoint PointX="11.5" PointY="9.9586393229166656" />
+          <ConnectorPoint PointX="12.46875" PointY="9.9586393229166656" />
+          <ConnectorPoint PointX="12.46875" PointY="5.8456022135416674" />
+        </AssociationConnector>
+        <AssociationConnector Association="IPAPPM.Model.FK__tbl_Selle__State__2BFE89A6" >
+          <ConnectorPoint PointX="8.5" PointY="5.1052864583333326" />
+          <ConnectorPoint PointX="8.5" PointY="5.5403450520833335" />
+          <ConnectorPoint PointX="12.25" PointY="5.5403450520833335" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="IPAPPM.Model.tbl_FavoriteProduct" Width="1.5" PointX="5.375" PointY="8.75" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="IPAPPM.Model.tbl_CompanyInfo" Width="1.5" PointX="8.375" PointY="11.75" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="IPAPPM.Model.tbl_UserNotifications" Width="1.5" PointX="0.75" PointY="13.75" Height="1.5956835937500031" />
       </Diagram>
     </Diagrams>
   </Designer>

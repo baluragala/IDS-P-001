@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using IPAPPM.Web.Portal.Filters;
 using IPAPPM.Web.Portal.Models;
+using System.Data;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
@@ -17,6 +18,8 @@ namespace IPAPPM.Web.Portal.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private IPAPPMLIVEEntities db = new IPAPPMLIVEEntities();
+
         //
         // GET: /Account/Login
 
@@ -37,6 +40,31 @@ namespace IPAPPM.Web.Portal.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
+                tbl_LoginAudit entity=null;
+                var result 
+                    = from c in db.tbl_LoginAudit
+                       where c.UserName == model.UserName
+                       select c;
+                if(result != null)
+                    entity = result.Single();
+
+                if (entity == null)
+                {
+                    entity = new tbl_LoginAudit
+                    {
+                        UserName = model.UserName,
+                        LoginTime = DateTime.Now
+                    };
+                    db.tbl_LoginAudit.AddObject(entity);
+                }
+                else
+                {
+                    entity.LoginTime = DateTime.Now;
+                    //entity.LogOutTime = null;
+                    db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
+                }
+                
+                db.SaveChanges();
                 return RedirectToLocal(returnUrl);
             }
 
@@ -53,8 +81,18 @@ namespace IPAPPM.Web.Portal.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
+            
+            tbl_LoginAudit entity = (from c in db.tbl_LoginAudit
+                                     where c.UserName == User.Identity.Name
+                                     select c).SingleOrDefault();
+            
+            entity.LogOutTime = DateTime.Now;
 
-            return RedirectToAction("Index", "Home");
+            //db.tbl_LoginAudit.Attach(entity);
+            db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
+            db.SaveChanges();
+
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -81,7 +119,7 @@ namespace IPAPPM.Web.Portal.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Dashboard");
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -107,7 +145,7 @@ namespace IPAPPM.Web.Portal.Controllers
             if (ownerAccount == User.Identity.Name)
             {
                 // Use a transaction to prevent the user from deleting their last login credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = System.Transactions.IsolationLevel.Serializable }))
                 {
                     bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
                     if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
@@ -337,7 +375,7 @@ namespace IPAPPM.Web.Portal.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Dashboard");
             }
         }
 

@@ -10,9 +10,9 @@ namespace IPAPPM.Web.Api.Controllers
 {
     public class ProductCategoryController : ApiController
     {
-        public List<ProductCategory> GetCategories()
-        {
-            return new ProductCategory().GetCategories();
-        }
+        //public List<ProductCategory> GetCategories()
+        //{
+        //    return new ProductCategory().GetCategories();
+        //}
     }
 }

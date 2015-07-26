@@ -119,3 +119,97 @@ ALTER TABLE [dbo].[tbl_ProductDetails] ADD  DEFAULT ((1)) FOR [IsActive]
 GO
 
 
+USE [IPAPPM_LIVE]
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__tbl_Compa__IsAct__628FA481]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[tbl_CompanyInfo] DROP CONSTRAINT [DF__tbl_Compa__IsAct__628FA481]
+END
+
+GO
+
+USE [IPAPPM_LIVE]
+GO
+
+/****** Object:  Table [dbo].[tbl_CompanyInfo]    Script Date: 07/25/2015 00:12:18 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tbl_CompanyInfo]') AND type in (N'U'))
+DROP TABLE [dbo].[tbl_CompanyInfo]
+GO
+
+USE [IPAPPM_LIVE]
+GO
+
+/****** Object:  Table [dbo].[tbl_CompanyInfo]    Script Date: 07/25/2015 00:12:18 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[tbl_CompanyInfo](
+	[Comapny_Id] [int] IDENTITY(1,1) NOT NULL,
+	[CompanyName] [varchar](100) NULL,
+	[Text] [varchar](max) NULL,
+	[Imagepath] [varchar](200) NULL,
+	[Website] [varchar](50) NULL,
+	[IsActive] [bit] NULL,
+	[CreatedBy] [varchar](20) NOT NULL,
+	[CreatedDate] [datetime] NOT NULL,
+	[ModifiedBy] [varchar](20) NOT NULL,
+	[ModifiedDate] [varchar](20) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Comapny_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[tbl_CompanyInfo] ADD  DEFAULT ((1)) FOR [IsActive]
+GO
+
+
+USE [IPAPPM_LIVE]
+GO
+
+/****** Object:  Table [dbo].[tbl_FavoriteProduct]    Script Date: 07/25/2015 08:13:34 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tbl_FavoriteProduct]') AND type in (N'U'))
+DROP TABLE [dbo].[tbl_FavoriteProduct]
+GO
+
+USE [IPAPPM_LIVE]
+GO
+
+/****** Object:  Table [dbo].[tbl_FavoriteProduct]    Script Date: 07/25/2015 08:13:34 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[tbl_FavoriteProduct](
+	[FavoriteProduct_Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NULL,
+	[Product_Id] [int] NOT NULL	
+PRIMARY KEY CLUSTERED 
+(
+	[FavoriteProduct_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
