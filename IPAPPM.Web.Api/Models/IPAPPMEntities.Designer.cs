@@ -20,14 +20,14 @@ using System.Xml.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_City__State___45F365D3", "tbl_State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_State), "tbl_City", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_City), true)]
-[assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserD__Compa__145C0A3F", "tbl_CompanyType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_CompanyType), "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_UserDetails), true)]
-[assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserD__RoleI__15502E78", "tbl_MRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_MRoles), "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_UserDetails), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_Produ__Categ__25518C17", "tbl_ProductCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(IPAPPM.Web.Api.Models.tbl_ProductCategory), "tbl_ProductDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_ProductDetails), true)]
-[assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserQ__UserI__534D60F1", "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_UserDetails), "tbl_UserQuestions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_UserQuestions), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_Seller__City__2CF2ADDF", "tbl_City", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_City), "tbl_SellerDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_SellerDetails), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_Selle__Selle__2B0A656D", "tbl_SellerType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_SellerType), "tbl_SellerDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_SellerDetails), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_Selle__State__2BFE89A6", "tbl_State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_State), "tbl_SellerDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_SellerDetails), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "tbl_SellerProductCategories", "tbl_ProductCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_ProductCategory), "tbl_SellerDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_SellerDetails))]
+[assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserD__Compa__145C0A3F", "tbl_CompanyType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_CompanyType), "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_UserDetails), true)]
+[assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserD__RoleI__15502E78", "tbl_MRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_MRoles), "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_UserDetails), true)]
+[assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserQ__UserI__534D60F1", "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Api.Models.tbl_UserDetails), "tbl_UserQuestions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Api.Models.tbl_UserQuestions), true)]
 
 #endregion
 
@@ -242,22 +242,6 @@ namespace IPAPPM.Web.Api.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<tbl_UserDetails> tbl_UserDetails
-        {
-            get
-            {
-                if ((_tbl_UserDetails == null))
-                {
-                    _tbl_UserDetails = base.CreateObjectSet<tbl_UserDetails>("tbl_UserDetails");
-                }
-                return _tbl_UserDetails;
-            }
-        }
-        private ObjectSet<tbl_UserDetails> _tbl_UserDetails;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<tbl_UserQuestions> tbl_UserQuestions
         {
             get
@@ -334,6 +318,54 @@ namespace IPAPPM.Web.Api.Models
             }
         }
         private ObjectSet<tbl_LoginAudit> _tbl_LoginAudit;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<tbl_AuditTrail> tbl_AuditTrail
+        {
+            get
+            {
+                if ((_tbl_AuditTrail == null))
+                {
+                    _tbl_AuditTrail = base.CreateObjectSet<tbl_AuditTrail>("tbl_AuditTrail");
+                }
+                return _tbl_AuditTrail;
+            }
+        }
+        private ObjectSet<tbl_AuditTrail> _tbl_AuditTrail;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<tbl_EndUsage> tbl_EndUsage
+        {
+            get
+            {
+                if ((_tbl_EndUsage == null))
+                {
+                    _tbl_EndUsage = base.CreateObjectSet<tbl_EndUsage>("tbl_EndUsage");
+                }
+                return _tbl_EndUsage;
+            }
+        }
+        private ObjectSet<tbl_EndUsage> _tbl_EndUsage;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<tbl_UserDetails> tbl_UserDetails
+        {
+            get
+            {
+                if ((_tbl_UserDetails == null))
+                {
+                    _tbl_UserDetails = base.CreateObjectSet<tbl_UserDetails>("tbl_UserDetails");
+                }
+                return _tbl_UserDetails;
+            }
+        }
+        private ObjectSet<tbl_UserDetails> _tbl_UserDetails;
 
         #endregion
 
@@ -420,14 +452,6 @@ namespace IPAPPM.Web.Api.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the tbl_UserDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTotbl_UserDetails(tbl_UserDetails tbl_UserDetails)
-        {
-            base.AddObject("tbl_UserDetails", tbl_UserDetails);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the tbl_UserQuestions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTotbl_UserQuestions(tbl_UserQuestions tbl_UserQuestions)
@@ -466,6 +490,30 @@ namespace IPAPPM.Web.Api.Models
         {
             base.AddObject("tbl_LoginAudit", tbl_LoginAudit);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the tbl_AuditTrail EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotbl_AuditTrail(tbl_AuditTrail tbl_AuditTrail)
+        {
+            base.AddObject("tbl_AuditTrail", tbl_AuditTrail);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the tbl_EndUsage EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotbl_EndUsage(tbl_EndUsage tbl_EndUsage)
+        {
+            base.AddObject("tbl_EndUsage", tbl_EndUsage);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the tbl_UserDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotbl_UserDetails(tbl_UserDetails tbl_UserDetails)
+        {
+            base.AddObject("tbl_UserDetails", tbl_UserDetails);
+        }
 
         #endregion
 
@@ -474,6 +522,165 @@ namespace IPAPPM.Web.Api.Models
     #endregion
 
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="IPAPPM.Model", Name="tbl_AuditTrail")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class tbl_AuditTrail : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new tbl_AuditTrail object.
+        /// </summary>
+        /// <param name="auditTrail_Id">Initial value of the AuditTrail_Id property.</param>
+        /// <param name="userName">Initial value of the UserName property.</param>
+        /// <param name="action">Initial value of the Action property.</param>
+        /// <param name="actionItem">Initial value of the ActionItem property.</param>
+        public static tbl_AuditTrail Createtbl_AuditTrail(global::System.Int32 auditTrail_Id, global::System.String userName, global::System.String action, global::System.String actionItem)
+        {
+            tbl_AuditTrail tbl_AuditTrail = new tbl_AuditTrail();
+            tbl_AuditTrail.AuditTrail_Id = auditTrail_Id;
+            tbl_AuditTrail.UserName = userName;
+            tbl_AuditTrail.Action = action;
+            tbl_AuditTrail.ActionItem = actionItem;
+            return tbl_AuditTrail;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AuditTrail_Id
+        {
+            get
+            {
+                return _AuditTrail_Id;
+            }
+            set
+            {
+                if (_AuditTrail_Id != value)
+                {
+                    OnAuditTrail_IdChanging(value);
+                    ReportPropertyChanging("AuditTrail_Id");
+                    _AuditTrail_Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AuditTrail_Id");
+                    OnAuditTrail_IdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AuditTrail_Id;
+        partial void OnAuditTrail_IdChanging(global::System.Int32 value);
+        partial void OnAuditTrail_IdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                OnUserNameChanging(value);
+                ReportPropertyChanging("UserName");
+                _UserName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("UserName");
+                OnUserNameChanged();
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Action
+        {
+            get
+            {
+                return _Action;
+            }
+            set
+            {
+                OnActionChanging(value);
+                ReportPropertyChanging("Action");
+                _Action = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Action");
+                OnActionChanged();
+            }
+        }
+        private global::System.String _Action;
+        partial void OnActionChanging(global::System.String value);
+        partial void OnActionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ActionItem
+        {
+            get
+            {
+                return _ActionItem;
+            }
+            set
+            {
+                OnActionItemChanging(value);
+                ReportPropertyChanging("ActionItem");
+                _ActionItem = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ActionItem");
+                OnActionItemChanged();
+            }
+        }
+        private global::System.String _ActionItem;
+        partial void OnActionItemChanging(global::System.String value);
+        partial void OnActionItemChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ActionDate
+        {
+            get
+            {
+                return _ActionDate;
+            }
+            set
+            {
+                OnActionDateChanging(value);
+                ReportPropertyChanging("ActionDate");
+                _ActionDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ActionDate");
+                OnActionDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ActionDate;
+        partial void OnActionDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnActionDateChanged();
+
+        #endregion
+
+    
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -1393,6 +1600,191 @@ namespace IPAPPM.Web.Api.Models
 
         #endregion
 
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="IPAPPM.Model", Name="tbl_EndUsage")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class tbl_EndUsage : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new tbl_EndUsage object.
+        /// </summary>
+        /// <param name="endUsage_Id">Initial value of the EndUsage_Id property.</param>
+        /// <param name="endUsage">Initial value of the EndUsage property.</param>
+        /// <param name="product">Initial value of the Product property.</param>
+        /// <param name="gSMRange">Initial value of the GSMRange property.</param>
+        /// <param name="availability">Initial value of the Availability property.</param>
+        public static tbl_EndUsage Createtbl_EndUsage(global::System.Int32 endUsage_Id, global::System.String endUsage, global::System.String product, global::System.String gSMRange, global::System.String availability)
+        {
+            tbl_EndUsage tbl_EndUsage = new tbl_EndUsage();
+            tbl_EndUsage.EndUsage_Id = endUsage_Id;
+            tbl_EndUsage.EndUsage = endUsage;
+            tbl_EndUsage.Product = product;
+            tbl_EndUsage.GSMRange = gSMRange;
+            tbl_EndUsage.Availability = availability;
+            return tbl_EndUsage;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EndUsage_Id
+        {
+            get
+            {
+                return _EndUsage_Id;
+            }
+            set
+            {
+                if (_EndUsage_Id != value)
+                {
+                    OnEndUsage_IdChanging(value);
+                    ReportPropertyChanging("EndUsage_Id");
+                    _EndUsage_Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("EndUsage_Id");
+                    OnEndUsage_IdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _EndUsage_Id;
+        partial void OnEndUsage_IdChanging(global::System.Int32 value);
+        partial void OnEndUsage_IdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String EndUsage
+        {
+            get
+            {
+                return _EndUsage;
+            }
+            set
+            {
+                OnEndUsageChanging(value);
+                ReportPropertyChanging("EndUsage");
+                _EndUsage = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("EndUsage");
+                OnEndUsageChanged();
+            }
+        }
+        private global::System.String _EndUsage;
+        partial void OnEndUsageChanging(global::System.String value);
+        partial void OnEndUsageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SubEndUsage
+        {
+            get
+            {
+                return _SubEndUsage;
+            }
+            set
+            {
+                OnSubEndUsageChanging(value);
+                ReportPropertyChanging("SubEndUsage");
+                _SubEndUsage = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("SubEndUsage");
+                OnSubEndUsageChanged();
+            }
+        }
+        private global::System.String _SubEndUsage;
+        partial void OnSubEndUsageChanging(global::System.String value);
+        partial void OnSubEndUsageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Product
+        {
+            get
+            {
+                return _Product;
+            }
+            set
+            {
+                OnProductChanging(value);
+                ReportPropertyChanging("Product");
+                _Product = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Product");
+                OnProductChanged();
+            }
+        }
+        private global::System.String _Product;
+        partial void OnProductChanging(global::System.String value);
+        partial void OnProductChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String GSMRange
+        {
+            get
+            {
+                return _GSMRange;
+            }
+            set
+            {
+                OnGSMRangeChanging(value);
+                ReportPropertyChanging("GSMRange");
+                _GSMRange = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("GSMRange");
+                OnGSMRangeChanged();
+            }
+        }
+        private global::System.String _GSMRange;
+        partial void OnGSMRangeChanging(global::System.String value);
+        partial void OnGSMRangeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Availability
+        {
+            get
+            {
+                return _Availability;
+            }
+            set
+            {
+                OnAvailabilityChanging(value);
+                ReportPropertyChanging("Availability");
+                _Availability = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Availability");
+                OnAvailabilityChanged();
+            }
+        }
+        private global::System.String _Availability;
+        partial void OnAvailabilityChanging(global::System.String value);
+        partial void OnAvailabilityChanged();
+
+        #endregion
+
+    
     }
     
     /// <summary>
@@ -3587,7 +3979,7 @@ namespace IPAPPM.Web.Api.Models
         /// </summary>
         /// <param name="userId">Initial value of the UserId property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="comanyName">Initial value of the ComanyName property.</param>
+        /// <param name="companyName">Initial value of the CompanyName property.</param>
         /// <param name="designation">Initial value of the Designation property.</param>
         /// <param name="email">Initial value of the Email property.</param>
         /// <param name="mobileNumber">Initial value of the MobileNumber property.</param>
@@ -3597,12 +3989,12 @@ namespace IPAPPM.Web.Api.Models
         /// <param name="registered_Date">Initial value of the Registered_Date property.</param>
         /// <param name="companyType_Id">Initial value of the CompanyType_Id property.</param>
         /// <param name="roleId">Initial value of the RoleId property.</param>
-        public static tbl_UserDetails Createtbl_UserDetails(global::System.Int32 userId, global::System.String name, global::System.String comanyName, global::System.String designation, global::System.String email, global::System.String mobileNumber, global::System.String city, global::System.String userName, global::System.String password, global::System.DateTime registered_Date, global::System.Int32 companyType_Id, global::System.Int32 roleId)
+        public static tbl_UserDetails Createtbl_UserDetails(global::System.Int32 userId, global::System.String name, global::System.String companyName, global::System.String designation, global::System.String email, global::System.String mobileNumber, global::System.String city, global::System.String userName, global::System.String password, global::System.DateTime registered_Date, global::System.Int32 companyType_Id, global::System.Int32 roleId)
         {
             tbl_UserDetails tbl_UserDetails = new tbl_UserDetails();
             tbl_UserDetails.UserId = userId;
             tbl_UserDetails.Name = name;
-            tbl_UserDetails.ComanyName = comanyName;
+            tbl_UserDetails.CompanyName = companyName;
             tbl_UserDetails.Designation = designation;
             tbl_UserDetails.Email = email;
             tbl_UserDetails.MobileNumber = mobileNumber;
@@ -3675,24 +4067,24 @@ namespace IPAPPM.Web.Api.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String ComanyName
+        public global::System.String CompanyName
         {
             get
             {
-                return _ComanyName;
+                return _CompanyName;
             }
             set
             {
-                OnComanyNameChanging(value);
-                ReportPropertyChanging("ComanyName");
-                _ComanyName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ComanyName");
-                OnComanyNameChanged();
+                OnCompanyNameChanging(value);
+                ReportPropertyChanging("CompanyName");
+                _CompanyName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("CompanyName");
+                OnCompanyNameChanged();
             }
         }
-        private global::System.String _ComanyName;
-        partial void OnComanyNameChanging(global::System.String value);
-        partial void OnComanyNameChanged();
+        private global::System.String _CompanyName;
+        partial void OnCompanyNameChanging(global::System.String value);
+        partial void OnCompanyNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3933,30 +4325,6 @@ namespace IPAPPM.Web.Api.Models
         private global::System.Int32 _RoleId;
         partial void OnRoleIdChanging(global::System.Int32 value);
         partial void OnRoleIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String PhoneNumber
-        {
-            get
-            {
-                return _PhoneNumber;
-            }
-            set
-            {
-                OnPhoneNumberChanging(value);
-                ReportPropertyChanging("PhoneNumber");
-                _PhoneNumber = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("PhoneNumber");
-                OnPhoneNumberChanged();
-            }
-        }
-        private global::System.String _PhoneNumber;
-        partial void OnPhoneNumberChanging(global::System.String value);
-        partial void OnPhoneNumberChanged();
 
         #endregion
 

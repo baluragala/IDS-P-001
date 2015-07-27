@@ -3,10 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index.aspx
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-  <div class="col-md-6">
+    <div class="col-md-6">
         <h4 class="heading">
             Registerd User List
         </h4>
@@ -28,9 +26,9 @@
                 </tr>
             </thead>
             <tbody>
-            <% foreach (var item in Model.UserDetails)
-               {  
-            %>
+                <% foreach (var item in Model.UserDetails)
+                   {  
+                %>
                 <tr>
                     <td>
                         <%: item.Name %>
@@ -39,17 +37,16 @@
                         <%: item.City %>
                     </td>
                     <td>
-                        <%: item.ComanyName %>
+                        <%: item.CompanyName %>
                     </td>
                     <td>
                         <%: item.Designation %>
                     </td>
                 </tr>
-            <%
-                } 
-            %>
+                <%
+                   } 
+                %>
             </tbody>
-            
         </table>
         <a href="/User/Index" style="margin-left: 475px">More..</a>
     </div>
@@ -76,9 +73,9 @@
                 </tr>
             </thead>
             <tbody>
-            <% foreach (var item in Model.LoginAudits)
-                {  
-            %>
+                <% foreach (var item in Model.LoginAudits)
+                   {  
+                %>
                 <tr>
                     <td>
                         <%: item.UserName %>
@@ -90,17 +87,17 @@
                         <%: item.LogOutTime %>
                     </td>
                     <td>
-                        192.168.1.1
+                          <%: item.IP %>
                     </td>
                 </tr>
-            <%
-                }
-            %>
+                <%
+                   }
+                %>
             </tbody>
         </table>
         <a href="/AdminLog/Index" style="margin-left: 475px">More..</a>
     </div>
-     <div class="col-md-6">
+    <div class="col-md-6">
         <h4 class="heading">
             Admin Audit Trails
         </h4>
@@ -122,72 +119,32 @@
                 </tr>
             </thead>
             <tbody>
+                <% foreach (var item in Model.AuditTrails)
+                   {  
+                %>
                 <tr>
                     <td>
-                        Admin1
+                        <%: item.UserName %>
                     </td>
                     <td>
-                      Added
+                         <%: item.Action %>
                     </td>
                     <td>
-                        Product
+                         <%: item.ActionItem %>
                     </td>
                     <td>
-                       10/06/2015 2.00PM
+                         <%: item.ActionDate %>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        Admin2
-                    </td>
-                    <td>
-                        Edited
-                    </td>
-                    <td>
-                       Company Info
-                    </td>
-                    <td>
-                         12/06/2015 11.00AM
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                         Admin3
-                    </td>
-                    <td>
-                      Deleted
-                    </td>
-                    <td>
-                       Product
-                    </td>
-                    <td>
-                       13/06/2015 10.00AM
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                         Admin4
-                    </td>
-                    <td>
-                       Added
-                    </td>
-                    <td>
-                      Company Info
-                    </td>
-                    <td>
-                         15/07/2015 03.00PM
-                    </td>
-                </tr>
+                <%
+                   } %>
             </tbody>
         </table>
-        <a href="#" style="margin-left: 475px">More..</a>
+        <a href="/Audit/Index" style="margin-left: 475px">More..</a>
     </div>
-
 </asp:Content>
-
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
     Dashboard
 </asp:Content>
-
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">
 </asp:Content>

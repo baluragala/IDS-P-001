@@ -20,7 +20,7 @@
             <%: Html.LabelFor(model => model.Question) %>
         </div>
         <div class="editor-field">
-            <%: Html.EditorFor(model => model.Question) %>
+            <pre> <%: Model.Question %> </pre>  
             <%: Html.ValidationMessageFor(model => model.Question) %>
         </div>
 
@@ -31,7 +31,7 @@
             <%: Html.TextAreaFor(model => model.Answer) %>
             <%: Html.ValidationMessageFor(model => model.Answer) %>
         </div>
-
+         <%: Html.HiddenFor(model => model.Question) %>
         <%: Html.HiddenFor(model => model.CreatedBy) %>
         <%: Html.HiddenFor(model => model.CreatedDate) %>
         <%: Html.HiddenFor(model => model.ModifiedBy) %>

@@ -9,6 +9,7 @@ using IPAPPM.Web.Portal.Models;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
+    [Authorize]
     public class NotificationController : Controller
     {
         private IPAPPMLIVEEntities db = new IPAPPMLIVEEntities();

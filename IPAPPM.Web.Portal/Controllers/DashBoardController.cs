@@ -7,6 +7,7 @@ using IPAPPM.Web.Portal.ViewModels;
 
 namespace IPAPPM.web.portal.Controllers
 {
+    [Authorize]
     public class DashBoardController : Controller
     {
         //

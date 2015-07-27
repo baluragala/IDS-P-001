@@ -9,6 +9,7 @@ using IPAPPM.Web.Portal.Models;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private IPAPPMLIVEEntities db = new IPAPPMLIVEEntities();
@@ -19,7 +20,7 @@ namespace IPAPPM.Web.Portal.Controllers
         public ActionResult Index()
         {
             var tbl_userdetails = db.tbl_UserDetails.Include("tbl_CompanyType").Include("tbl_MRoles");
-            return View(tbl_userdetails.ToList());
+            return View(tbl_userdetails.OrderByDescending(u=>u.Registered_Date).ToList());
         }
 
         //

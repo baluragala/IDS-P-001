@@ -6,10 +6,12 @@
     <edmx:StorageModels>
     <Schema Namespace="IPAPPM.Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="IPAPPMModelStoreContainer">
+          <EntitySet Name="tbl_AuditTrail" EntityType="IPAPPM.Model.Store.tbl_AuditTrail" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_City" EntityType="IPAPPM.Model.Store.tbl_City" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_CommonTerms" EntityType="IPAPPM.Model.Store.tbl_CommonTerms" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_CompanyInfo" EntityType="IPAPPM.Model.Store.tbl_CompanyInfo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_CompanyType" EntityType="IPAPPM.Model.Store.tbl_CompanyType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_EndUsage" EntityType="IPAPPM.Model.Store.tbl_EndUsage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_LoginAudit" EntityType="IPAPPM.Model.Store.tbl_LoginAudit" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_Mobile_Verification" EntityType="IPAPPM.Model.Store.tbl_Mobile_Verification" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbl_MRoles" EntityType="IPAPPM.Model.Store.tbl_MRoles" store:Type="Tables" Schema="dbo" />
@@ -64,6 +66,16 @@
             <End Role="tbl_UserQuestions" EntitySet="tbl_UserQuestions" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tbl_AuditTrail">
+          <Key>
+            <PropertyRef Name="AuditTrail_Id" />
+          </Key>
+          <Property Name="AuditTrail_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Action" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="ActionItem" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ActionDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbl_City">
           <Key>
             <PropertyRef Name="City_Id" />
@@ -111,6 +123,17 @@
           <Property Name="Target_Type" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="100" />
           <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_EndUsage">
+          <Key>
+            <PropertyRef Name="EndUsage_Id" />
+          </Key>
+          <Property Name="EndUsage_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EndUsage" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SubEndUsage" Type="varchar" MaxLength="50" />
+          <Property Name="Product" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="GSMRange" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Availability" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="tbl_LoginAudit">
           <Key>
@@ -234,7 +257,7 @@
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="ComanyName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Designation" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="Email" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="MobileNumber" Type="varchar" Nullable="false" MaxLength="12" />
@@ -245,7 +268,6 @@
           <Property Name="IsActive" Type="bit" />
           <Property Name="CompanyType_Id" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
-          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tbl_UserNotifications">
           <Key>
@@ -404,27 +426,14 @@
           <EntitySet Name="tbl_ProductDetails" EntityType="IPAPPM.Model.tbl_ProductDetails" />
           <EntitySet Name="tbl_SellerType" EntityType="IPAPPM.Model.tbl_SellerType" />
           <EntitySet Name="tbl_State" EntityType="IPAPPM.Model.tbl_State" />
-          <EntitySet Name="tbl_UserDetails" EntityType="IPAPPM.Model.tbl_UserDetails" />
           <EntitySet Name="tbl_UserQuestions" EntityType="IPAPPM.Model.tbl_UserQuestions" />
           <AssociationSet Name="FK__tbl_City__State___45F365D3" Association="IPAPPM.Model.FK__tbl_City__State___45F365D3">
             <End Role="tbl_State" EntitySet="tbl_State" />
             <End Role="tbl_City" EntitySet="tbl_City" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_UserD__Compa__145C0A3F" Association="IPAPPM.Model.FK__tbl_UserD__Compa__145C0A3F">
-            <End Role="tbl_CompanyType" EntitySet="tbl_CompanyType" />
-            <End Role="tbl_UserDetails" EntitySet="tbl_UserDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tbl_UserD__RoleI__15502E78" Association="IPAPPM.Model.FK__tbl_UserD__RoleI__15502E78">
-            <End Role="tbl_MRoles" EntitySet="tbl_MRoles" />
-            <End Role="tbl_UserDetails" EntitySet="tbl_UserDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK__tbl_Produ__Categ__25518C17" Association="IPAPPM.Model.FK__tbl_Produ__Categ__25518C17">
             <End Role="tbl_ProductCategory" EntitySet="tbl_ProductCategory" />
             <End Role="tbl_ProductDetails" EntitySet="tbl_ProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tbl_UserQ__UserI__534D60F1" Association="IPAPPM.Model.FK__tbl_UserQ__UserI__534D60F1">
-            <End Role="tbl_UserDetails" EntitySet="tbl_UserDetails" />
-            <End Role="tbl_UserQuestions" EntitySet="tbl_UserQuestions" />
           </AssociationSet>
           <EntitySet Name="tbl_SellerDetails" EntityType="IPAPPM.Model.tbl_SellerDetails" />
           <AssociationSet Name="FK__tbl_Seller__City__2CF2ADDF" Association="IPAPPM.Model.FK__tbl_Seller__City__2CF2ADDF">
@@ -446,6 +455,21 @@
             <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
           </AssociationSet>
           <EntitySet Name="tbl_LoginAudit" EntityType="IPAPPM.Model.tbl_LoginAudit" />
+          <EntitySet Name="tbl_AuditTrail" EntityType="IPAPPM.Model.tbl_AuditTrail" />
+          <EntitySet Name="tbl_EndUsage" EntityType="IPAPPM.Model.tbl_EndUsage" />
+          <EntitySet Name="tbl_UserDetails" EntityType="IPAPPM.Model.tbl_UserDetails" />
+          <AssociationSet Name="FK__tbl_UserD__Compa__145C0A3F" Association="IPAPPM.Model.FK__tbl_UserD__Compa__145C0A3F">
+            <End Role="tbl_CompanyType" EntitySet="tbl_CompanyType" />
+            <End Role="tbl_UserDetails" EntitySet="tbl_UserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_UserD__RoleI__15502E78" Association="IPAPPM.Model.FK__tbl_UserD__RoleI__15502E78">
+            <End Role="tbl_MRoles" EntitySet="tbl_MRoles" />
+            <End Role="tbl_UserDetails" EntitySet="tbl_UserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_UserQ__UserI__534D60F1" Association="IPAPPM.Model.FK__tbl_UserQ__UserI__534D60F1">
+            <End Role="tbl_UserDetails" EntitySet="tbl_UserDetails" />
+            <End Role="tbl_UserQuestions" EntitySet="tbl_UserQuestions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tbl_City">
           <Key>
@@ -571,28 +595,6 @@
           <NavigationProperty Name="tbl_City" Relationship="IPAPPM.Model.FK__tbl_City__State___45F365D3" FromRole="tbl_State" ToRole="tbl_City" />
           <NavigationProperty Name="tbl_SellerDetails" Relationship="IPAPPM.Model.FK__tbl_Selle__State__2BFE89A6" FromRole="tbl_State" ToRole="tbl_SellerDetails" />
         </EntityType>
-        <EntityType Name="tbl_UserDetails">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="ComanyName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Designation" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="MobileNumber" Type="String" Nullable="false" MaxLength="12" Unicode="false" FixedLength="false" />
-          <Property Name="City" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
-          <Property Name="Registered_Date" Type="DateTime" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CompanyType_Id" Type="Int32" Nullable="false" />
-          <Property Name="RoleId" Type="Int32" Nullable="false" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="tbl_CompanyType" Relationship="IPAPPM.Model.FK__tbl_UserD__Compa__145C0A3F" FromRole="tbl_UserDetails" ToRole="tbl_CompanyType" />
-          <NavigationProperty Name="tbl_MRoles" Relationship="IPAPPM.Model.FK__tbl_UserD__RoleI__15502E78" FromRole="tbl_UserDetails" ToRole="tbl_MRoles" />
-          <NavigationProperty Name="tbl_UserQuestions" Relationship="IPAPPM.Model.FK__tbl_UserQ__UserI__534D60F1" FromRole="tbl_UserDetails" ToRole="tbl_UserQuestions" />
-        </EntityType>
         <EntityType Name="tbl_UserQuestions">
           <Key>
             <PropertyRef Name="Question_Id" />
@@ -620,30 +622,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_UserD__Compa__145C0A3F">
-          <End Role="tbl_CompanyType" Type="IPAPPM.Model.tbl_CompanyType" Multiplicity="1" />
-          <End Role="tbl_UserDetails" Type="IPAPPM.Model.tbl_UserDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_CompanyType">
-              <PropertyRef Name="CompanyType_Id" />
-            </Principal>
-            <Dependent Role="tbl_UserDetails">
-              <PropertyRef Name="CompanyType_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__tbl_UserD__RoleI__15502E78">
-          <End Role="tbl_MRoles" Type="IPAPPM.Model.tbl_MRoles" Multiplicity="1" />
-          <End Role="tbl_UserDetails" Type="IPAPPM.Model.tbl_UserDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_MRoles">
-              <PropertyRef Name="RoleId" />
-            </Principal>
-            <Dependent Role="tbl_UserDetails">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__tbl_Produ__Categ__25518C17">
           <End Role="tbl_ProductCategory" Type="IPAPPM.Model.tbl_ProductCategory" Multiplicity="0..1" />
           <End Role="tbl_ProductDetails" Type="IPAPPM.Model.tbl_ProductDetails" Multiplicity="*" />
@@ -653,18 +631,6 @@
             </Principal>
             <Dependent Role="tbl_ProductDetails">
               <PropertyRef Name="Category_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__tbl_UserQ__UserI__534D60F1">
-          <End Role="tbl_UserDetails" Type="IPAPPM.Model.tbl_UserDetails" Multiplicity="1" />
-          <End Role="tbl_UserQuestions" Type="IPAPPM.Model.tbl_UserQuestions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_UserDetails">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="tbl_UserQuestions">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -762,6 +728,84 @@
           <Property Type="DateTime" Name="LogOutTime" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="tbl_AuditTrail">
+          <Key>
+            <PropertyRef Name="AuditTrail_Id" />
+          </Key>
+          <Property Type="Int32" Name="AuditTrail_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Action" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ActionItem" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ActionDate" />
+        </EntityType>
+        <EntityType Name="tbl_EndUsage">
+          <Key>
+            <PropertyRef Name="EndUsage_Id" />
+          </Key>
+          <Property Type="Int32" Name="EndUsage_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="EndUsage" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SubEndUsage" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Product" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="GSMRange" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Availability" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_UserDetails">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Designation" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MobileNumber" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Registered_Date" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" />
+          <Property Type="Int32" Name="CompanyType_Id" Nullable="false" />
+          <Property Type="Int32" Name="RoleId" Nullable="false" />
+          <NavigationProperty Name="tbl_CompanyType" Relationship="IPAPPM.Model.FK__tbl_UserD__Compa__145C0A3F" FromRole="tbl_UserDetails" ToRole="tbl_CompanyType" />
+          <NavigationProperty Name="tbl_MRoles" Relationship="IPAPPM.Model.FK__tbl_UserD__RoleI__15502E78" FromRole="tbl_UserDetails" ToRole="tbl_MRoles" />
+          <NavigationProperty Name="tbl_UserQuestions" Relationship="IPAPPM.Model.FK__tbl_UserQ__UserI__534D60F1" FromRole="tbl_UserDetails" ToRole="tbl_UserQuestions" />
+        </EntityType>
+        <Association Name="FK__tbl_UserD__Compa__145C0A3F">
+          <End Type="IPAPPM.Model.tbl_CompanyType" Role="tbl_CompanyType" Multiplicity="1" />
+          <End Type="IPAPPM.Model.tbl_UserDetails" Role="tbl_UserDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_CompanyType">
+              <PropertyRef Name="CompanyType_Id" />
+            </Principal>
+            <Dependent Role="tbl_UserDetails">
+              <PropertyRef Name="CompanyType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_UserD__RoleI__15502E78">
+          <End Type="IPAPPM.Model.tbl_MRoles" Role="tbl_MRoles" Multiplicity="1" />
+          <End Type="IPAPPM.Model.tbl_UserDetails" Role="tbl_UserDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_MRoles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="tbl_UserDetails">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_UserQ__UserI__534D60F1">
+          <End Type="IPAPPM.Model.tbl_UserDetails" Role="tbl_UserDetails" Multiplicity="1" />
+          <End Type="IPAPPM.Model.tbl_UserQuestions" Role="tbl_UserQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tbl_UserQuestions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -892,26 +936,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_UserDetails">
-            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_UserDetails">
-              <MappingFragment StoreEntitySet="tbl_UserDetails">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ComanyName" ColumnName="ComanyName" />
-                <ScalarProperty Name="Designation" ColumnName="Designation" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Registered_Date" ColumnName="Registered_Date" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CompanyType_Id" ColumnName="CompanyType_Id" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbl_UserQuestions">
             <EntityTypeMapping TypeName="IPAPPM.Model.tbl_UserQuestions">
               <MappingFragment StoreEntitySet="tbl_UserQuestions">
@@ -989,6 +1013,48 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbl_AuditTrail">
+            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_AuditTrail">
+              <MappingFragment StoreEntitySet="tbl_AuditTrail">
+                <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+                <ScalarProperty Name="ActionItem" ColumnName="ActionItem" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AuditTrail_Id" ColumnName="AuditTrail_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_EndUsage">
+            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_EndUsage">
+              <MappingFragment StoreEntitySet="tbl_EndUsage">
+                <ScalarProperty Name="Availability" ColumnName="Availability" />
+                <ScalarProperty Name="GSMRange" ColumnName="GSMRange" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
+                <ScalarProperty Name="SubEndUsage" ColumnName="SubEndUsage" />
+                <ScalarProperty Name="EndUsage" ColumnName="EndUsage" />
+                <ScalarProperty Name="EndUsage_Id" ColumnName="EndUsage_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_UserDetails">
+            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_UserDetails">
+              <MappingFragment StoreEntitySet="tbl_UserDetails">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="CompanyType_Id" ColumnName="CompanyType_Id" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Registered_Date" ColumnName="Registered_Date" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1020,28 +1086,14 @@
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_ProductDetails" Width="1.5" PointX="3" PointY="8.625" Height="4.0956022135416745" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_SellerType" Width="1.5" PointX="10" PointY="7.75" Height="2.7494921875000022" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_State" Width="1.5" PointX="7.75" PointY="3.125" Height="1.9802864583333393" IsExpanded="true" />
-        <EntityTypeShape EntityType="IPAPPM.Model.tbl_UserDetails" Width="1.5" PointX="3" PointY="2.25" Height="4.4802050781250031" IsExpanded="true" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_UserQuestions" Width="1.5" PointX="5.25" PointY="4.5" Height="2.9417936197916674" IsExpanded="true" />
         <AssociationConnector Association="IPAPPM.Model.FK__tbl_City__State___45F365D3" ManuallyRouted="false">
           <ConnectorPoint PointX="9.25" PointY="4.1151432291666659" />
           <ConnectorPoint PointX="10" PointY="4.1151432291666659" />
         </AssociationConnector>
-        <AssociationConnector Association="IPAPPM.Model.FK__tbl_UserD__Compa__145C0A3F" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="4.5862939453125" />
-          <ConnectorPoint PointX="3" PointY="4.5862939453125" />
-        </AssociationConnector>
-        <AssociationConnector Association="IPAPPM.Model.FK__tbl_UserD__RoleI__15502E78" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="1.4999995" />
-          <ConnectorPoint PointX="3.75" PointY="1.4999995" />
-          <ConnectorPoint PointX="3.75" PointY="2.25" />
-        </AssociationConnector>
         <AssociationConnector Association="IPAPPM.Model.FK__tbl_Produ__Categ__25518C17" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="10.817047526041666" />
           <ConnectorPoint PointX="3" PointY="10.817047526041666" />
-        </AssociationConnector>
-        <AssociationConnector Association="IPAPPM.Model.FK__tbl_UserQ__UserI__534D60F1" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="5.6151025390625016" />
-          <ConnectorPoint PointX="5.25" PointY="5.6151025390625016" />
         </AssociationConnector>
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_SellerDetails" Width="1.5" PointX="12.25" PointY="1.75" Height="4.0956022135416674" />
         <AssociationConnector Association="IPAPPM.Model.FK__tbl_Seller__City__2CF2ADDF" >
@@ -1072,6 +1124,21 @@
           <ConnectorPoint PointX="13.140627" PointY="6.0379036458333317" />
         </AssociationConnector>
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_LoginAudit" Width="1.5" PointX="5.375" PointY="8.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="IPAPPM.Model.tbl_AuditTrail" Width="1.5" PointX="14.375" PointY="0.75" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="IPAPPM.Model.tbl_EndUsage" Width="1.5" PointX="14.375" PointY="3.75" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="IPAPPM.Model.tbl_UserDetails" Width="1.5" PointX="3" PointY="1.125" Height="4.0956022135416674" />
+        <AssociationConnector Association="IPAPPM.Model.FK__tbl_UserD__Compa__145C0A3F" >
+          <ConnectorPoint PointX="2.25" PointY="4.3603011067708337" />
+          <ConnectorPoint PointX="3" PointY="4.3603011067708337" />
+        </AssociationConnector>
+        <AssociationConnector Association="IPAPPM.Model.FK__tbl_UserD__RoleI__15502E78" >
+          <ConnectorPoint PointX="2.25" PointY="1.735341796875" />
+          <ConnectorPoint PointX="3" PointY="1.735341796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="IPAPPM.Model.FK__tbl_UserQ__UserI__534D60F1" >
+          <ConnectorPoint PointX="4.5" PointY="4.8603011067708337" />
+          <ConnectorPoint PointX="5.25" PointY="4.8603011067708337" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>

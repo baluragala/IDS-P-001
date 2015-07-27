@@ -137,6 +137,7 @@
       <DependentUpon>IPAPPMEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\OperationResult.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\Seller.cs" />

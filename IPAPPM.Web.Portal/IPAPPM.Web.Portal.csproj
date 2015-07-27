@@ -171,9 +171,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminLogController.cs" />
+    <Compile Include="Controllers\AuditController.cs" />
     <Compile Include="Controllers\CommonTermsController.cs" />
     <Compile Include="Controllers\CompanyInfoController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
+    <Compile Include="Controllers\EndUsageController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProductCategoryController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -392,6 +394,11 @@
     <Content Include="Views\AdminLog\Details.aspx" />
     <Content Include="Views\AdminLog\Edit.aspx" />
     <Content Include="Views\AdminLog\Index.aspx" />
+    <Content Include="Views\Audit\Create.aspx" />
+    <Content Include="Views\Audit\Delete.aspx" />
+    <Content Include="Views\Audit\Details.aspx" />
+    <Content Include="Views\Audit\Edit.aspx" />
+    <Content Include="Views\Audit\Index.aspx" />
     <Content Include="Views\CommonTerms\Create.aspx" />
     <Content Include="Views\CommonTerms\Delete.aspx" />
     <Content Include="Views\CommonTerms\Details.aspx" />
@@ -403,6 +410,11 @@
     <Content Include="Views\CompanyInfo\Edit.aspx" />
     <Content Include="Views\CompanyInfo\Index.aspx" />
     <Content Include="Views\Dashboard\Index.aspx" />
+    <Content Include="Views\EndUsage\Create.aspx" />
+    <Content Include="Views\EndUsage\Delete.aspx" />
+    <Content Include="Views\EndUsage\Details.aspx" />
+    <Content Include="Views\EndUsage\Edit.aspx" />
+    <Content Include="Views\EndUsage\Index.aspx" />
     <Content Include="Views\Notification\Create.aspx" />
     <Content Include="Views\Notification\Delete.aspx" />
     <Content Include="Views\Notification\Details.aspx" />

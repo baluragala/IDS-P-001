@@ -9,6 +9,7 @@ using IPAPPM.Web.Portal.Models;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
+    [Authorize]
     public class CompanyInfoController : Controller
     {
         private IPAPPMLIVEEntities db = new IPAPPMLIVEEntities();
@@ -18,7 +19,7 @@ namespace IPAPPM.Web.Portal.Controllers
 
         public ActionResult Index()
         {
-            return View(db.tbl_CompanyInfo.ToList());
+            return View(db.tbl_CompanyInfo.Single());
         }
 
         //
@@ -58,6 +59,14 @@ namespace IPAPPM.Web.Portal.Controllers
             if (ModelState.IsValid)
             {
                 db.tbl_CompanyInfo.AddObject(tbl_companyinfo);
+                //Audit 
+                db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                {
+                    Action = "CREATE",
+                    ActionItem = "CompanyInfo",
+                    UserName = User.Identity.Name,
+                    ActionDate = DateTime.Now
+                });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -92,6 +101,14 @@ namespace IPAPPM.Web.Portal.Controllers
             {
                 db.tbl_CompanyInfo.Attach(tbl_companyinfo);
                 db.ObjectStateManager.ChangeObjectState(tbl_companyinfo, EntityState.Modified);
+                //Audit 
+                db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                {
+                    Action = "CREATE",
+                    ActionItem = "CompanyInfo",
+                    UserName = User.Identity.Name,
+                    ActionDate = DateTime.Now
+                });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

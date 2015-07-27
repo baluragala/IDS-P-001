@@ -127,6 +127,10 @@
                             <%: Html.ActionLink("Product","Index","Product") %>
                         </li>
 
+                         <li>
+                            <%: Html.ActionLink("End Usage","Index","EndUsage") %>
+                        </li>
+
                         <li>
                             <%: Html.ActionLink("Notifications","Index","Notification") %>
                         </li>

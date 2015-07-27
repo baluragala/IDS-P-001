@@ -29,7 +29,7 @@ namespace IPAPPM.Web.Api.Models
                            {
                                UserId = c.UserId,
                                Name = c.Name,
-                               CompanyName = c.ComanyName,
+                               CompanyName = c.CompanyName,
                                Designation = c.Designation,
                                Email = c.Email,
                                MobileNumber = c.MobileNumber,
@@ -42,11 +42,12 @@ namespace IPAPPM.Web.Api.Models
 
         public void Register(UserDetails userDetails)
         {
+
             tbl_UserDetails entity = new tbl_UserDetails
             {
                 Name = userDetails.Name,
                 MobileNumber = userDetails.MobileNumber,
-                ComanyName = userDetails.CompanyName,
+                CompanyName = userDetails.CompanyName,
                 CompanyType_Id = Convert.ToInt32(userDetails.CompanyType),
                 Designation = userDetails.Designation,
                 Email = userDetails.Email,

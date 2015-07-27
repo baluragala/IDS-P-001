@@ -9,34 +9,33 @@ using IPAPPM.Web.Portal.Models;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
-    [Authorize]
-    public class CommonTermsController : Controller
+    public class EndUsageController : Controller
     {
         private IPAPPMLIVEEntities db = new IPAPPMLIVEEntities();
 
         //
-        // GET: /CommonTerms/
+        // GET: /EndUsage/
 
         public ActionResult Index()
         {
-            return View(db.tbl_CommonTerms.ToList());
+            return View(db.tbl_EndUsage.ToList());
         }
 
         //
-        // GET: /CommonTerms/Details/5
+        // GET: /EndUsage/Details/5
 
         public ActionResult Details(int id = 0)
         {
-            tbl_CommonTerms tbl_commonterms = db.tbl_CommonTerms.Single(t => t.CtTerms_Id == id);
-            if (tbl_commonterms == null)
+            tbl_EndUsage tbl_endusage = db.tbl_EndUsage.Single(t => t.EndUsage_Id == id);
+            if (tbl_endusage == null)
             {
                 return HttpNotFound();
             }
-            return View(tbl_commonterms);
+            return View(tbl_endusage);
         }
 
         //
-        // GET: /CommonTerms/Create
+        // GET: /EndUsage/Create
 
         public ActionResult Create()
         {
@@ -44,71 +43,71 @@ namespace IPAPPM.Web.Portal.Controllers
         }
 
         //
-        // POST: /CommonTerms/Create
+        // POST: /EndUsage/Create
 
         [HttpPost]
-        public ActionResult Create(tbl_CommonTerms tbl_commonterms)
+        public ActionResult Create(tbl_EndUsage tbl_endusage)
         {
             if (ModelState.IsValid)
             {
-                db.tbl_CommonTerms.AddObject(tbl_commonterms);
+                db.tbl_EndUsage.AddObject(tbl_endusage);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(tbl_commonterms);
+            return View(tbl_endusage);
         }
 
         //
-        // GET: /CommonTerms/Edit/5
+        // GET: /EndUsage/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
-            tbl_CommonTerms tbl_commonterms = db.tbl_CommonTerms.Single(t => t.CtTerms_Id == id);
-            if (tbl_commonterms == null)
+            tbl_EndUsage tbl_endusage = db.tbl_EndUsage.Single(t => t.EndUsage_Id == id);
+            if (tbl_endusage == null)
             {
                 return HttpNotFound();
             }
-            return View(tbl_commonterms);
+            return View(tbl_endusage);
         }
 
         //
-        // POST: /CommonTerms/Edit/5
+        // POST: /EndUsage/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(tbl_CommonTerms tbl_commonterms)
+        public ActionResult Edit(tbl_EndUsage tbl_endusage)
         {
             if (ModelState.IsValid)
             {
-                db.tbl_CommonTerms.Attach(tbl_commonterms);
-                db.ObjectStateManager.ChangeObjectState(tbl_commonterms, EntityState.Modified);
+                db.tbl_EndUsage.Attach(tbl_endusage);
+                db.ObjectStateManager.ChangeObjectState(tbl_endusage, EntityState.Modified);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(tbl_commonterms);
+            return View(tbl_endusage);
         }
 
         //
-        // GET: /CommonTerms/Delete/5
+        // GET: /EndUsage/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
-            tbl_CommonTerms tbl_commonterms = db.tbl_CommonTerms.Single(t => t.CtTerms_Id == id);
-            if (tbl_commonterms == null)
+            tbl_EndUsage tbl_endusage = db.tbl_EndUsage.Single(t => t.EndUsage_Id == id);
+            if (tbl_endusage == null)
             {
                 return HttpNotFound();
             }
-            return View(tbl_commonterms);
+            return View(tbl_endusage);
         }
 
         //
-        // POST: /CommonTerms/Delete/5
+        // POST: /EndUsage/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            tbl_CommonTerms tbl_commonterms = db.tbl_CommonTerms.Single(t => t.CtTerms_Id == id);
-            db.tbl_CommonTerms.DeleteObject(tbl_commonterms);
+            tbl_EndUsage tbl_endusage = db.tbl_EndUsage.Single(t => t.EndUsage_Id == id);
+            db.tbl_EndUsage.DeleteObject(tbl_endusage);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

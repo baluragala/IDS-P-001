@@ -9,6 +9,7 @@ using IPAPPM.Web.Portal.Models;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
+    [Authorize]
     public class ProductCategoryController : Controller
     {
         private IPAPPMLIVEEntities db = new IPAPPMLIVEEntities();
@@ -63,6 +64,16 @@ namespace IPAPPM.Web.Portal.Controllers
                 }  
 
                 db.tbl_ProductCategory.AddObject(tbl_productcategory);
+
+                //Audit 
+                db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                {
+                    Action = "CREATE",
+                    ActionItem = "ProductCategory",
+                    UserName = User.Identity.Name,
+                    ActionDate = DateTime.Now
+                });
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -104,6 +115,14 @@ namespace IPAPPM.Web.Portal.Controllers
 
                 db.tbl_ProductCategory.Attach(tbl_productcategory);
                 db.ObjectStateManager.ChangeObjectState(tbl_productcategory, EntityState.Modified);
+                //Audit 
+                db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                {
+                    Action = "UPDATE",
+                    ActionItem = "ProductCategory",
+                    UserName = User.Identity.Name,
+                    ActionDate = DateTime.Now
+                });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -131,6 +150,14 @@ namespace IPAPPM.Web.Portal.Controllers
         {
             tbl_ProductCategory tbl_productcategory = db.tbl_ProductCategory.Single(t => t.Category_Id == id);
             db.tbl_ProductCategory.DeleteObject(tbl_productcategory);
+            //Audit 
+            db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+            {
+                Action = "DELETE",
+                ActionItem = "ProductCategory",
+                UserName = User.Identity.Name,
+                ActionDate = DateTime.Now
+            });
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -10,33 +10,33 @@ using IPAPPM.Web.Portal.Models;
 namespace IPAPPM.Web.Portal.Controllers
 {
     [Authorize]
-    public class AdminLogController : Controller
+    public class AuditController : Controller
     {
         private IPAPPMLIVEEntities db = new IPAPPMLIVEEntities();
 
         //
-        // GET: /AdminLog/
+        // GET: /Audit/
 
         public ActionResult Index()
         {
-            return View(db.tbl_LoginAudit.OrderByDescending(l=>l.LoginTime).ToList());
+            return View(db.tbl_AuditTrail.OrderByDescending(a=>a.ActionDate).ToList());
         }
 
         ////
-        //// GET: /AdminLog/Details/5
+        //// GET: /Audit/Details/5
 
         //public ActionResult Details(int id = 0)
         //{
-        //    tbl_LoginAudit tbl_loginaudit = db.tbl_LoginAudit.Single(t => t.LAudit_Id == id);
-        //    if (tbl_loginaudit == null)
+        //    tbl_AuditTrail tbl_audittrail = db.tbl_AuditTrail.Single(t => t.AuditTrail_Id == id);
+        //    if (tbl_audittrail == null)
         //    {
         //        return HttpNotFound();
         //    }
-        //    return View(tbl_loginaudit);
+        //    return View(tbl_audittrail);
         //}
 
         ////
-        //// GET: /AdminLog/Create
+        //// GET: /Audit/Create
 
         //public ActionResult Create()
         //{
@@ -44,71 +44,71 @@ namespace IPAPPM.Web.Portal.Controllers
         //}
 
         ////
-        //// POST: /AdminLog/Create
+        //// POST: /Audit/Create
 
         //[HttpPost]
-        //public ActionResult Create(tbl_LoginAudit tbl_loginaudit)
+        //public ActionResult Create(tbl_AuditTrail tbl_audittrail)
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        db.tbl_LoginAudit.AddObject(tbl_loginaudit);
+        //        db.tbl_AuditTrail.AddObject(tbl_audittrail);
         //        db.SaveChanges();
         //        return RedirectToAction("Index");
         //    }
 
-        //    return View(tbl_loginaudit);
+        //    return View(tbl_audittrail);
         //}
 
         ////
-        //// GET: /AdminLog/Edit/5
+        //// GET: /Audit/Edit/5
 
         //public ActionResult Edit(int id = 0)
         //{
-        //    tbl_LoginAudit tbl_loginaudit = db.tbl_LoginAudit.Single(t => t.LAudit_Id == id);
-        //    if (tbl_loginaudit == null)
+        //    tbl_AuditTrail tbl_audittrail = db.tbl_AuditTrail.Single(t => t.AuditTrail_Id == id);
+        //    if (tbl_audittrail == null)
         //    {
         //        return HttpNotFound();
         //    }
-        //    return View(tbl_loginaudit);
+        //    return View(tbl_audittrail);
         //}
 
         ////
-        //// POST: /AdminLog/Edit/5
+        //// POST: /Audit/Edit/5
 
         //[HttpPost]
-        //public ActionResult Edit(tbl_LoginAudit tbl_loginaudit)
+        //public ActionResult Edit(tbl_AuditTrail tbl_audittrail)
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        db.tbl_LoginAudit.Attach(tbl_loginaudit);
-        //        db.ObjectStateManager.ChangeObjectState(tbl_loginaudit, EntityState.Modified);
+        //        db.tbl_AuditTrail.Attach(tbl_audittrail);
+        //        db.ObjectStateManager.ChangeObjectState(tbl_audittrail, EntityState.Modified);
         //        db.SaveChanges();
         //        return RedirectToAction("Index");
         //    }
-        //    return View(tbl_loginaudit);
+        //    return View(tbl_audittrail);
         //}
 
         ////
-        //// GET: /AdminLog/Delete/5
+        //// GET: /Audit/Delete/5
 
         //public ActionResult Delete(int id = 0)
         //{
-        //    tbl_LoginAudit tbl_loginaudit = db.tbl_LoginAudit.Single(t => t.LAudit_Id == id);
-        //    if (tbl_loginaudit == null)
+        //    tbl_AuditTrail tbl_audittrail = db.tbl_AuditTrail.Single(t => t.AuditTrail_Id == id);
+        //    if (tbl_audittrail == null)
         //    {
         //        return HttpNotFound();
         //    }
-        //    return View(tbl_loginaudit);
+        //    return View(tbl_audittrail);
         //}
 
         ////
-        //// POST: /AdminLog/Delete/5
+        //// POST: /Audit/Delete/5
 
         //[HttpPost, ActionName("Delete")]
         //public ActionResult DeleteConfirmed(int id)
         //{
-        //    tbl_LoginAudit tbl_loginaudit = db.tbl_LoginAudit.Single(t => t.LAudit_Id == id);
-        //    db.tbl_LoginAudit.DeleteObject(tbl_loginaudit);
+        //    tbl_AuditTrail tbl_audittrail = db.tbl_AuditTrail.Single(t => t.AuditTrail_Id == id);
+        //    db.tbl_AuditTrail.DeleteObject(tbl_audittrail);
         //    db.SaveChanges();
         //    return RedirectToAction("Index");
         //}

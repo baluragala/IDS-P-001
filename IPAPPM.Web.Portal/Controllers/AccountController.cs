@@ -45,7 +45,7 @@ namespace IPAPPM.Web.Portal.Controllers
                     = from c in db.tbl_LoginAudit
                        where c.UserName == model.UserName
                        select c;
-                if(result != null)
+                if(result.Count()>0)
                     entity = result.Single();
 
                 if (entity == null)
@@ -53,13 +53,15 @@ namespace IPAPPM.Web.Portal.Controllers
                     entity = new tbl_LoginAudit
                     {
                         UserName = model.UserName,
-                        LoginTime = DateTime.Now
+                        LoginTime = DateTime.Now,
+                        IP = Request.ServerVariables["REMOTE_ADDR"]
                     };
                     db.tbl_LoginAudit.AddObject(entity);
                 }
                 else
                 {
                     entity.LoginTime = DateTime.Now;
+                    entity.IP = Request.ServerVariables["REMOTE_ADDR"];
                     //entity.LogOutTime = null;
                     db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
                 }

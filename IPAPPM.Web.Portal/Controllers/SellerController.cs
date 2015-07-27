@@ -9,6 +9,7 @@ using IPAPPM.Web.Portal.Models;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
+    [Authorize]
     public class SellerController : Controller
     {
         private IPAPPMLIVEEntities db = new IPAPPMLIVEEntities();
@@ -74,6 +75,16 @@ namespace IPAPPM.Web.Portal.Controllers
                 }
 
                 db.tbl_SellerDetails.AddObject(tbl_sellerdetails);
+
+                //Audit 
+                db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                {
+                    Action = "CREATE",
+                    ActionItem = "Seller",
+                    UserName = User.Identity.Name,
+                    ActionDate = DateTime.Now
+                });
+
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
@@ -135,6 +146,14 @@ namespace IPAPPM.Web.Portal.Controllers
                     db.tbl_SellerDetails.Attach(tbl_sellerdetails);
 
                 db.ObjectStateManager.ChangeObjectState(tbl_sellerdetails, EntityState.Modified);
+                //Audit 
+                db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                {
+                    Action = "CREATE",
+                    ActionItem = "Seller",
+                    UserName = User.Identity.Name,
+                    ActionDate = DateTime.Now
+                });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

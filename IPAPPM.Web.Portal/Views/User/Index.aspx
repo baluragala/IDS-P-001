@@ -28,11 +28,11 @@
         </th>
 
         <th>
-            <%: Html.DisplayNameFor(model => model.Registered_Date) %>
+            Registered Date
         </th>
        
         <th>
-            <%: Html.DisplayNameFor(model => model.tbl_CompanyType.Company_Type) %>
+           Company Type
         </th>
        
     </tr>
@@ -43,7 +43,7 @@
             <%: Html.DisplayFor(modelItem => item.Name) %>
         </td>
         <td>
-            <%: Html.DisplayFor(modelItem => item.ComanyName) %>
+            <%: Html.DisplayFor(modelItem => item.CompanyName) %>
         </td>
         <td>
             <%: Html.DisplayFor(modelItem => item.Designation) %>
@@ -58,7 +58,7 @@
             <%: Html.DisplayFor(modelItem => item.City) %>
         </td>
         <td>
-            <%: Html.DisplayFor(modelItem => item.UserName) %>
+            <%: Html.DisplayFor(modelItem => item.Registered_Date) %>
         </td>
         
        

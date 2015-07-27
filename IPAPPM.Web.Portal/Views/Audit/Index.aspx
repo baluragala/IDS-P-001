@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<IPAPPM.Web.Portal.Models.tbl_LoginAudit>>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<IPAPPM.Web.Portal.Models.tbl_AuditTrail>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
@@ -6,40 +6,38 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-
 <table class="table table-bordered table-highlight">
     <tr>
-    <th>
-            User Name
+        <th>
+            <%: Html.DisplayNameFor(model => model.UserName) %>
         </th>
         <th>
-            Last Login
+            <%: Html.DisplayNameFor(model => model.Action) %>
         </th>
         <th>
-           Last Logout
+            <%: Html.DisplayNameFor(model => model.ActionItem) %>
         </th>
         <th>
-           IP
+            <%: Html.DisplayNameFor(model => model.ActionDate) %>
         </th>
         
     </tr>
 
 <% foreach (var item in Model) { %>
     <tr>
-     <td>
+        <td>
             <%: Html.DisplayFor(modelItem => item.UserName) %>
         </td>
         <td>
-            <%: Html.DisplayFor(modelItem => item.LoginTime) %>
+            <%: Html.DisplayFor(modelItem => item.Action) %>
         </td>
         <td>
-            <%: Html.DisplayFor(modelItem => item.LogOutTime) %>
+            <%: Html.DisplayFor(modelItem => item.ActionItem) %>
         </td>
-         <td>
-            <%: Html.DisplayFor(modelItem => item.IP) %>
+        <td>
+            <%: Html.DisplayFor(modelItem => item.ActionDate) %>
         </td>
-       
-       
+        
     </tr>
 <% } %>
 
@@ -48,7 +46,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
-Admin Login Logs
+Audit Trail
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">
