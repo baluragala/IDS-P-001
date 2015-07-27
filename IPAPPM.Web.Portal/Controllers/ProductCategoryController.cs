@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IPAPPM.Web.Portal.Models;
+using System.Data.SqlClient;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
@@ -146,20 +147,28 @@ namespace IPAPPM.Web.Portal.Controllers
         // POST: /ProductCategory/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public String DeleteConfirmed(int id)
         {
-            tbl_ProductCategory tbl_productcategory = db.tbl_ProductCategory.Single(t => t.Category_Id == id);
-            db.tbl_ProductCategory.DeleteObject(tbl_productcategory);
-            //Audit 
-            db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+            try
             {
-                Action = "DELETE",
-                ActionItem = "ProductCategory",
-                UserName = User.Identity.Name,
-                ActionDate = DateTime.Now
-            });
-            db.SaveChanges();
-            return RedirectToAction("Index");
+                tbl_ProductCategory tbl_productcategory = db.tbl_ProductCategory.Single(t => t.Category_Id == id);
+                db.tbl_ProductCategory.DeleteObject(tbl_productcategory);
+                //Audit 
+                db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                {
+                    Action = "DELETE",
+                    ActionItem = "ProductCategory",
+                    UserName = User.Identity.Name,
+                    ActionDate = DateTime.Now
+                });
+                db.SaveChanges();
+                return "Product Category Successfully Deleted";
+            }
+            catch (Exception ex)
+            {
+                return "Product Category Cannot deleted. May be due to existing references or violation";
+            }
+            
         }
 
         protected override void Dispose(bool disposing)

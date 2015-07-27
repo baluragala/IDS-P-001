@@ -104,12 +104,19 @@ namespace IPAPPM.Web.Portal.Controllers
         // POST: /EndUsage/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public String DeleteConfirmed(int id)
         {
-            tbl_EndUsage tbl_endusage = db.tbl_EndUsage.Single(t => t.EndUsage_Id == id);
-            db.tbl_EndUsage.DeleteObject(tbl_endusage);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                tbl_EndUsage tbl_endusage = db.tbl_EndUsage.Single(t => t.EndUsage_Id == id);
+                db.tbl_EndUsage.DeleteObject(tbl_endusage);
+                db.SaveChanges();
+                return "End Usage deletd Successfully.";
+            }
+            catch (Exception ex)
+            {
+                return "End Usage Cannot deleted. May be due to existing references or violation";
+            }
         }
 
         protected override void Dispose(bool disposing)

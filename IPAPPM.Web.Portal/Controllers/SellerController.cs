@@ -180,12 +180,29 @@ namespace IPAPPM.Web.Portal.Controllers
         // POST: /Seller/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public String DeleteConfirmed(int id)
         {
-            tbl_SellerDetails tbl_sellerdetails = db.tbl_SellerDetails.Single(t => t.Seller_Id == id);
-            db.tbl_SellerDetails.DeleteObject(tbl_sellerdetails);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                tbl_SellerDetails tbl_sellerdetails = db.tbl_SellerDetails.Single(t => t.Seller_Id == id);
+                db.tbl_SellerDetails.DeleteObject(tbl_sellerdetails);
+
+                //Audit 
+                db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                {
+                    Action = "DELETE",
+                    ActionItem = "Seller",
+                    UserName = User.Identity.Name,
+                    ActionDate = DateTime.Now
+                });
+
+                db.SaveChanges();
+                return "Seller deleted Successfully.";
+            }
+            catch (Exception ex)
+            {
+                return "Seller Cannot deleted. May be due to existing references or violation";
+            }
         }
 
         protected override void Dispose(bool disposing)

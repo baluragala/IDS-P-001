@@ -77,7 +77,8 @@
         
         <td>
            <a href="<%= Url.Action("Edit/"+item.Seller_Id)  %>"><img src="../../Images/Edit.png" /></a>
-            <a href="<%= Url.Action("Delete/"+item.Seller_Id)  %>"><img src="../../Images/Dustbin.png" /></a>
+            <a onclick="deleteSeller('<%: item.Seller_Name %>','<%: item.Seller_Id %>')">
+            <img src="../../Images/Dustbin.png" /></a>
         </td>
     </tr>
 <% } %>
@@ -91,4 +92,26 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">
+<script type="text/javascript">
+    function deleteSeller(name, id) {
+        var r = confirm("Are you sure to delete " + name + " ?");
+        if (r == true) {
+            /*DELETE*/
+            $.ajax({
+                url: '/Seller/Delete/' + id,
+                type: "post",
+                async: true,
+                processData: false,
+                cache: false,
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                },
+                error: function (xhr) {
+                    alert(xhr.responseText);
+                }
+            });
+        }
+    }
+    </script>
 </asp:Content>

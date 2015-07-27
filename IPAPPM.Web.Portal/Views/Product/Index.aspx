@@ -18,7 +18,8 @@
         </div>
         <div class="col-md-2">
             <a href="<%= Url.Action("Edit/"+item.Product_Id)  %>">
-                <img src="../../Images/Edit.png" alt="Edit" /></a> <a href="<%= Url.Action("Delete/"+item.Product_Id)  %>">
+                <img src="../../Images/Edit.png" alt="Edit" /></a> 
+                <a onclick="deleteProduct('<%: item.Product_Name %>','<%: item.Product_Id %>')">
                     <img src="../../Images/Dustbin.png" alt="Delete" /></a>
         </div>
     </div>
@@ -55,4 +56,26 @@
     <% } %>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">
+<script type="text/javascript">
+    function deleteProduct(name, id) {
+        var r = confirm("Are you sure to delete " + name + " ?");
+        if (r == true) {
+            /*DELETE*/
+            $.ajax({
+                url: '/Product/Delete/' + id,
+                type: "post",
+                async: true,
+                processData: false,
+                cache: false,
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                },
+                error: function (xhr) {
+                    alert(xhr.responseText);
+                }
+            });
+        }
+    }
+    </script>
 </asp:Content>

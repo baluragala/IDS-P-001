@@ -6,18 +6,16 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<h2>Edit</h2>
-
 <% using (Html.BeginForm()) { %>
     <%: Html.ValidationSummary(true) %>
 
     <fieldset>
-        <legend>tbl_EndUsage</legend>
+       
 
         <%: Html.HiddenFor(model => model.EndUsage_Id) %>
 
         <div class="editor-label">
-            <%: Html.LabelFor(model => model.EndUsage) %>
+            <%: Html.LabelFor(model => model.EndUsage,"End Usage") %>
         </div>
         <div class="editor-field">
             <%: Html.EditorFor(model => model.EndUsage) %>
@@ -25,7 +23,7 @@
         </div>
 
         <div class="editor-label">
-            <%: Html.LabelFor(model => model.SubEndUsage) %>
+            <%: Html.LabelFor(model => model.SubEndUsage,"Sub End Usage") %>
         </div>
         <div class="editor-field">
             <%: Html.EditorFor(model => model.SubEndUsage) %>
@@ -57,18 +55,19 @@
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Update" />
         </p>
     </fieldset>
 <% } %>
 
 <div>
-    <%: Html.ActionLink("Back to List", "Index") %>
+    <%: Html.ActionLink("All End Usage", "Index") %>
 </div>
 
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
+End Usage
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">

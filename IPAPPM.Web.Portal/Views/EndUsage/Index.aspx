@@ -48,7 +48,8 @@
             <td>
                 
                     <a href="<%= Url.Action("Edit/"+item.EndUsage_Id)     %>">
-                        <img src="../../Images/Edit.png" /></a> <a href="<%= Url.Action("Delete/"+item.EndUsage_Id)  %>">
+                        <img src="../../Images/Edit.png" /></a> 
+                        <a onclick="deleteEndUsage('<%: item.EndUsage %>','<%: item.EndUsage_Id %>')">
                             <img src="../../Images/Dustbin.png" /></a>
                 
             </td>
@@ -60,4 +61,26 @@
     End Usage
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">
+<script type="text/javascript">
+    function deleteEndUsage(name, id) {
+        var r = confirm("Are you sure to delete " + name + " ?");
+        if (r == true) {
+            /*DELETE*/
+            $.ajax({
+                url: '/EndUsage/Delete/' + id,
+                type: "post",
+                async: true,
+                processData: false,
+                cache: false,
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                },
+                error: function (xhr) {
+                    alert(xhr.responseText);
+                }
+            });
+        }
+    }
+    </script>
 </asp:Content>
