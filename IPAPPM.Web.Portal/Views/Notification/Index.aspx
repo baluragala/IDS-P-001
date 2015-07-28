@@ -3,66 +3,60 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-<h2>Index</h2>
-
-<p>
-    <%: Html.ActionLink("Create New", "Create") %>
-</p>
-<table class="table table-bordered">
-    <tr>
-        <th>
+   
+    <p>
+        <%: Html.ActionLink("Create New", "Create") %>
+    </p>
+    <div class="row">
+        <div class="col-md-2">
             <%: Html.DisplayNameFor(model => model.Notification_Id) %>
-        </th>
-        <th>
+        </div>
+        <div class="col-md-10">
             <%: Html.DisplayNameFor(model => model.Message) %>
-        </th>
-       <%-- <th>
-            <%: Html.DisplayNameFor(model => model.IsActive) %>
-        </th>--%>
-       <%-- <th>
-            <%: Html.DisplayNameFor(model => model.CreatedBy) %>
-        </th>
-        <th>
-            <%: Html.DisplayNameFor(model => model.CreatedDate) %>
-        </th>--%>
-        <%--<th></th>--%>
-    </tr>
-</table>
-<% foreach (var item in Model) { %>
-    <div class="col-md-1">
-        
-            <%: Html.DisplayFor(modelItem => item.Notification_Id) %>
+        </div>
+       
     </div>
-    <div class="col-md-11">
-            <%: Html.Raw(item.Message) %>
+    <% foreach (var item in Model)
+       { %>
+    <div class="col-md-2">
+        <%: Html.DisplayFor(modelItem => item.Notification_Id) %>
     </div>
-       <%-- <td>
-            <%: Html.DisplayFor(modelItem => item.IsActive) %>
-        </td>
-        <td>
-            <%: Html.DisplayFor(modelItem => item.CreatedBy) %>
-        </td>
-        <td>
-            <%: Html.DisplayFor(modelItem => item.CreatedDate) %>
-        </td>--%>
-        <%--<td>
-            <%: Html.ActionLink("Edit", "Edit", new { id=item.Notification_Id }) %> |
-            <%: Html.ActionLink("Details", "Details", new { id=item.Notification_Id }) %> |
-            <%: Html.ActionLink("Delete", "Delete", new { id=item.Notification_Id }) %>
-        </td>--%>
-    </tr>
-<% } %>
-
-
-
+    <div class="col-md-8">
+        <%: Html.Raw(item.Message) %>
+    </div>
+   <div class="col-md-2">
+            <a href="<%= Url.Action("Edit/"+item.Notification_Id)  %>">
+                    <img src="../../Images/Edit.png" /></a> <a onclick="deleteNotification('<%:item.Notification_Id %>')">
+                    <img src="../../Images/Dustbin.png" alt="Delete" /></a>
+     </div>    
+    
+    <% } %>
 </asp:Content>
-
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
-Notifications
+    Notifications
 </asp:Content>
-
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">
+<script type="text/javascript">
+    function deleteNotification(id) {
+        var r = confirm("Are you sure to delete this notification ?");
+        if (r == true) {
+            /*DELETE*/
+            $.ajax({
+                url: '/Notification/Delete/' + id,
+                type: "post",
+                async: true,
+                processData: false,
+                cache: false,
+                success: function (data) {
+                    alert(data);
+                    location.reload();
+                },
+                error: function (xhr) {
+                    alert(xhr.responseText);
+                }
+            });
+        }
+    }
+    </script>
 </asp:Content>

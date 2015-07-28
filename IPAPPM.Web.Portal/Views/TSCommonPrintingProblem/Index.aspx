@@ -1,28 +1,19 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<IPAPPM.Web.Portal.Models.tbl_ProductCategory>>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<IPAPPM.Web.Portal.Models.tbl_CommonTerms>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
 </asp:Content>
-<asp:Content ID="Content5" ContentPlaceHolderID="FeaturedContent" runat="server">
-    Product Category
-</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <p>
+   <p>
         <%: Html.ActionLink("Create New", "Create") %>
     </p>
-    <table class="table table-bordered table-highlight">
+    <table class="table table-bordered">
         <tr>
             <th>
-                Name
+                Problem
             </th>
             <th>
-                Description
-            </th>
-            <th>
-                Active?
-            </th>
-            <th>
-                Image
+                Solution
             </th>
             <th>
             </th>
@@ -31,34 +22,31 @@
            { %>
         <tr>
             <td>
-                <%: Html.DisplayFor(modelItem => item.Category_Name) %>
+                <%: Html.Raw(item.Title) %>
             </td>
             <td>
-                <%: Html.Raw(item.Description)%>
+                <%: Html.Raw(item.Description) %>
             </td>
             <td>
-                <%: Html.DisplayFor(modelItem => item.IsActive) %>
-            </td>
-            <td>
-                <img src="/<%:item.ImagePath%>" alt="Image" height="30" width="30" />
-            </td>
-            <td>
-                <a href="<%= Url.Action("Edit/"+item.Category_Id)  %>">
-                    <img src="../../Images/Edit.png" /></a> <a onclick="deleteProductCategory('<%: item.Category_Name %>','<%: item.Category_Id %>')">
-                    <img src="../../Images/Dustbin.png" alt="Delete" /></a>
+                <a href="<%= Url.Action("Edit/"+item.CtTerms_Id)  %>">
+                    <img src="../../Images/Edit.png" alt="Edit" /></a> <a onclick="deleteCommonTerm('<%: item.Title %>','<%: item.CtTerms_Id %>')">
+                        <img src="../../Images/Dustbin.png" alt="Delete" /></a>
             </td>
         </tr>
         <% } %>
     </table>
 </asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
+    Common Printing Term
+</asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">
     <script type="text/javascript">
-        function deleteProductCategory(name, id) {
+        function deleteCommonTerm(name, id) {
             var r = confirm("Are you sure to delete " + name + " ?");
             if (r == true) {
                 /*DELETE*/
                 $.ajax({
-                    url: '/ProductCategory/Delete/' + id,
+                    url: '/TSCommonPrintingProblem/Delete/' + id,
                     type: "post",
                     async: true,
                     processData: false,

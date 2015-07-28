@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IPAPPM.Web.Portal.Models.tbl_Notifications>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IPAPPM.Web.Portal.Models.tbl_CommonTerms>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Edit
@@ -6,33 +6,35 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-
-
 <% using (Html.BeginForm()) { %>
     <%: Html.ValidationSummary(true) %>
 
-    <fieldset>
-        
+    <fieldset>        
 
-        <%: Html.HiddenFor(model => model.Notification_Id) %>
+        <%: Html.HiddenFor(model => model.CtTerms_Id) %>
 
         <div class="editor-label">
-            <%: Html.LabelFor(model => model.Message) %>
+            <%: Html.LabelFor(model => model.Title) %>
         </div>
         <div class="editor-field">
-            <%: Html.TextAreaFor(model => model.Message) %>
-            <%: Html.ValidationMessageFor(model => model.Message) %>
+            <%: Html.TextAreaFor(model => model.Title) %>
+            <%: Html.ValidationMessageFor(model => model.Title) %>
         </div>
 
-       
+        <div class="editor-label">
+            <%: Html.LabelFor(model => model.Description) %>
+        </div>
+        <div class="editor-field">
+            <%: Html.TextAreaFor(model => model.Description)%>
+            <%: Html.ValidationMessageFor(model => model.Description) %>
+        </div>
 
+            <%: Html.HiddenFor(model => model.TermType) %>
         
             <%: Html.HiddenFor(model => model.CreatedBy) %>
         
-        
-        
             <%: Html.HiddenFor(model => model.CreatedDate) %>
-        <br />
+           
         <p>
             <input type="submit" value="Update" />
         </p>
@@ -40,13 +42,13 @@
 <% } %>
 
 <div>
-    <%: Html.ActionLink("All Notifications", "Index") %>
+    <%: Html.ActionLink("Back to List", "Index") %>
 </div>
 
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
-Notifications
+Common Printing Term
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">

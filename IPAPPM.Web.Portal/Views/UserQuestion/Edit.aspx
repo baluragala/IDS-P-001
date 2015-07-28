@@ -5,9 +5,6 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-<h2>Update</h2>
-
 <% using (Html.BeginForm()) { %>
     <%: Html.ValidationSummary(true) %>
 
@@ -44,6 +41,7 @@
             <%: Html.DropDownList("UserId", String.Empty) %>
             <%: Html.ValidationMessageFor(model => model.UserId) %>
         </div>--%>
+        <br />
         <p>
             <input type="submit" value="Update" />
         </p>

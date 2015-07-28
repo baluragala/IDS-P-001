@@ -47,13 +47,6 @@
     </div>
 
     <div class="display-label">
-        <%: Html.DisplayNameFor(model => model.CaretedDate) %>
-    </div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.CaretedDate) %>
-    </div>
-
-    <div class="display-label">
         <%: Html.DisplayNameFor(model => model.ModifiedBy) %>
     </div>
     <div class="display-field">
@@ -65,6 +58,13 @@
     </div>
     <div class="display-field">
         <%: Html.DisplayFor(model => model.ModifiedDate) %>
+    </div>
+
+    <div class="display-label">
+        <%: Html.DisplayNameFor(model => model.CreatedDate) %>
+    </div>
+    <div class="display-field">
+        <%: Html.DisplayFor(model => model.CreatedDate) %>
     </div>
 </fieldset>
 <p>

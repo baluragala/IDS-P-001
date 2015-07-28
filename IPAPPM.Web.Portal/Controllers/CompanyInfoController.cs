@@ -19,7 +19,8 @@ namespace IPAPPM.Web.Portal.Controllers
 
         public ActionResult Index()
         {
-            return View(db.tbl_CompanyInfo.Single());
+            tbl_CompanyInfo model = db.tbl_CompanyInfo.ToList().Count > 0 ? db.tbl_CompanyInfo.Single() : new tbl_CompanyInfo();           
+            return View(model);
         }
 
         //
@@ -27,7 +28,7 @@ namespace IPAPPM.Web.Portal.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            tbl_CompanyInfo tbl_companyinfo = db.tbl_CompanyInfo.Single(t => t.Comapny_Id == id);
+            tbl_CompanyInfo tbl_companyinfo = db.tbl_CompanyInfo.Single(t => t.Company_Id == id);
             if (tbl_companyinfo == null)
             {
                 return HttpNotFound();
@@ -48,7 +49,7 @@ namespace IPAPPM.Web.Portal.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(tbl_CompanyInfo tbl_companyinfo)
+        public ActionResult Create(tbl_CompanyInfo tbl_companyinfo,HttpPostedFileBase file)
         {
             tbl_companyinfo.CreatedBy = User.Identity.Name;
             tbl_companyinfo.CreatedDate = DateTime.Now;
@@ -58,6 +59,12 @@ namespace IPAPPM.Web.Portal.Controllers
 
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    file.SaveAs(HttpContext.Server.MapPath("~/Images/")
+                                                          + file.FileName);
+                    tbl_companyinfo.ImagePath = "Images/" + file.FileName;
+                }  
                 db.tbl_CompanyInfo.AddObject(tbl_companyinfo);
                 //Audit 
                 db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
@@ -79,7 +86,7 @@ namespace IPAPPM.Web.Portal.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            tbl_CompanyInfo tbl_companyinfo = db.tbl_CompanyInfo.Single(t => t.Comapny_Id == id);
+            tbl_CompanyInfo tbl_companyinfo = db.tbl_CompanyInfo.Single(t => t.Company_Id == id);
             if (tbl_companyinfo == null)
             {
                 return HttpNotFound();
@@ -92,19 +99,25 @@ namespace IPAPPM.Web.Portal.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(tbl_CompanyInfo tbl_companyinfo)
+        public ActionResult Edit(tbl_CompanyInfo tbl_companyinfo, HttpPostedFileBase file)
         {
             tbl_companyinfo.ModifiedBy = User.Identity.Name;
             tbl_companyinfo.ModifiedDate = DateTime.Now;
 
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    file.SaveAs(HttpContext.Server.MapPath("~/Images/")
+                                                          + file.FileName);
+                    tbl_companyinfo.ImagePath = "Images/" + file.FileName;
+                } 
                 db.tbl_CompanyInfo.Attach(tbl_companyinfo);
                 db.ObjectStateManager.ChangeObjectState(tbl_companyinfo, EntityState.Modified);
                 //Audit 
                 db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
                 {
-                    Action = "CREATE",
+                    Action = "UPDATE",
                     ActionItem = "CompanyInfo",
                     UserName = User.Identity.Name,
                     ActionDate = DateTime.Now
@@ -120,7 +133,7 @@ namespace IPAPPM.Web.Portal.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            tbl_CompanyInfo tbl_companyinfo = db.tbl_CompanyInfo.Single(t => t.Comapny_Id == id);
+            tbl_CompanyInfo tbl_companyinfo = db.tbl_CompanyInfo.Single(t => t.Company_Id == id);
             if (tbl_companyinfo == null)
             {
                 return HttpNotFound();
@@ -134,7 +147,7 @@ namespace IPAPPM.Web.Portal.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            tbl_CompanyInfo tbl_companyinfo = db.tbl_CompanyInfo.Single(t => t.Comapny_Id == id);
+            tbl_CompanyInfo tbl_companyinfo = db.tbl_CompanyInfo.Single(t => t.Company_Id == id);
             db.tbl_CompanyInfo.DeleteObject(tbl_companyinfo);
             db.SaveChanges();
             return RedirectToAction("Index");

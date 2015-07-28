@@ -5,6 +5,9 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<p>
+<a href="/Audit/ExportData">Export</a>
+</p>
 
 <table class="table table-bordered table-highlight">
     <tr>

@@ -114,22 +114,6 @@ namespace IPAPPM.Web.Portal.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<tbl_CompanyInfo> tbl_CompanyInfo
-        {
-            get
-            {
-                if ((_tbl_CompanyInfo == null))
-                {
-                    _tbl_CompanyInfo = base.CreateObjectSet<tbl_CompanyInfo>("tbl_CompanyInfo");
-                }
-                return _tbl_CompanyInfo;
-            }
-        }
-        private ObjectSet<tbl_CompanyInfo> _tbl_CompanyInfo;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<tbl_CompanyType> tbl_CompanyType
         {
             get
@@ -366,6 +350,22 @@ namespace IPAPPM.Web.Portal.Models
             }
         }
         private ObjectSet<tbl_EndUsage> _tbl_EndUsage;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<tbl_CompanyInfo> tbl_CompanyInfo
+        {
+            get
+            {
+                if ((_tbl_CompanyInfo == null))
+                {
+                    _tbl_CompanyInfo = base.CreateObjectSet<tbl_CompanyInfo>("tbl_CompanyInfo");
+                }
+                return _tbl_CompanyInfo;
+            }
+        }
+        private ObjectSet<tbl_CompanyInfo> _tbl_CompanyInfo;
 
         #endregion
 
@@ -385,14 +385,6 @@ namespace IPAPPM.Web.Portal.Models
         public void AddTotbl_CommonTerms(tbl_CommonTerms tbl_CommonTerms)
         {
             base.AddObject("tbl_CommonTerms", tbl_CommonTerms);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the tbl_CompanyInfo EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTotbl_CompanyInfo(tbl_CompanyInfo tbl_CompanyInfo)
-        {
-            base.AddObject("tbl_CompanyInfo", tbl_CompanyInfo);
         }
     
         /// <summary>
@@ -513,6 +505,14 @@ namespace IPAPPM.Web.Portal.Models
         public void AddTotbl_EndUsage(tbl_EndUsage tbl_EndUsage)
         {
             base.AddObject("tbl_EndUsage", tbl_EndUsage);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the tbl_CompanyInfo EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotbl_CompanyInfo(tbl_CompanyInfo tbl_CompanyInfo)
+        {
+            base.AddObject("tbl_CompanyInfo", tbl_CompanyInfo);
         }
 
         #endregion
@@ -897,8 +897,8 @@ namespace IPAPPM.Web.Portal.Models
         /// <param name="termType">Initial value of the TermType property.</param>
         /// <param name="iSActive">Initial value of the ISActive property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
-        /// <param name="caretedDate">Initial value of the CaretedDate property.</param>
-        public static tbl_CommonTerms Createtbl_CommonTerms(global::System.Int32 ctTerms_Id, global::System.String title, global::System.Int32 termType, global::System.Boolean iSActive, global::System.String createdBy, global::System.DateTime caretedDate)
+        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        public static tbl_CommonTerms Createtbl_CommonTerms(global::System.Int32 ctTerms_Id, global::System.String title, global::System.Int32 termType, global::System.Boolean iSActive, global::System.String createdBy, global::System.DateTime createdDate)
         {
             tbl_CommonTerms tbl_CommonTerms = new tbl_CommonTerms();
             tbl_CommonTerms.CtTerms_Id = ctTerms_Id;
@@ -906,7 +906,7 @@ namespace IPAPPM.Web.Portal.Models
             tbl_CommonTerms.TermType = termType;
             tbl_CommonTerms.ISActive = iSActive;
             tbl_CommonTerms.CreatedBy = createdBy;
-            tbl_CommonTerms.CaretedDate = caretedDate;
+            tbl_CommonTerms.CreatedDate = createdDate;
             return tbl_CommonTerms;
         }
 
@@ -1064,30 +1064,6 @@ namespace IPAPPM.Web.Portal.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime CaretedDate
-        {
-            get
-            {
-                return _CaretedDate;
-            }
-            set
-            {
-                OnCaretedDateChanging(value);
-                ReportPropertyChanging("CaretedDate");
-                _CaretedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CaretedDate");
-                OnCaretedDateChanged();
-            }
-        }
-        private global::System.DateTime _CaretedDate;
-        partial void OnCaretedDateChanging(global::System.DateTime value);
-        partial void OnCaretedDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String ModifiedBy
@@ -1132,6 +1108,30 @@ namespace IPAPPM.Web.Portal.Models
         private Nullable<global::System.DateTime> _ModifiedDate;
         partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
         partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedDate
+        {
+            get
+            {
+                return _CreatedDate;
+            }
+            set
+            {
+                OnCreatedDateChanging(value);
+                ReportPropertyChanging("CreatedDate");
+                _CreatedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedDate");
+                OnCreatedDateChanged();
+            }
+        }
+        private global::System.DateTime _CreatedDate;
+        partial void OnCreatedDateChanging(global::System.DateTime value);
+        partial void OnCreatedDateChanged();
 
         #endregion
 
@@ -1151,15 +1151,15 @@ namespace IPAPPM.Web.Portal.Models
         /// <summary>
         /// Create a new tbl_CompanyInfo object.
         /// </summary>
-        /// <param name="comapny_Id">Initial value of the Comapny_Id property.</param>
+        /// <param name="company_Id">Initial value of the Company_Id property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static tbl_CompanyInfo Createtbl_CompanyInfo(global::System.Int32 comapny_Id, global::System.String createdBy, global::System.DateTime createdDate, global::System.String modifiedBy, global::System.DateTime modifiedDate)
+        public static tbl_CompanyInfo Createtbl_CompanyInfo(global::System.Int32 company_Id, global::System.String createdBy, global::System.DateTime createdDate, global::System.String modifiedBy, global::System.DateTime modifiedDate)
         {
             tbl_CompanyInfo tbl_CompanyInfo = new tbl_CompanyInfo();
-            tbl_CompanyInfo.Comapny_Id = comapny_Id;
+            tbl_CompanyInfo.Company_Id = company_Id;
             tbl_CompanyInfo.CreatedBy = createdBy;
             tbl_CompanyInfo.CreatedDate = createdDate;
             tbl_CompanyInfo.ModifiedBy = modifiedBy;
@@ -1176,27 +1176,27 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 Comapny_Id
+        public global::System.Int32 Company_Id
         {
             get
             {
-                return _Comapny_Id;
+                return _Company_Id;
             }
             set
             {
-                if (_Comapny_Id != value)
+                if (_Company_Id != value)
                 {
-                    OnComapny_IdChanging(value);
-                    ReportPropertyChanging("Comapny_Id");
-                    _Comapny_Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Comapny_Id");
-                    OnComapny_IdChanged();
+                    OnCompany_IdChanging(value);
+                    ReportPropertyChanging("Company_Id");
+                    _Company_Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Company_Id");
+                    OnCompany_IdChanged();
                 }
             }
         }
-        private global::System.Int32 _Comapny_Id;
-        partial void OnComapny_IdChanging(global::System.Int32 value);
-        partial void OnComapny_IdChanged();
+        private global::System.Int32 _Company_Id;
+        partial void OnCompany_IdChanging(global::System.Int32 value);
+        partial void OnCompany_IdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1251,24 +1251,24 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Imagepath
+        public global::System.String ImagePath
         {
             get
             {
-                return _Imagepath;
+                return _ImagePath;
             }
             set
             {
-                OnImagepathChanging(value);
-                ReportPropertyChanging("Imagepath");
-                _Imagepath = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Imagepath");
-                OnImagepathChanged();
+                OnImagePathChanging(value);
+                ReportPropertyChanging("ImagePath");
+                _ImagePath = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ImagePath");
+                OnImagePathChanged();
             }
         }
-        private global::System.String _Imagepath;
-        partial void OnImagepathChanging(global::System.String value);
-        partial void OnImagepathChanged();
+        private global::System.String _ImagePath;
+        partial void OnImagePathChanging(global::System.String value);
+        partial void OnImagePathChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

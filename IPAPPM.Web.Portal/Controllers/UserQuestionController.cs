@@ -91,6 +91,14 @@ namespace IPAPPM.Web.Portal.Controllers
                 
                 db.tbl_UserQuestions.Attach(tbl_userquestions);
                 db.ObjectStateManager.ChangeObjectState(tbl_userquestions, EntityState.Modified);
+                //Audit 
+                db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                {
+                    Action = "UPDATE",
+                    ActionItem = "UserQuestion",
+                    UserName = User.Identity.Name,
+                    ActionDate = DateTime.Now
+                });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -115,12 +123,27 @@ namespace IPAPPM.Web.Portal.Controllers
         // POST: /UserQuestion/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public String DeleteConfirmed(int id)
         {
-            tbl_UserQuestions tbl_userquestions = db.tbl_UserQuestions.Single(t => t.Question_Id == id);
-            db.tbl_UserQuestions.DeleteObject(tbl_userquestions);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                tbl_UserQuestions tbl_userquestions = db.tbl_UserQuestions.Single(t => t.Question_Id == id);
+                db.tbl_UserQuestions.DeleteObject(tbl_userquestions);
+                //Audit 
+                db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                {
+                    Action = "DELETE",
+                    ActionItem = "UserQuestion",
+                    UserName = User.Identity.Name,
+                    ActionDate = DateTime.Now
+                });
+                db.SaveChanges();
+                return "User Question deleted Successfully.";
+            }
+            catch (Exception ex)
+            {
+                return "User Question Cannot deleted. May be due to existing references or violation";
+            }
         }
 
         protected override void Dispose(bool disposing)

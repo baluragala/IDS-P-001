@@ -17,9 +17,25 @@ namespace IPAPPM.Web.Portal.Controllers
         //
         // GET: /CommonTerms/
 
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            return View(db.tbl_CommonTerms.ToList());
+            /*
+             * Term Type
+             * 1 - Paper
+             * 2 - Priniting
+             * 3 - Common Priting Problem
+             * 4 - Common Photo copier Problem
+             */
+            int termType = id;
+            if (termType == 1)
+                return View(db.tbl_CommonTerms.Where(t => t.TermType==1).ToList());
+            if (termType == 2)
+                return View(db.tbl_CommonTerms.Where(t => t.TermType==2).ToList());
+            if (termType == 3)
+                return View(db.tbl_CommonTerms.Where(t => t.TermType==3).ToList());
+            if (termType == 4)
+                return View(db.tbl_CommonTerms.Where(t => t.TermType==4).ToList());
+            return HttpNotFound("No such term type defined");
         }
 
         //
@@ -38,7 +54,7 @@ namespace IPAPPM.Web.Portal.Controllers
         //
         // GET: /CommonTerms/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             return View();
         }
@@ -47,13 +63,62 @@ namespace IPAPPM.Web.Portal.Controllers
         // POST: /CommonTerms/Create
 
         [HttpPost]
-        public ActionResult Create(tbl_CommonTerms tbl_commonterms)
+        [ValidateInput(false)]
+        public ActionResult Create(tbl_CommonTerms tbl_commonterms, int id)
         {
+            tbl_commonterms.TermType = id;
+            tbl_commonterms.CreatedBy = User.Identity.Name;
+            tbl_commonterms.CreatedDate = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 db.tbl_CommonTerms.AddObject(tbl_commonterms);
+                switch (id)
+                {
+                    case 1:
+                    db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                    {
+                        Action = "CREATE",
+                        ActionItem = "Common Paper Term",
+                        UserName = User.Identity.Name,
+                        ActionDate = DateTime.Now
+                    });
+                    break;
+
+                    case 2:
+                    db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                    {
+                        Action = "CREATE",
+                        ActionItem = "Common Priting Term",
+                        UserName = User.Identity.Name,
+                        ActionDate = DateTime.Now
+                    });
+                    break;
+
+                    case 3:
+                    db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                    {
+                        Action = "CREATE",
+                        ActionItem = "Common Printing Problem",
+                        UserName = User.Identity.Name,
+                        ActionDate = DateTime.Now
+                    });
+                    break;
+
+                    case 4:
+                    db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
+                    {
+                        Action = "CREATE",
+                        ActionItem = "Common Photocopier Problem",
+                        UserName = User.Identity.Name,
+                        ActionDate = DateTime.Now
+                    });
+                    break;
+
+                }
+                
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index/"+id);
             }
 
             return View(tbl_commonterms);
@@ -76,6 +141,7 @@ namespace IPAPPM.Web.Portal.Controllers
         // POST: /CommonTerms/Edit/5
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(tbl_CommonTerms tbl_commonterms)
         {
             if (ModelState.IsValid)

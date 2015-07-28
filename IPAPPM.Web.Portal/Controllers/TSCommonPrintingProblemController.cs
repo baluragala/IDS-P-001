@@ -9,34 +9,33 @@ using IPAPPM.Web.Portal.Models;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
-    [Authorize]
-    public class NotificationController : Controller
+    public class TSCommonPrintingProblemController : Controller
     {
         private IPAPPMLIVEEntities db = new IPAPPMLIVEEntities();
 
         //
-        // GET: /Notification/
+        // GET: /CommonPaperTerms/
 
         public ActionResult Index()
         {
-            return View(db.tbl_Notifications.ToList());
+            return View(db.tbl_CommonTerms.Where(c => c.TermType == 3).ToList());
         }
 
         //
-        // GET: /Notification/Details/5
+        // GET: /CommonPaperTerms/Details/5
 
         public ActionResult Details(int id = 0)
         {
-            tbl_Notifications tbl_notifications = db.tbl_Notifications.Single(t => t.Notification_Id == id);
-            if (tbl_notifications == null)
+            tbl_CommonTerms tbl_commonterms = db.tbl_CommonTerms.Single(t => t.CtTerms_Id == id);
+            if (tbl_commonterms == null)
             {
                 return HttpNotFound();
             }
-            return View(tbl_notifications);
+            return View(tbl_commonterms);
         }
 
         //
-        // GET: /Notification/Create
+        // GET: /CommonPaperTerms/Create
 
         public ActionResult Create()
         {
@@ -44,29 +43,23 @@ namespace IPAPPM.Web.Portal.Controllers
         }
 
         //
-        // POST: /Notification/Create
+        // POST: /CommonPaperTerms/Create
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(tbl_Notifications tbl_notifications)
+        public ActionResult Create(tbl_CommonTerms tbl_commonterms)
         {
-            if (tbl_notifications==null)
-            {
-                ModelState.AddModelError("", "Please enter notification message");
-                return View(tbl_notifications);
-            }
-
+            tbl_commonterms.CreatedBy = User.Identity.Name;
+            tbl_commonterms.CreatedDate = DateTime.Now;
+            tbl_commonterms.TermType = 3;
             if (ModelState.IsValid)
             {
-                tbl_notifications.CreatedBy = User.Identity.Name;
-                tbl_notifications.CreatedDate = DateTime.Now;
-                tbl_notifications.IsActive = true;
-                db.tbl_Notifications.AddObject(tbl_notifications);
+                db.tbl_CommonTerms.AddObject(tbl_commonterms);
                 //Audit 
                 db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
                 {
                     Action = "CREATE",
-                    ActionItem = "Notification",
+                    ActionItem = "CommonPrintingProblem",
                     UserName = User.Identity.Name,
                     ActionDate = DateTime.Now
                 });
@@ -74,84 +67,87 @@ namespace IPAPPM.Web.Portal.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(tbl_notifications);
+            return View(tbl_commonterms);
         }
 
         //
-        // GET: /Notification/Edit/5
+        // GET: /CommonPaperTerms/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
-            tbl_Notifications tbl_notifications = db.tbl_Notifications.Single(t => t.Notification_Id == id);
-            if (tbl_notifications == null)
+            tbl_CommonTerms tbl_commonterms = db.tbl_CommonTerms.Single(t => t.CtTerms_Id == id);
+            if (tbl_commonterms == null)
             {
                 return HttpNotFound();
             }
-            return View(tbl_notifications);
+            return View(tbl_commonterms);
         }
 
         //
-        // POST: /Notification/Edit/5
+        // POST: /CommonPaperTerms/Edit/5
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(tbl_Notifications tbl_notifications)
+        public ActionResult Edit(tbl_CommonTerms tbl_commonterms)
         {
+            tbl_commonterms.ModifiedBy = User.Identity.Name;
+            tbl_commonterms.ModifiedDate = DateTime.Now;
+
             if (ModelState.IsValid)
             {
-                db.tbl_Notifications.Attach(tbl_notifications);
-                db.ObjectStateManager.ChangeObjectState(tbl_notifications, EntityState.Modified);
+                db.tbl_CommonTerms.Attach(tbl_commonterms);
+                db.ObjectStateManager.ChangeObjectState(tbl_commonterms, EntityState.Modified);
                 //Audit 
                 db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
                 {
                     Action = "UPDATE",
-                    ActionItem = "Notification",
+                    ActionItem = "CommonPrintingProblem",
                     UserName = User.Identity.Name,
                     ActionDate = DateTime.Now
                 });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(tbl_notifications);
+            return View(tbl_commonterms);
         }
 
         //
-        // GET: /Notification/Delete/5
+        // GET: /CommonPaperTerms/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
-            tbl_Notifications tbl_notifications = db.tbl_Notifications.Single(t => t.Notification_Id == id);
-            if (tbl_notifications == null)
+            tbl_CommonTerms tbl_commonterms = db.tbl_CommonTerms.Single(t => t.CtTerms_Id == id);
+            if (tbl_commonterms == null)
             {
                 return HttpNotFound();
             }
-            return View(tbl_notifications);
+            return View(tbl_commonterms);
         }
 
         //
-        // POST: /Notification/Delete/5
+        // POST: /CommonPaperTerms/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public String DeleteConfirmed(int id)
         {
             try
             {
-                tbl_Notifications tbl_notifications = db.tbl_Notifications.Single(t => t.Notification_Id == id);
-                db.tbl_Notifications.DeleteObject(tbl_notifications);
+                tbl_CommonTerms tbl_commonterms = db.tbl_CommonTerms.Single(t => t.CtTerms_Id == id);
+                db.tbl_CommonTerms.DeleteObject(tbl_commonterms);
                 //Audit 
                 db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
                 {
                     Action = "DELETE",
-                    ActionItem = "Notification",
+                    ActionItem = "CommonPrintingProblem",
                     UserName = User.Identity.Name,
                     ActionDate = DateTime.Now
                 });
                 db.SaveChanges();
-                return "Notification deleted Successfully.";
+                return "Common printing Term deleted successfully";
             }
             catch (Exception ex)
             {
-                return "Notification Cannot deleted. May be due to existing references or violation";
+                return "Common printing Term Cannot deleted. May be due to existing references or violation";
             }
         }
 
@@ -161,4 +157,5 @@ namespace IPAPPM.Web.Portal.Controllers
             base.Dispose(disposing);
         }
     }
+
 }

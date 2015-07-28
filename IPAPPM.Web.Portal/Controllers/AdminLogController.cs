@@ -6,6 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IPAPPM.Web.Portal.Models;
+using System.Web.UI.WebControls;
+using System.IO;
+using System.Web.UI;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
@@ -20,6 +23,26 @@ namespace IPAPPM.Web.Portal.Controllers
         public ActionResult Index()
         {
             return View(db.tbl_LoginAudit.OrderByDescending(l=>l.LoginTime).ToList());
+        }
+
+        public ActionResult ExportData()
+        {
+            GridView gv = new GridView();
+            gv.DataSource = db.tbl_LoginAudit.OrderByDescending(l => l.LoginTime).ToList();
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=AdminLog-" + DateTime.Now.ToShortDateString() +".xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            gv.RenderControl(htw);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+
+            return RedirectToAction("Index");
         }
 
         ////

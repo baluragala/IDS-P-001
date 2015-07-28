@@ -33,7 +33,7 @@
             <End Role="tbl_ProductCategory" EntitySet="tbl_ProductCategory" />
             <End Role="tbl_ProductDetails" EntitySet="tbl_ProductDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_Selle__Produ__6DCC4D03" Association="IPAPPM.Model.Store.FK__tbl_Selle__Produ__6DCC4D03">
+          <AssociationSet Name="FK__tbl_Selle__Produ__7B264821" Association="IPAPPM.Model.Store.FK__tbl_Selle__Produ__7B264821">
             <End Role="tbl_ProductCategory" EntitySet="tbl_ProductCategory" />
             <End Role="tbl_SellerProductCategories" EntitySet="tbl_SellerProductCategories" />
           </AssociationSet>
@@ -41,7 +41,7 @@
             <End Role="tbl_SellerType" EntitySet="tbl_SellerType" />
             <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__tbl_Selle__Selle__6CD828CA" Association="IPAPPM.Model.Store.FK__tbl_Selle__Selle__6CD828CA">
+          <AssociationSet Name="FK__tbl_Selle__Selle__7C1A6C5A" Association="IPAPPM.Model.Store.FK__tbl_Selle__Selle__7C1A6C5A">
             <End Role="tbl_SellerDetails" EntitySet="tbl_SellerDetails" />
             <End Role="tbl_SellerProductCategories" EntitySet="tbl_SellerProductCategories" />
           </AssociationSet>
@@ -95,18 +95,18 @@
           <Property Name="TermType" Type="int" Nullable="false" />
           <Property Name="ISActive" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="varchar" Nullable="false" MaxLength="20" />
-          <Property Name="CaretedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="20" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="tbl_CompanyInfo">
           <Key>
-            <PropertyRef Name="Comapny_Id" />
+            <PropertyRef Name="Company_Id" />
           </Key>
-          <Property Name="Comapny_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Company_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CompanyName" Type="varchar" MaxLength="100" />
           <Property Name="Text" Type="varchar(max)" />
-          <Property Name="Imagepath" Type="varchar" MaxLength="200" />
+          <Property Name="ImagePath" Type="varchar" MaxLength="200" />
           <Property Name="Website" Type="varchar" MaxLength="50" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="varchar" Nullable="false" MaxLength="20" />
@@ -316,8 +316,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_Selle__Produ__6DCC4D03">
-          <End Role="tbl_ProductCategory" Type="IPAPPM.Model.Store.tbl_ProductCategory" Multiplicity="1" />
+        <Association Name="FK__tbl_Selle__Produ__7B264821">
+          <End Role="tbl_ProductCategory" Type="IPAPPM.Model.Store.tbl_ProductCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tbl_SellerProductCategories" Type="IPAPPM.Model.Store.tbl_SellerProductCategories" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_ProductCategory">
@@ -340,8 +342,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tbl_Selle__Selle__6CD828CA">
-          <End Role="tbl_SellerDetails" Type="IPAPPM.Model.Store.tbl_SellerDetails" Multiplicity="1" />
+        <Association Name="FK__tbl_Selle__Selle__7C1A6C5A">
+          <End Role="tbl_SellerDetails" Type="IPAPPM.Model.Store.tbl_SellerDetails" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tbl_SellerProductCategories" Type="IPAPPM.Model.Store.tbl_SellerProductCategories" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_SellerDetails">
@@ -419,7 +423,6 @@
         <EntityContainer Name="IPAPPMLIVEEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbl_City" EntityType="IPAPPM.Model.tbl_City" />
           <EntitySet Name="tbl_CommonTerms" EntityType="IPAPPM.Model.tbl_CommonTerms" />
-          <EntitySet Name="tbl_CompanyInfo" EntityType="IPAPPM.Model.tbl_CompanyInfo" />
           <EntitySet Name="tbl_CompanyType" EntityType="IPAPPM.Model.tbl_CompanyType" />
           <EntitySet Name="tbl_LoginAudit" EntityType="IPAPPM.Model.tbl_LoginAudit" />
           <EntitySet Name="tbl_Mobile_Verification" EntityType="IPAPPM.Model.tbl_Mobile_Verification" />
@@ -471,6 +474,7 @@
           </AssociationSet>
           <EntitySet Name="tbl_AuditTrail" EntityType="IPAPPM.Model.tbl_AuditTrail" />
           <EntitySet Name="tbl_EndUsage" EntityType="IPAPPM.Model.tbl_EndUsage" />
+          <EntitySet Name="tbl_CompanyInfo" EntityType="IPAPPM.Model.tbl_CompanyInfo" />
         </EntityContainer>
         <EntityType Name="tbl_City">
           <Key>
@@ -493,24 +497,9 @@
           <Property Type="Int32" Name="TermType" Nullable="false" />
           <Property Type="Boolean" Name="ISActive" Nullable="false" />
           <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="CaretedDate" Nullable="false" />
           <Property Type="String" Name="ModifiedBy" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="ModifiedDate" />
-        </EntityType>
-        <EntityType Name="tbl_CompanyInfo">
-          <Key>
-            <PropertyRef Name="Comapny_Id" />
-          </Key>
-          <Property Type="Int32" Name="Comapny_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="CompanyName" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Imagepath" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Website" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Boolean" Name="IsActive" />
-          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
-          <Property Type="String" Name="ModifiedBy" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_CompanyType">
           <Key>
@@ -808,6 +797,21 @@
           <Property Type="String" Name="GSMRange" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Availability" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="tbl_CompanyInfo">
+          <Key>
+            <PropertyRef Name="Company_Id" />
+          </Key>
+          <Property Type="Int32" Name="Company_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CompanyName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ImagePath" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Website" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsActive" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="String" Name="ModifiedBy" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -827,31 +831,15 @@
           <EntitySetMapping Name="tbl_CommonTerms">
             <EntityTypeMapping TypeName="IPAPPM.Model.tbl_CommonTerms">
               <MappingFragment StoreEntitySet="tbl_CommonTerms">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CaretedDate" ColumnName="CaretedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ISActive" ColumnName="ISActive" />
                 <ScalarProperty Name="TermType" ColumnName="TermType" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="CtTerms_Id" ColumnName="CtTerms_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_CompanyInfo">
-            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_CompanyInfo">
-              <MappingFragment StoreEntitySet="tbl_CompanyInfo">
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
-                <ScalarProperty Name="Imagepath" ColumnName="Imagepath" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Comapny_Id" ColumnName="Comapny_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1058,6 +1046,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbl_CompanyInfo">
+            <EntityTypeMapping TypeName="IPAPPM.Model.tbl_CompanyInfo">
+              <MappingFragment StoreEntitySet="tbl_CompanyInfo">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1080,8 +1084,7 @@
     <Diagrams>
       <Diagram Name="IPAPPMEntities" ZoomLevel="74">
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_City" Width="1.5" PointX="3" PointY="2.125" Height="2.1725878906250102" />
-        <EntityTypeShape EntityType="IPAPPM.Model.tbl_CommonTerms" Width="1.5" PointX="7.75" PointY="0.75" Height="2.7494921875000102" />
-        <EntityTypeShape EntityType="IPAPPM.Model.tbl_CompanyInfo" Width="1.5" PointX="9.75" PointY="0.75" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="IPAPPM.Model.tbl_CommonTerms" Width="1.5" PointX="7.75" PointY="0.75" Height="2.7494921875" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_CompanyType" Width="1.5" PointX="5.75" PointY="8.125" Height="2.172587890624996" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_LoginAudit" Width="1.5" PointX="10.75" PointY="4.75" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_Mobile_Verification" Width="1.5" PointX="11.75" PointY="0.75" Height="1.7879850260416674" />
@@ -1143,6 +1146,7 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_AuditTrail" Width="1.5" PointX="12.375" PointY="7.75" Height="1.9802864583333388" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_EndUsage" Width="1.5" PointX="7.375" PointY="13.75" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="IPAPPM.Model.tbl_CompanyInfo" Width="1.5" PointX="13.375" PointY="10.75" Height="2.9417936197916674" />
       </Diagram>
     </Diagrams>
   </Designer>
