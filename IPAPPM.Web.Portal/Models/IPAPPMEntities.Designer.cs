@@ -15,6 +15,7 @@ using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -946,6 +947,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage="required")]
         public global::System.String Title
         {
             get
@@ -970,6 +972,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage="required")]
         public global::System.String Description
         {
             get
@@ -1152,14 +1155,20 @@ namespace IPAPPM.Web.Portal.Models
         /// Create a new tbl_CompanyInfo object.
         /// </summary>
         /// <param name="company_Id">Initial value of the Company_Id property.</param>
+        /// <param name="companyName">Initial value of the CompanyName property.</param>
+        /// <param name="text">Initial value of the Text property.</param>
+        /// <param name="website">Initial value of the Website property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static tbl_CompanyInfo Createtbl_CompanyInfo(global::System.Int32 company_Id, global::System.String createdBy, global::System.DateTime createdDate, global::System.String modifiedBy, global::System.DateTime modifiedDate)
+        public static tbl_CompanyInfo Createtbl_CompanyInfo(global::System.Int32 company_Id, global::System.String companyName, global::System.String text, global::System.String website, global::System.String createdBy, global::System.DateTime createdDate, global::System.String modifiedBy, global::System.DateTime modifiedDate)
         {
             tbl_CompanyInfo tbl_CompanyInfo = new tbl_CompanyInfo();
             tbl_CompanyInfo.Company_Id = company_Id;
+            tbl_CompanyInfo.CompanyName = companyName;
+            tbl_CompanyInfo.Text = text;
+            tbl_CompanyInfo.Website = website;
             tbl_CompanyInfo.CreatedBy = createdBy;
             tbl_CompanyInfo.CreatedDate = createdDate;
             tbl_CompanyInfo.ModifiedBy = modifiedBy;
@@ -1201,8 +1210,9 @@ namespace IPAPPM.Web.Portal.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage="required")]
         public global::System.String CompanyName
         {
             get
@@ -1213,7 +1223,7 @@ namespace IPAPPM.Web.Portal.Models
             {
                 OnCompanyNameChanging(value);
                 ReportPropertyChanging("CompanyName");
-                _CompanyName = StructuralObject.SetValidValue(value, true);
+                _CompanyName = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("CompanyName");
                 OnCompanyNameChanged();
             }
@@ -1225,8 +1235,9 @@ namespace IPAPPM.Web.Portal.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.String Text
         {
             get
@@ -1237,7 +1248,7 @@ namespace IPAPPM.Web.Portal.Models
             {
                 OnTextChanging(value);
                 ReportPropertyChanging("Text");
-                _Text = StructuralObject.SetValidValue(value, true);
+                _Text = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Text");
                 OnTextChanged();
             }
@@ -1273,8 +1284,9 @@ namespace IPAPPM.Web.Portal.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.String Website
         {
             get
@@ -1285,7 +1297,7 @@ namespace IPAPPM.Web.Portal.Models
             {
                 OnWebsiteChanging(value);
                 ReportPropertyChanging("Website");
-                _Website = StructuralObject.SetValidValue(value, true);
+                _Website = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Website");
                 OnWebsiteChanged();
             }
@@ -1667,6 +1679,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage="required")]
         public global::System.String EndUsage
         {
             get
@@ -1715,6 +1728,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.String Product
         {
             get
@@ -1739,6 +1753,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.String GSMRange
         {
             get
@@ -1763,6 +1778,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.String Availability
         {
             get
@@ -2243,6 +2259,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage="required")]
         public global::System.String Message
         {
             get
@@ -2375,6 +2392,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
+        
         public global::System.Int32 Category_Id
         {
             get
@@ -2402,6 +2420,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.String Category_Name
         {
             get
@@ -2426,6 +2445,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.String Description
         {
             get
@@ -2705,6 +2725,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage="required")]
         public global::System.String Product_Name
         {
             get
@@ -2729,6 +2750,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.String Description
         {
             get
@@ -2897,6 +2919,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage="required")]
         public Nullable<global::System.Int32> Category_Id
         {
             get
@@ -3150,6 +3173,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage="required")]
         public global::System.String Seller_Name
         {
             get
@@ -3198,6 +3222,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.String Address
         {
             get
@@ -3222,6 +3247,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.String PhoneNumbers
         {
             get
@@ -3246,6 +3272,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.Int32 SellerType_Id
         {
             get
@@ -3270,6 +3297,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.Int32 State
         {
             get
@@ -3294,6 +3322,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.Int32 City
         {
             get
@@ -3559,6 +3588,7 @@ namespace IPAPPM.Web.Portal.Models
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("IPAPPM.Model", "tbl_SellerProductCategories", "tbl_ProductCategory")]
+        
         public EntityCollection<tbl_ProductCategory> tbl_ProductCategory
         {
             get

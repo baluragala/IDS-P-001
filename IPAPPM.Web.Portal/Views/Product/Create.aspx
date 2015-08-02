@@ -16,19 +16,22 @@
         <div class="col-md-6">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Category_Id, "Product Category") %>
+                <span class="field-validation-error">*</span>
             </div>
             <div class="editor-field">
                 <%: Html.DropDownList("Category_Id", String.Empty) %>
-                <%: Html.ValidationMessageFor(model => model.Category_Id) %>
+                 <%: Html.ValidationMessageFor(model => model.Category_Id) %>
+                
             </div>
         </div>
         <div class="col-md-6">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Product_Name, "Name") %>
+                 <span class="field-validation-error">*</span>
             </div>
             <div class="editor-field">
                 <%: Html.EditorFor(model => model.Product_Name) %>
-                <%: Html.ValidationMessageFor(model => model.Product_Name) %>
+                 <%: Html.ValidationMessageFor(model => model.Product_Name)%>
             </div>
         </div>
     </div>
@@ -36,10 +39,12 @@
         <div class="col-md-6">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Description, "Description") %>
+                <span class="field-validation-error">*</span>
+                  <%: Html.ValidationMessageFor(model => model.Description)%>
+               
             </div>
             <div class="editor-field">
                 <%: Html.TextAreaFor(model => model.Description, new Dictionary<string, object> { { "cols", "60" },{"rows","4"}})%>
-                <%: Html.ValidationMessageFor(model => model.Description) %>
             </div>
         </div>
         <div class="col-md-6">

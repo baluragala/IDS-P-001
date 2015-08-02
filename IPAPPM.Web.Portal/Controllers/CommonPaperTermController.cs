@@ -59,7 +59,7 @@ namespace IPAPPM.Web.Portal.Controllers
                 db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
                 {
                     Action = "CREATE",
-                    ActionItem = "CommonPaperTerm",
+                    ActionItem = "Common Paper Term",
                     UserName = User.Identity.Name,
                     ActionDate = DateTime.Now
                 });
@@ -101,7 +101,7 @@ namespace IPAPPM.Web.Portal.Controllers
                 db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
                 {
                     Action = "UPDATE",
-                    ActionItem = "CommonPaperTerm",
+                    ActionItem = "Common Paper Term",
                     UserName = User.Identity.Name,
                     ActionDate = DateTime.Now
                 });
@@ -138,7 +138,7 @@ namespace IPAPPM.Web.Portal.Controllers
                 db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
                 {
                     Action = "DELETE",
-                    ActionItem = "CommonPaperTerm",
+                    ActionItem = "Common Paper Term",
                     UserName = User.Identity.Name,
                     ActionDate = DateTime.Now
                 });

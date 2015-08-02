@@ -51,11 +51,13 @@ namespace IPAPPM.Web.Portal.Controllers
         [ValidateInput(false)]
         public ActionResult Create(tbl_CompanyInfo tbl_companyinfo,HttpPostedFileBase file)
         {
+           
             tbl_companyinfo.CreatedBy = User.Identity.Name;
             tbl_companyinfo.CreatedDate = DateTime.Now;
             tbl_companyinfo.ModifiedBy = User.Identity.Name;
             tbl_companyinfo.ModifiedDate = DateTime.Now;
             tbl_companyinfo.IsActive = true;
+            tbl_companyinfo.ImagePath="";
 
             if (ModelState.IsValid)
             {

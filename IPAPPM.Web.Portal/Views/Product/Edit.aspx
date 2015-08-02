@@ -17,6 +17,7 @@
         <div class="col-md-6">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Category_Id, "Product Category") %>
+                 <span class="field-validation-error">*</span>
             </div>
             <div class="editor-field">
                 <%: Html.DropDownList("Category_Id", String.Empty) %>
@@ -26,6 +27,7 @@
         <div class="col-md-6">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Product_Name, "Name") %>
+                 <span class="field-validation-error">*</span>
             </div>
             <div class="editor-field">
                 <%: Html.EditorFor(model => model.Product_Name) %>
@@ -37,6 +39,7 @@
         <div class="col-md-6">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Description, "Description") %>
+                 <span class="field-validation-error">*</span>
             </div>
             <div class="editor-field">
                 <%: Html.TextAreaFor(model => model.Description, new Dictionary<string, object> { { "cols", "60" },{"rows","4"}})%>

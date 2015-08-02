@@ -11,6 +11,7 @@ using WebMatrix.WebData;
 using IPAPPM.Web.Portal.Filters;
 using IPAPPM.Web.Portal.Models;
 using System.Data;
+using CaptchaMvc.HtmlHelpers;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
@@ -38,7 +39,12 @@ namespace IPAPPM.Web.Portal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (!this.IsCaptchaValid("Captcha is not valid"))
+            {
+                ModelState.AddModelError("LoginError", "Captcha is not valid.");
+                return View(model);
+            }
+           if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
                 tbl_LoginAudit entity=null;
                 var result 
@@ -60,18 +66,19 @@ namespace IPAPPM.Web.Portal.Controllers
                 }
                 else
                 {
+                    Session["LastLoginTime"] = entity.LoginTime;
                     entity.LoginTime = DateTime.Now;
                     entity.IP = Request.ServerVariables["REMOTE_ADDR"];
                     //entity.LogOutTime = null;
                     db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
                 }
-                
+               
                 db.SaveChanges();
                 return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            ModelState.AddModelError("LoginError", "The user name or password provided is incorrect.");
             return View(model);
         }
 

@@ -93,6 +93,7 @@ namespace IPAPPM.Web.Portal.Controllers
             ViewBag.City = new SelectList(db.tbl_City, "City_Id", "City_Name", tbl_sellerdetails.City);
             ViewBag.SellerType_Id = new SelectList(db.tbl_SellerType, "SellerType_Id", "Seller_Type", tbl_sellerdetails.SellerType_Id);
             ViewBag.State = new SelectList(db.tbl_State, "State_Id", "State_Name", tbl_sellerdetails.State);
+            ViewBag.ProductCategories = new SelectList(db.tbl_ProductCategory, "Category_Id", "Category_Name");
             return View(tbl_sellerdetails);
         }
 
@@ -149,7 +150,7 @@ namespace IPAPPM.Web.Portal.Controllers
                 //Audit 
                 db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
                 {
-                    Action = "CREATE",
+                    Action = "EDIT",
                     ActionItem = "Seller",
                     UserName = User.Identity.Name,
                     ActionDate = DateTime.Now
@@ -160,6 +161,8 @@ namespace IPAPPM.Web.Portal.Controllers
             ViewBag.City = new SelectList(db.tbl_City, "City_Id", "City_Name", tbl_sellerdetails.City);
             ViewBag.SellerType_Id = new SelectList(db.tbl_SellerType, "SellerType_Id", "Seller_Type", tbl_sellerdetails.SellerType_Id);
             ViewBag.State = new SelectList(db.tbl_State, "State_Id", "State_Name", tbl_sellerdetails.State);
+            ViewBag.ProductCategories = new SelectList(db.tbl_ProductCategory, "Category_Id", "Category_Name");
+            ViewBag.SelectedProductCategories = tbl_sellerdetails.tbl_ProductCategory.Select(t => t.Category_Id).ToArray();
             return View(tbl_sellerdetails);
         }
 

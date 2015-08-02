@@ -104,10 +104,10 @@
             <PropertyRef Name="Company_Id" />
           </Key>
           <Property Name="Company_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="CompanyName" Type="varchar" MaxLength="100" />
-          <Property Name="Text" Type="varchar(max)" />
+          <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Text" Type="varchar(max)" Nullable="false" />
           <Property Name="ImagePath" Type="varchar" MaxLength="200" />
-          <Property Name="Website" Type="varchar" MaxLength="50" />
+          <Property Name="Website" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -802,10 +802,10 @@
             <PropertyRef Name="Company_Id" />
           </Key>
           <Property Type="Int32" Name="Company_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="CompanyName" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ImagePath" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Website" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Website" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="IsActive" />
           <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
@@ -1082,7 +1082,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="IPAPPMEntities" ZoomLevel="74">
+      <Diagram Name="IPAPPMEntities" ZoomLevel="97">
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_City" Width="1.5" PointX="3" PointY="2.125" Height="2.1725878906250102" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_CommonTerms" Width="1.5" PointX="7.75" PointY="0.75" Height="2.7494921875" />
         <EntityTypeShape EntityType="IPAPPM.Model.tbl_CompanyType" Width="1.5" PointX="5.75" PointY="8.125" Height="2.172587890624996" />

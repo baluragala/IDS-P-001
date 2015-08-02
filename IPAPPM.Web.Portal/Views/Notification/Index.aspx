@@ -12,13 +12,16 @@
         <div class="col-md-2">
             <%: Html.DisplayNameFor(model => model.Notification_Id) %>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-8">
             <%: Html.DisplayNameFor(model => model.Message) %>
         </div>
-       
+         <div class="col-md-2">
+            
+        </div>
     </div>
     <% foreach (var item in Model)
        { %>
+       <div class="row">
     <div class="col-md-2">
         <%: Html.DisplayFor(modelItem => item.Notification_Id) %>
     </div>
@@ -30,7 +33,7 @@
                     <img src="../../Images/Edit.png" /></a> <a onclick="deleteNotification('<%:item.Notification_Id %>')">
                     <img src="../../Images/Dustbin.png" alt="Delete" /></a>
      </div>    
-    
+    </div>
     <% } %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">

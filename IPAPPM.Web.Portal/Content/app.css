@@ -3474,3 +3474,9 @@ ul.support-list li {
 @media (min-width: 1200px) {
   
 }
+
+.field-validation-error
+{
+    color:Red;
+    font-size:medium;
+}

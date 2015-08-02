@@ -13,6 +13,7 @@
         <div class="col-md-4">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.SellerType_Id, "Seller Type") %>
+                <span class="field-validation-error">*</span>
             </div>
             <div class="editor-field">
                 <%: Html.DropDownList("SellerType_Id", String.Empty)%>
@@ -22,6 +23,7 @@
         <div class="col-md-4">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Seller_Name, "Seller Name") %>
+                <span class="field-validation-error">*</span>
             </div>
             <div class="editor-field">
                 <%: Html.EditorFor(model => model.Seller_Name)%>
@@ -42,19 +44,23 @@
         <div class="col-md-6">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Address, "Address") %>
+                <span class="field-validation-error">*</span>
+                <%: Html.ValidationMessageFor(model => model.Address)%>
             </div>
             <div class="editor-field">
                 <%: Html.TextAreaFor(model => model.Address, new Dictionary<string, object> { { "cols", "60" }, { "rows", "4" } })%>
-                <%: Html.ValidationMessageFor(model => model.Address)%>
+                
             </div>
         </div>
         <div class="col-md-6">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.PhoneNumbers, "PhoneNumber(s)")%>
+                <span class="field-validation-error">*</span>
+                <%: Html.ValidationMessageFor(model => model.PhoneNumbers)%>
             </div>
             <div class="editor-field">
                 <%: Html.TextAreaFor(model => model.PhoneNumbers, new Dictionary<string, object> { { "cols", "60" }, { "rows", "4" } })%>
-                <%: Html.ValidationMessageFor(model => model.PhoneNumbers)%>
+                
             </div>
         </div>
     </div>
@@ -62,6 +68,7 @@
         <div class="col-md-6">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.City, "City")%>
+                <span class="field-validation-error">*</span>
             </div>
             <div class="editor-field">
                 <%: Html.DropDownList("City", String.Empty)%>
@@ -71,6 +78,7 @@
         <div class="col-md-6">
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.State, "State")%>
+                <span class="field-validation-error">*</span>
             </div>
             <div class="editor-field">
                 <%: Html.DropDownList("State", String.Empty)%>

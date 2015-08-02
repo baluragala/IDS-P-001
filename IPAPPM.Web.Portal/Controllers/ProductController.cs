@@ -52,6 +52,7 @@ namespace IPAPPM.Web.Portal.Controllers
         [ValidateInput(false)]
         public ActionResult Create(tbl_ProductDetails tbl_productdetails, HttpPostedFileBase file)
         {
+           
             if (ModelState.IsValid)
             {
                 tbl_productdetails.CreatedBy = User.Identity.Name;

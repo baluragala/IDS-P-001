@@ -58,11 +58,11 @@ namespace IPAPPM.Web.Portal.Models
 
     public class LoginModel
     {
-        [Required]
+        [Required(ErrorMessage="Username is required")]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="Password is required")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

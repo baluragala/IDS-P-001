@@ -6,16 +6,13 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<h2>Create</h2>
-
 <% using (Html.BeginForm()) { %>
     <%: Html.ValidationSummary(true) %>
 
     <fieldset>
-        <legend>tbl_EndUsage</legend>
-
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.EndUsage) %>
+       <div class="editor-label">
+            <%: Html.LabelFor(model => model.EndUsage,"End Usage") %>
+            <span class="field-validation-error">*</span>
         </div>
         <div class="editor-field">
             <%: Html.EditorFor(model => model.EndUsage) %>
@@ -23,7 +20,7 @@
         </div>
 
         <div class="editor-label">
-            <%: Html.LabelFor(model => model.SubEndUsage) %>
+            <%: Html.LabelFor(model => model.SubEndUsage,"Sub End Usage") %>
         </div>
         <div class="editor-field">
             <%: Html.EditorFor(model => model.SubEndUsage) %>
@@ -32,6 +29,7 @@
 
         <div class="editor-label">
             <%: Html.LabelFor(model => model.Product) %>
+            <span class="field-validation-error">*</span>
         </div>
         <div class="editor-field">
             <%: Html.EditorFor(model => model.Product) %>
@@ -39,7 +37,8 @@
         </div>
 
         <div class="editor-label">
-            <%: Html.LabelFor(model => model.GSMRange) %>
+            <%: Html.LabelFor(model => model.GSMRange,"GSM Range") %>
+            <span class="field-validation-error">*</span>
         </div>
         <div class="editor-field">
             <%: Html.EditorFor(model => model.GSMRange) %>
@@ -48,12 +47,13 @@
 
         <div class="editor-label">
             <%: Html.LabelFor(model => model.Availability) %>
+            <span class="field-validation-error">*</span>
         </div>
         <div class="editor-field">
             <%: Html.EditorFor(model => model.Availability) %>
             <%: Html.ValidationMessageFor(model => model.Availability) %>
         </div>
-
+        <br />
         <p>
             <input type="submit" value="Create" />
         </p>
@@ -64,9 +64,11 @@
     <%: Html.ActionLink("Back to List", "Index") %>
 </div>
 
+
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
+End Usage
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">

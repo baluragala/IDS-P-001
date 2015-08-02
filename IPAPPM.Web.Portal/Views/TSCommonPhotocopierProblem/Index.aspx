@@ -37,7 +37,7 @@
     </table>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
-    Common Printing Term
+    Troubleshoot Common Photocopier Problem
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">
     <script type="text/javascript">

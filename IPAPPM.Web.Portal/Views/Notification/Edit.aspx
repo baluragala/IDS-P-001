@@ -18,19 +18,15 @@
 
         <div class="editor-label">
             <%: Html.LabelFor(model => model.Message) %>
+             <span class="field-validation-error">*</span>
+             <%: Html.ValidationMessageFor(model => model.Message) %>
         </div>
         <div class="editor-field">
             <%: Html.TextAreaFor(model => model.Message) %>
-            <%: Html.ValidationMessageFor(model => model.Message) %>
         </div>
-
-       
 
         
             <%: Html.HiddenFor(model => model.CreatedBy) %>
-        
-        
-        
             <%: Html.HiddenFor(model => model.CreatedDate) %>
         <br />
         <p>

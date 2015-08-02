@@ -6,28 +6,29 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<h2>Create</h2>
-
 <% using (Html.BeginForm()) { %>
     <%: Html.ValidationSummary(true) %>
 
     <fieldset>
 
-
         <div class="editor-label">
-           Problem
+             <%: Html.LabelFor(model => model.Title, "Problem")%>
+            <span class="field-validation-error">*</span>
+            <%: Html.ValidationMessageFor(model => model.Title) %>
         </div>
         <div class="editor-field">
             <%: Html.TextAreaFor(model => model.Title) %>
-            <%: Html.ValidationMessageFor(model => model.Title) %>
+            
         </div>
 
         <div class="editor-label">
-            Solution
+             <%: Html.LabelFor(model => model.Description, "Solution")%>
+             <span class="field-validation-error">*</span>
+              <%: Html.ValidationMessageFor(model => model.Description) %>
         </div>
         <div class="editor-field">
             <%: Html.TextAreaFor(model => model.Description)%>
-            <%: Html.ValidationMessageFor(model => model.Description) %>
+           
         </div>
         <br />
         <p>
@@ -43,7 +44,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
-Troubleshoot Common Printing Problem
+Troubleshoot Common Printing Problems
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">

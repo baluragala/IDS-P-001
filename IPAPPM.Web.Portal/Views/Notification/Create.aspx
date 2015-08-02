@@ -14,10 +14,12 @@
 
         <div class="editor-label">
             <%: Html.LabelFor(model => model.Message) %>
+            <span class="field-validation-error">*</span>
+            <%: Html.ValidationMessageFor(model => model.Message) %>
         </div>
         <div class="editor-field">
             <%: Html.TextAreaFor(model => model.Message, new Dictionary<string, object> { { "cols", "60" }, { "rows", "6" } })%>
-            <%: Html.ValidationMessageFor(model => model.Message) %>
+            
         </div>
 
         <%--<div class="editor-label">
@@ -44,6 +46,7 @@
             <%: Html.ValidationMessageFor(model => model.CreatedDate) %>
         </div>--%>
 
+        <br />
         <p>
             <input type="submit" value="Create" />
         </p>

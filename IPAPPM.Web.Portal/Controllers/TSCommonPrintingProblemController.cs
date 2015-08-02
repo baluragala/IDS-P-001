@@ -49,6 +49,12 @@ namespace IPAPPM.Web.Portal.Controllers
         [ValidateInput(false)]
         public ActionResult Create(tbl_CommonTerms tbl_commonterms)
         {
+            if (tbl_commonterms==null)
+            {
+                ModelState.AddModelError("", "Please fill all mandatory fields marked with *)");
+                return View(tbl_commonterms);
+            }
+
             tbl_commonterms.CreatedBy = User.Identity.Name;
             tbl_commonterms.CreatedDate = DateTime.Now;
             tbl_commonterms.TermType = 3;
@@ -59,7 +65,7 @@ namespace IPAPPM.Web.Portal.Controllers
                 db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
                 {
                     Action = "CREATE",
-                    ActionItem = "CommonPrintingProblem",
+                    ActionItem = "Common Printing Problem",
                     UserName = User.Identity.Name,
                     ActionDate = DateTime.Now
                 });
@@ -101,7 +107,7 @@ namespace IPAPPM.Web.Portal.Controllers
                 db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
                 {
                     Action = "UPDATE",
-                    ActionItem = "CommonPrintingProblem",
+                    ActionItem = "Common Printing Problem",
                     UserName = User.Identity.Name,
                     ActionDate = DateTime.Now
                 });
@@ -138,7 +144,7 @@ namespace IPAPPM.Web.Portal.Controllers
                 db.tbl_AuditTrail.AddObject(new tbl_AuditTrail
                 {
                     Action = "DELETE",
-                    ActionItem = "CommonPrintingProblem",
+                    ActionItem = "Common Printing Problem",
                     UserName = User.Identity.Name,
                     ActionDate = DateTime.Now
                 });

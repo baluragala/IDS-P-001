@@ -6,8 +6,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<h2>Edit</h2>
-
 <% using (Html.BeginForm()) { %>
     <%: Html.ValidationSummary(true) %>
 
@@ -17,18 +15,22 @@
 
         <div class="editor-label">
             <%: Html.LabelFor(model => model.Title) %>
+             <span class="field-validation-error">*</span>
+             <%: Html.ValidationMessageFor(model => model.Title) %>
         </div>
         <div class="editor-field">
             <%: Html.TextAreaFor(model => model.Title) %>
-            <%: Html.ValidationMessageFor(model => model.Title) %>
+            
         </div>
 
         <div class="editor-label">
             <%: Html.LabelFor(model => model.Description) %>
+             <span class="field-validation-error">*</span>
+              <%: Html.ValidationMessageFor(model => model.Description) %>
         </div>
         <div class="editor-field">
             <%: Html.TextAreaFor(model => model.Description)%>
-            <%: Html.ValidationMessageFor(model => model.Description) %>
+           
         </div>
 
             <%: Html.HiddenFor(model => model.TermType) %>
@@ -36,7 +38,8 @@
             <%: Html.HiddenFor(model => model.CreatedBy) %>
         
             <%: Html.HiddenFor(model => model.CreatedDate) %>
-           
+        
+        <br />   
         <p>
             <input type="submit" value="Update" />
         </p>
@@ -50,6 +53,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
+Common Paper Terms 
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">

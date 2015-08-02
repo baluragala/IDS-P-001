@@ -38,6 +38,9 @@
     <Reference Include="AjaxControlToolkit">
       <HintPath>..\packages\AjaxControlToolkit.15.1.2.0\lib\net40\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="CaptchaMvc">
+      <HintPath>..\packages\CaptchaMvc.Mvc4.1.5.0\lib\net40-full\CaptchaMvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MvcCheckBoxList">
       <HintPath>..\packages\MvcCheckBoxList.1.4.4.5\lib\net40\MvcCheckBoxList.dll</HintPath>
@@ -190,6 +193,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CaptchaImage_2.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\IPAPPMEntities.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -198,6 +202,13 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\DashboardVM.cs" />
+    <Compile Include="Views\Account\CaptchaImage.aspx.cs">
+      <DependentUpon>CaptchaImage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Account\CaptchaImage.aspx.designer.cs">
+      <DependentUpon>CaptchaImage.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app.css" />
@@ -393,6 +404,7 @@
     <Content Include="Scripts\tinymce\skins\lightgray\skin.min.css" />
     <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
+    <Content Include="Views\Account\CaptchaImage.aspx" />
     <Content Include="Views\AdminLog\Create.aspx" />
     <Content Include="Views\AdminLog\Delete.aspx" />
     <Content Include="Views\AdminLog\Details.aspx" />
@@ -526,6 +538,11 @@
     <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <None Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Views\Shared\Root.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\IPAPPM_Resources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

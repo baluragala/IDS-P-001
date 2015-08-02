@@ -16,6 +16,7 @@
 
         <div class="editor-label">
             <%: Html.LabelFor(model => model.EndUsage,"End Usage") %>
+            <span class="field-validation-error">*</span>
         </div>
         <div class="editor-field">
             <%: Html.EditorFor(model => model.EndUsage) %>
@@ -32,14 +33,17 @@
 
         <div class="editor-label">
             <%: Html.LabelFor(model => model.Product) %>
+            <span class="field-validation-error">*</span>
         </div>
+
         <div class="editor-field">
             <%: Html.EditorFor(model => model.Product) %>
             <%: Html.ValidationMessageFor(model => model.Product) %>
         </div>
 
         <div class="editor-label">
-            <%: Html.LabelFor(model => model.GSMRange) %>
+            <%: Html.LabelFor(model => model.GSMRange,"GSM Range") %>
+            <span class="field-validation-error">*</span>
         </div>
         <div class="editor-field">
             <%: Html.EditorFor(model => model.GSMRange) %>
@@ -48,12 +52,13 @@
 
         <div class="editor-label">
             <%: Html.LabelFor(model => model.Availability) %>
+            <span class="field-validation-error">*</span>
         </div>
         <div class="editor-field">
             <%: Html.EditorFor(model => model.Availability) %>
             <%: Html.ValidationMessageFor(model => model.Availability) %>
         </div>
-
+        <br />
         <p>
             <input type="submit" value="Update" />
         </p>

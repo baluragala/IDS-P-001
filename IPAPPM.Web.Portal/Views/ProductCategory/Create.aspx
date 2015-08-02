@@ -18,7 +18,8 @@
         <legend></legend>
 
         <div class="editor-label">
-            <%: Html.LabelFor(model => model.Category_Name) %>
+            <%: Html.LabelFor(model => model.Category_Name,"Name") %>
+            <span class="field-validation-error">*</span>
         </div>
         <div class="editor-field">
             <%: Html.EditorFor(model => model.Category_Name) %>
@@ -27,14 +28,16 @@
 
         <div class="editor-label">
             <%: Html.LabelFor(model => model.Description) %>
+            <span class="field-validation-error">*</span>
+            <%: Html.ValidationMessageFor(model => model.Description) %>
         </div>
         <div class="editor-field">
             <%: Html.TextAreaFor(model => model.Description) %>
-            <%: Html.ValidationMessageFor(model => model.Description) %>
+            
         </div>
 
         <div class="editor-label">
-            <%: Html.LabelFor(model => model.ImagePath) %>
+            <%: Html.LabelFor(model => model.ImagePath,"Upload Image") %>
         </div>
         <div class="editor-field">
             <input id="ImagePath" title="Upload a image"

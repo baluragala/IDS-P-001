@@ -62,7 +62,7 @@
                 <ul class="nav navbar-nav pull-left">
 
                     <li>Last Login Time:
-                            <asp:Label ID="lblCurrentDate" runat="server" Text="16/07/2015 1.01PM"></asp:Label>
+                                                <%: Session["LastLoginTime"]%>
                     </li>
                 </ul>
 
