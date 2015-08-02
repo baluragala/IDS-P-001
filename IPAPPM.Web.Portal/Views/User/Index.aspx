@@ -1,4 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<IPAPPM.Web.Portal.Models.tbl_UserDetails>>" %>
+﻿<%@ Import Namespace="PagedList.Mvc" %>
+<%@ Import Namespace="PagedList" %>
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" 
+Inherits="System.Web.Mvc.ViewPage<PagedList.IPagedList<IPAPPM.Web.Portal.Models.tbl_UserDetails>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
@@ -15,16 +19,16 @@
             Company
         </th>
         <th>
-            <%: Html.DisplayNameFor(model => model.Designation) %>
+          Designation
         </th>
         <th>
-            <%: Html.DisplayNameFor(model => model.Email) %>
+            Email
         </th>
         <th>
             Mobile
         </th>
         <th>
-            <%: Html.DisplayNameFor(model => model.City) %>
+           City
         </th>
 
         <th>
@@ -71,7 +75,10 @@
 <% } %>
 
 </table>
+Page <%: (Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) %> of <%:Model.PageCount %>
 
+<%: Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    %>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">

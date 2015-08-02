@@ -7,9 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using IPAPPM.Web.Portal.Models;
 using System.Web.UI.WebControls;
-using System.IO;
+using System.IO;    
 using System.Web.UI;
-
+using PagedList;
 namespace IPAPPM.Web.Portal.Controllers
 {
     [Authorize]
@@ -20,9 +20,12 @@ namespace IPAPPM.Web.Portal.Controllers
         //
         // GET: /Audit/
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.tbl_AuditTrail.OrderByDescending(a=>a.ActionDate).ToList());
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
+            
+            return View(db.tbl_AuditTrail.OrderByDescending(a=>a.ActionDate).ToPagedList(pageNumber,pageSize));
         }
 
         public ActionResult ExportData()

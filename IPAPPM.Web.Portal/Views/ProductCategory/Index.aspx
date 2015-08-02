@@ -1,4 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<IPAPPM.Web.Portal.Models.tbl_ProductCategory>>" %>
+﻿<%@ Import Namespace="PagedList.Mvc" %>
+<%@ Import Namespace="PagedList" %>
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" 
+Inherits="System.Web.Mvc.ViewPage<PagedList.IPagedList<IPAPPM.Web.Portal.Models.tbl_ProductCategory>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
@@ -50,6 +54,12 @@
         </tr>
         <% } %>
     </table>
+
+    Page <%: (Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) %> of <%:Model.PageCount %>
+
+<%: Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    
+    %>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptsSection" runat="server">
     <script type="text/javascript">

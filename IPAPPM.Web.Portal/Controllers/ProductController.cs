@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IPAPPM.Web.Portal.Models;
+using PagedList;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
@@ -17,10 +18,12 @@ namespace IPAPPM.Web.Portal.Controllers
         //
         // GET: /Product/
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
             var tbl_productdetails = db.tbl_ProductDetails.Include("tbl_ProductCategory");
-            return View(tbl_productdetails.ToList());
+            return View(tbl_productdetails.OrderBy(p=>p.Product_Id).ToPagedList(pageNumber,pageSize));
         }
 
         //

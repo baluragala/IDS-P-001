@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IPAPPM.Web.Portal.Models;
+using PagedList;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
@@ -17,9 +18,11 @@ namespace IPAPPM.Web.Portal.Controllers
         //
         // GET: /Notification/
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.tbl_Notifications.ToList());
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
+            return View(db.tbl_Notifications.OrderByDescending(n=>n.CreatedDate).ToPagedList(pageNumber,pageSize));
         }
 
         //

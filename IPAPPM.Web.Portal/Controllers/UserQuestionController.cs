@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IPAPPM.Web.Portal.Models;
+using PagedList;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
@@ -17,10 +18,13 @@ namespace IPAPPM.Web.Portal.Controllers
         //
         // GET: /UserQuestion/
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
+
         {
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
             var tbl_userquestions = db.tbl_UserQuestions.Include("tbl_UserDetails");
-            return View(tbl_userquestions.ToList());
+            return View(tbl_userquestions.OrderByDescending(q=>q.CreatedDate).ToPagedList(pageNumber,pageSize));
         }
 
         //

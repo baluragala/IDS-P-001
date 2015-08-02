@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IPAPPM.Web.Portal.Models;
+using PagedList;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
@@ -17,14 +18,17 @@ namespace IPAPPM.Web.Portal.Controllers
         //
         // GET: /Seller/
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
             var tbl_sellerdetails = db.tbl_SellerDetails
                                        .Include("tbl_City")
                                        .Include("tbl_SellerType")
                                        .Include("tbl_State")
                                        .Include("tbl_ProductCategory");
-            return View(tbl_sellerdetails.ToList());
+            return View(tbl_sellerdetails.OrderBy(s=>s.Seller_Id).ToPagedList(pageNumber,pageSize));
         }
 
         //

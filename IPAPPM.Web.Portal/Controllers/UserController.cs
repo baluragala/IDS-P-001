@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IPAPPM.Web.Portal.Models;
+using PagedList;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
@@ -17,10 +18,12 @@ namespace IPAPPM.Web.Portal.Controllers
         //
         // GET: /User/
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
             var tbl_userdetails = db.tbl_UserDetails.Include("tbl_CompanyType").Include("tbl_MRoles");
-            return View(tbl_userdetails.OrderByDescending(u=>u.Registered_Date).ToList());
+            return View(tbl_userdetails.OrderByDescending(u=>u.Registered_Date).ToPagedList(pageNumber,pageSize));
         }
 
         //

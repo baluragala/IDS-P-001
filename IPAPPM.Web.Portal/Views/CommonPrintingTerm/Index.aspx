@@ -1,4 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<IPAPPM.Web.Portal.Models.tbl_CommonTerms>>" %>
+﻿<%@ Import Namespace="PagedList.Mvc" %>
+<%@ Import Namespace="PagedList" %>
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" 
+Inherits="System.Web.Mvc.ViewPage<PagedList.IPagedList<IPAPPM.Web.Portal.Models.tbl_CommonTerms>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
@@ -10,10 +14,10 @@
     <table class="table table-bordered">
         <tr>
             <th>
-                <%: Html.DisplayNameFor(model => model.Title) %>
+                Title
             </th>
             <th>
-                <%: Html.DisplayNameFor(model => model.Description) %>
+               Description
             </th>
             <th>
             </th>
@@ -35,6 +39,11 @@
         </tr>
         <% } %>
     </table>
+      Page <%: (Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) %> of <%:Model.PageCount %>
+
+<%: Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    
+    %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
     Common Printing Terms

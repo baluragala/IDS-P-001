@@ -1,4 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<IPAPPM.Web.Portal.Models.tbl_UserQuestions>>" %>
+﻿<%@ Import Namespace="PagedList.Mvc" %>
+<%@ Import Namespace="PagedList" %>
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" 
+Inherits="System.Web.Mvc.ViewPage<PagedList.IPagedList<IPAPPM.Web.Portal.Models.tbl_UserQuestions>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
@@ -6,16 +10,16 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <div class="col-md-1">
-            <%: Html.DisplayNameFor(model => model.Question_Id) %>
+           Id
         </div>
         <div class="col-md-2">
-            <%: Html.DisplayNameFor(model => model.Question) %>
-        </div>
+            Question
+                    </div>
         <div class="col-md-5">
-            <%: Html.DisplayNameFor(model => model.Answer) %>
+           Answer
         </div>
         <div class="col-md-1">
-            <%: Html.DisplayNameFor(model => model.tbl_UserDetails.Name) %>
+            User
         </div>
         <div class="col-md-1">
         </div>
@@ -42,6 +46,11 @@
         </div>
     </div>
     <% } %>
+      Page <%: (Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) %> of <%:Model.PageCount %>
+
+<%: Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    
+    %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
     Answer Questions

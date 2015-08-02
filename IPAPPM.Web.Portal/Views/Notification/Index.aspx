@@ -1,4 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<IPAPPM.Web.Portal.Models.tbl_Notifications>>" %>
+﻿<%@ Import Namespace="PagedList.Mvc" %>
+<%@ Import Namespace="PagedList" %>
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" 
+Inherits="System.Web.Mvc.ViewPage<PagedList.IPagedList<IPAPPM.Web.Portal.Models.tbl_Notifications>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
@@ -10,10 +14,10 @@
     </p>
     <div class="row">
         <div class="col-md-2">
-            <%: Html.DisplayNameFor(model => model.Notification_Id) %>
+           Id
         </div>
         <div class="col-md-8">
-            <%: Html.DisplayNameFor(model => model.Message) %>
+           Notification Message
         </div>
          <div class="col-md-2">
             
@@ -35,6 +39,11 @@
      </div>    
     </div>
     <% } %>
+        Page <%: (Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) %> of <%:Model.PageCount %>
+
+<%: Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    
+    %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FeaturedContent" runat="server">
     Notifications

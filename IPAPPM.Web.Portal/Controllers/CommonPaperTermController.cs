@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IPAPPM.Web.Portal.Models;
-
+using PagedList;
 namespace IPAPPM.Web.Portal.Controllers
 {
     public class CommonPaperTermController : Controller
@@ -16,9 +16,11 @@ namespace IPAPPM.Web.Portal.Controllers
         //
         // GET: /CommonPaperTerms/
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.tbl_CommonTerms.Where(c=>c.TermType==1).ToList());
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
+            return View(db.tbl_CommonTerms.Where(c=>c.TermType==1).OrderBy(t=>t.Title).ToPagedList(pageNumber,pageSize));
         }
 
         //
