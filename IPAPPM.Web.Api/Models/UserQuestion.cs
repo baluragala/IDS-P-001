@@ -35,7 +35,8 @@ namespace IPAPPM.Web.Api.Models
                              select new UserQuestion
                        {
                            Question = c.Question,
-                           Answer = c.Answer
+                           Answer = c.Answer,
+                           UserId = c.UserId
                        }).ToList();
             return userQuestions;
         }

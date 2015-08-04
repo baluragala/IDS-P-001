@@ -23,7 +23,7 @@ namespace IPAPPM.Web.Api.Models
                           {
                               Name = c.CompanyName,
                               Text = c.Text,
-                              ImagePath = c.Imagepath,
+                              ImagePath = c.ImagePath,
                               WebSite = c.Website
                           }).Single();
             return companyInfo;

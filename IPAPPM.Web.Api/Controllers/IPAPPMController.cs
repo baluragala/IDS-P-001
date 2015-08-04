@@ -30,26 +30,14 @@ namespace IPAPPM.Web.Api.Controllers
             return new Product().GetProducts(fromTime);
         }
 
-        //public List<Product> GetFavoriteProducts(String userId)
-        //{
-        //    return new Product().GetFavoriteProductsByUser(userId);
-        //}
-       
-
         public CompanyInfo GetCompanyInfo(DateTime fromTime)
         {
             return new CompanyInfo().GetCompanyInfo(fromTime);
         }
 
-        public List<Notification> GetNotifications(int userId)
+        public List<Notification> GetNotifications(DateTime fromTime)
         {
-            return new Notification().GetUserNotifications(userId);
-        }
-
-
-        public void MarkNotificatoinAsRead(int notificationId, int userId)
-        {
-            new Notification().MarkNotificatoinAsRead(notificationId, userId);
+            return new Notification().GetUserNotifications(fromTime);
         }
 
         public UserDetails GetUserDetails(String mobileNumber)
@@ -62,17 +50,24 @@ namespace IPAPPM.Web.Api.Controllers
             return new UserQuestion().GeUserQuestions(fromTime);
         }
 
+        public List<EndUsage> GetEndUsages(DateTime fromTime)
+        {
+            return new EndUsage().GetEndUsages(fromTime);
+        }
+
+        public List<CommonTerm> GetCommonTerms(int termType,DateTime fromTime)
+        {
+            return new CommonTerm().GetCommonTerms(termType,fromTime);
+        }
+
+       
         [HttpPost]
         public void Register(UserDetails userDetails)
         {
             new UserDetails().Register(userDetails);
         }
 
-        //[HttpPost]
-        //public void SetFavoriteProduct(FavoriteProduct favoriteProduct)
-        //{
-        //    new FavoriteProduct().SetFavouriteProduct(favoriteProduct);
-        //}
+     
 
         [HttpPost]
         public void SaveQuestion(UserQuestion userQuestion)

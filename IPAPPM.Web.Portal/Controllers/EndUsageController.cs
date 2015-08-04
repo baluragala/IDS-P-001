@@ -51,6 +51,9 @@ namespace IPAPPM.Web.Portal.Controllers
         [HttpPost]
         public ActionResult Create(tbl_EndUsage tbl_endusage)
         {
+            tbl_endusage.CreatedBy = User.Identity.Name;
+            tbl_endusage.CreatedDate = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 db.tbl_EndUsage.AddObject(tbl_endusage);
@@ -80,6 +83,8 @@ namespace IPAPPM.Web.Portal.Controllers
         [HttpPost]
         public ActionResult Edit(tbl_EndUsage tbl_endusage)
         {
+            tbl_endusage.ModifiedBy = User.Identity.Name;
+            tbl_endusage.ModifiedDate = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.tbl_EndUsage.Attach(tbl_endusage);

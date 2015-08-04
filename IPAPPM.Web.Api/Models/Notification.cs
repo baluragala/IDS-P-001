@@ -36,6 +36,22 @@ namespace IPAPPM.Web.Api.Models
 
         }
 
+        public List<Notification> GetUserNotifications(DateTime fromTime)
+        {
+            List<Notification> notifications;
+            notifications = (from c in db.tbl_Notifications
+                             where c.CreatedDate >= fromTime
+                             select new Notification
+                             {
+                                 Message = c.Message,
+                                 NotificationId = c.Notification_Id
+
+                             }).ToList();
+
+            return notifications;
+
+        }
+
         public void MarkNotificatoinAsRead(int notificationId,int userId)
         {
             tbl_UserNotifications entity = new tbl_UserNotifications

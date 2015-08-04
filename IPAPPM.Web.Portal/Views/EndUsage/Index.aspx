@@ -19,7 +19,7 @@ Inherits="System.Web.Mvc.ViewPage<PagedList.IPagedList<IPAPPM.Web.Portal.Models.
                 Sub End Usage
             </th>
             <th>
-                Product>
+                Product
             </th>
             <th>
                 GSMRange

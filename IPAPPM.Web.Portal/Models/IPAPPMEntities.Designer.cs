@@ -22,13 +22,13 @@ using System.ComponentModel.DataAnnotations;
 
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_City__State___45F365D3", "tbl_State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Portal.Models.tbl_State), "tbl_City", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_City), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_Seller__City__2CF2ADDF", "tbl_City", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Portal.Models.tbl_City), "tbl_SellerDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_SellerDetails), true)]
+[assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserD__Compa__145C0A3F", "tbl_CompanyType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Portal.Models.tbl_CompanyType), "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_UserDetails), true)]
+[assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserD__RoleI__15502E78", "tbl_MRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Portal.Models.tbl_MRoles), "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_UserDetails), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_Produ__Categ__25518C17", "tbl_ProductCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(IPAPPM.Web.Portal.Models.tbl_ProductCategory), "tbl_ProductDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_ProductDetails), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_Selle__Selle__2B0A656D", "tbl_SellerType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Portal.Models.tbl_SellerType), "tbl_SellerDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_SellerDetails), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_Selle__State__2BFE89A6", "tbl_State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Portal.Models.tbl_State), "tbl_SellerDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_SellerDetails), true)]
-[assembly: EdmRelationshipAttribute("IPAPPM.Model", "tbl_SellerProductCategories", "tbl_ProductCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_ProductCategory), "tbl_SellerDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_SellerDetails))]
-[assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserD__Compa__145C0A3F", "tbl_CompanyType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Portal.Models.tbl_CompanyType), "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_UserDetails), true)]
-[assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserD__RoleI__15502E78", "tbl_MRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Portal.Models.tbl_MRoles), "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_UserDetails), true)]
 [assembly: EdmRelationshipAttribute("IPAPPM.Model", "FK__tbl_UserQ__UserI__534D60F1", "tbl_UserDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IPAPPM.Web.Portal.Models.tbl_UserDetails), "tbl_UserQuestions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_UserQuestions), true)]
+[assembly: EdmRelationshipAttribute("IPAPPM.Model", "tbl_SellerProductCategories", "tbl_ProductCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_ProductCategory), "tbl_SellerDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IPAPPM.Web.Portal.Models.tbl_SellerDetails))]
 
 #endregion
 
@@ -83,6 +83,22 @@ namespace IPAPPM.Web.Portal.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<tbl_AuditTrail> tbl_AuditTrail
+        {
+            get
+            {
+                if ((_tbl_AuditTrail == null))
+                {
+                    _tbl_AuditTrail = base.CreateObjectSet<tbl_AuditTrail>("tbl_AuditTrail");
+                }
+                return _tbl_AuditTrail;
+            }
+        }
+        private ObjectSet<tbl_AuditTrail> _tbl_AuditTrail;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<tbl_City> tbl_City
         {
             get
@@ -115,6 +131,22 @@ namespace IPAPPM.Web.Portal.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<tbl_CompanyInfo> tbl_CompanyInfo
+        {
+            get
+            {
+                if ((_tbl_CompanyInfo == null))
+                {
+                    _tbl_CompanyInfo = base.CreateObjectSet<tbl_CompanyInfo>("tbl_CompanyInfo");
+                }
+                return _tbl_CompanyInfo;
+            }
+        }
+        private ObjectSet<tbl_CompanyInfo> _tbl_CompanyInfo;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<tbl_CompanyType> tbl_CompanyType
         {
             get
@@ -127,6 +159,22 @@ namespace IPAPPM.Web.Portal.Models
             }
         }
         private ObjectSet<tbl_CompanyType> _tbl_CompanyType;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<tbl_EndUsage> tbl_EndUsage
+        {
+            get
+            {
+                if ((_tbl_EndUsage == null))
+                {
+                    _tbl_EndUsage = base.CreateObjectSet<tbl_EndUsage>("tbl_EndUsage");
+                }
+                return _tbl_EndUsage;
+            }
+        }
+        private ObjectSet<tbl_EndUsage> _tbl_EndUsage;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -275,6 +323,22 @@ namespace IPAPPM.Web.Portal.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<tbl_UserDetails> tbl_UserDetails
+        {
+            get
+            {
+                if ((_tbl_UserDetails == null))
+                {
+                    _tbl_UserDetails = base.CreateObjectSet<tbl_UserDetails>("tbl_UserDetails");
+                }
+                return _tbl_UserDetails;
+            }
+        }
+        private ObjectSet<tbl_UserDetails> _tbl_UserDetails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<tbl_UserNotifications> tbl_UserNotifications
         {
             get
@@ -303,74 +367,18 @@ namespace IPAPPM.Web.Portal.Models
             }
         }
         private ObjectSet<tbl_UserQuestions> _tbl_UserQuestions;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<tbl_UserDetails> tbl_UserDetails
-        {
-            get
-            {
-                if ((_tbl_UserDetails == null))
-                {
-                    _tbl_UserDetails = base.CreateObjectSet<tbl_UserDetails>("tbl_UserDetails");
-                }
-                return _tbl_UserDetails;
-            }
-        }
-        private ObjectSet<tbl_UserDetails> _tbl_UserDetails;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<tbl_AuditTrail> tbl_AuditTrail
-        {
-            get
-            {
-                if ((_tbl_AuditTrail == null))
-                {
-                    _tbl_AuditTrail = base.CreateObjectSet<tbl_AuditTrail>("tbl_AuditTrail");
-                }
-                return _tbl_AuditTrail;
-            }
-        }
-        private ObjectSet<tbl_AuditTrail> _tbl_AuditTrail;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<tbl_EndUsage> tbl_EndUsage
-        {
-            get
-            {
-                if ((_tbl_EndUsage == null))
-                {
-                    _tbl_EndUsage = base.CreateObjectSet<tbl_EndUsage>("tbl_EndUsage");
-                }
-                return _tbl_EndUsage;
-            }
-        }
-        private ObjectSet<tbl_EndUsage> _tbl_EndUsage;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<tbl_CompanyInfo> tbl_CompanyInfo
-        {
-            get
-            {
-                if ((_tbl_CompanyInfo == null))
-                {
-                    _tbl_CompanyInfo = base.CreateObjectSet<tbl_CompanyInfo>("tbl_CompanyInfo");
-                }
-                return _tbl_CompanyInfo;
-            }
-        }
-        private ObjectSet<tbl_CompanyInfo> _tbl_CompanyInfo;
 
         #endregion
 
         #region AddTo Methods
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the tbl_AuditTrail EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotbl_AuditTrail(tbl_AuditTrail tbl_AuditTrail)
+        {
+            base.AddObject("tbl_AuditTrail", tbl_AuditTrail);
+        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the tbl_City EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -389,11 +397,27 @@ namespace IPAPPM.Web.Portal.Models
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the tbl_CompanyInfo EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotbl_CompanyInfo(tbl_CompanyInfo tbl_CompanyInfo)
+        {
+            base.AddObject("tbl_CompanyInfo", tbl_CompanyInfo);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the tbl_CompanyType EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTotbl_CompanyType(tbl_CompanyType tbl_CompanyType)
         {
             base.AddObject("tbl_CompanyType", tbl_CompanyType);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the tbl_EndUsage EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotbl_EndUsage(tbl_EndUsage tbl_EndUsage)
+        {
+            base.AddObject("tbl_EndUsage", tbl_EndUsage);
         }
     
         /// <summary>
@@ -469,6 +493,14 @@ namespace IPAPPM.Web.Portal.Models
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the tbl_UserDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotbl_UserDetails(tbl_UserDetails tbl_UserDetails)
+        {
+            base.AddObject("tbl_UserDetails", tbl_UserDetails);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the tbl_UserNotifications EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTotbl_UserNotifications(tbl_UserNotifications tbl_UserNotifications)
@@ -482,38 +514,6 @@ namespace IPAPPM.Web.Portal.Models
         public void AddTotbl_UserQuestions(tbl_UserQuestions tbl_UserQuestions)
         {
             base.AddObject("tbl_UserQuestions", tbl_UserQuestions);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the tbl_UserDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTotbl_UserDetails(tbl_UserDetails tbl_UserDetails)
-        {
-            base.AddObject("tbl_UserDetails", tbl_UserDetails);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the tbl_AuditTrail EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTotbl_AuditTrail(tbl_AuditTrail tbl_AuditTrail)
-        {
-            base.AddObject("tbl_AuditTrail", tbl_AuditTrail);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the tbl_EndUsage EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTotbl_EndUsage(tbl_EndUsage tbl_EndUsage)
-        {
-            base.AddObject("tbl_EndUsage", tbl_EndUsage);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the tbl_CompanyInfo EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTotbl_CompanyInfo(tbl_CompanyInfo tbl_CompanyInfo)
-        {
-            base.AddObject("tbl_CompanyInfo", tbl_CompanyInfo);
         }
 
         #endregion
@@ -895,15 +895,17 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         /// <param name="ctTerms_Id">Initial value of the CtTerms_Id property.</param>
         /// <param name="title">Initial value of the Title property.</param>
+        /// <param name="description">Initial value of the Description property.</param>
         /// <param name="termType">Initial value of the TermType property.</param>
         /// <param name="iSActive">Initial value of the ISActive property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        public static tbl_CommonTerms Createtbl_CommonTerms(global::System.Int32 ctTerms_Id, global::System.String title, global::System.Int32 termType, global::System.Boolean iSActive, global::System.String createdBy, global::System.DateTime createdDate)
+        public static tbl_CommonTerms Createtbl_CommonTerms(global::System.Int32 ctTerms_Id, global::System.String title, global::System.String description, global::System.Int32 termType, global::System.Boolean iSActive, global::System.String createdBy, global::System.DateTime createdDate)
         {
             tbl_CommonTerms tbl_CommonTerms = new tbl_CommonTerms();
             tbl_CommonTerms.CtTerms_Id = ctTerms_Id;
             tbl_CommonTerms.Title = title;
+            tbl_CommonTerms.Description = description;
             tbl_CommonTerms.TermType = termType;
             tbl_CommonTerms.ISActive = iSActive;
             tbl_CommonTerms.CreatedBy = createdBy;
@@ -970,9 +972,9 @@ namespace IPAPPM.Web.Portal.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        [Required(ErrorMessage="required")]
+        [Required(ErrorMessage = "required")]
         public global::System.String Description
         {
             get
@@ -983,7 +985,7 @@ namespace IPAPPM.Web.Portal.Models
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
+                _Description = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -1067,6 +1069,30 @@ namespace IPAPPM.Web.Portal.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedDate
+        {
+            get
+            {
+                return _CreatedDate;
+            }
+            set
+            {
+                OnCreatedDateChanging(value);
+                ReportPropertyChanging("CreatedDate");
+                _CreatedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedDate");
+                OnCreatedDateChanged();
+            }
+        }
+        private global::System.DateTime _CreatedDate;
+        partial void OnCreatedDateChanging(global::System.DateTime value);
+        partial void OnCreatedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String ModifiedBy
@@ -1111,30 +1137,6 @@ namespace IPAPPM.Web.Portal.Models
         private Nullable<global::System.DateTime> _ModifiedDate;
         partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
         partial void OnModifiedDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime CreatedDate
-        {
-            get
-            {
-                return _CreatedDate;
-            }
-            set
-            {
-                OnCreatedDateChanging(value);
-                ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreatedDate");
-                OnCreatedDateChanged();
-            }
-        }
-        private global::System.DateTime _CreatedDate;
-        partial void OnCreatedDateChanging(global::System.DateTime value);
-        partial void OnCreatedDateChanged();
 
         #endregion
 
@@ -1212,7 +1214,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        [Required(ErrorMessage="required")]
+        [Required(ErrorMessage = "required")]
         public global::System.String CompanyName
         {
             get
@@ -1632,7 +1634,9 @@ namespace IPAPPM.Web.Portal.Models
         /// <param name="product">Initial value of the Product property.</param>
         /// <param name="gSMRange">Initial value of the GSMRange property.</param>
         /// <param name="availability">Initial value of the Availability property.</param>
-        public static tbl_EndUsage Createtbl_EndUsage(global::System.Int32 endUsage_Id, global::System.String endUsage, global::System.String product, global::System.String gSMRange, global::System.String availability)
+        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
+        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        public static tbl_EndUsage Createtbl_EndUsage(global::System.Int32 endUsage_Id, global::System.String endUsage, global::System.String product, global::System.String gSMRange, global::System.String availability, global::System.String createdBy, global::System.DateTime createdDate)
         {
             tbl_EndUsage tbl_EndUsage = new tbl_EndUsage();
             tbl_EndUsage.EndUsage_Id = endUsage_Id;
@@ -1640,6 +1644,8 @@ namespace IPAPPM.Web.Portal.Models
             tbl_EndUsage.Product = product;
             tbl_EndUsage.GSMRange = gSMRange;
             tbl_EndUsage.Availability = availability;
+            tbl_EndUsage.CreatedBy = createdBy;
+            tbl_EndUsage.CreatedDate = createdDate;
             return tbl_EndUsage;
         }
 
@@ -1679,7 +1685,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        [Required(ErrorMessage="required")]
+        [Required(ErrorMessage = "required")]
         public global::System.String EndUsage
         {
             get
@@ -1704,6 +1710,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage = "required")]
         public global::System.String SubEndUsage
         {
             get
@@ -1797,6 +1804,102 @@ namespace IPAPPM.Web.Portal.Models
         private global::System.String _Availability;
         partial void OnAvailabilityChanging(global::System.String value);
         partial void OnAvailabilityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                OnCreatedByChanging(value);
+                ReportPropertyChanging("CreatedBy");
+                _CreatedBy = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("CreatedBy");
+                OnCreatedByChanged();
+            }
+        }
+        private global::System.String _CreatedBy;
+        partial void OnCreatedByChanging(global::System.String value);
+        partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedDate
+        {
+            get
+            {
+                return _CreatedDate;
+            }
+            set
+            {
+                OnCreatedDateChanging(value);
+                ReportPropertyChanging("CreatedDate");
+                _CreatedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedDate");
+                OnCreatedDateChanged();
+            }
+        }
+        private global::System.DateTime _CreatedDate;
+        partial void OnCreatedDateChanging(global::System.DateTime value);
+        partial void OnCreatedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ModifiedDate;
+        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ModifiedBy
+        {
+            get
+            {
+                return _ModifiedBy;
+            }
+            set
+            {
+                OnModifiedByChanging(value);
+                ReportPropertyChanging("ModifiedBy");
+                _ModifiedBy = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ModifiedBy");
+                OnModifiedByChanged();
+            }
+        }
+        private global::System.String _ModifiedBy;
+        partial void OnModifiedByChanging(global::System.String value);
+        partial void OnModifiedByChanged();
 
         #endregion
 
@@ -2259,7 +2362,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        [Required(ErrorMessage="required")]
+        [Required(ErrorMessage = "required")]
         public global::System.String Message
         {
             get
@@ -2392,7 +2495,6 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        
         public global::System.Int32 Category_Id
         {
             get
@@ -2725,7 +2827,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        [Required(ErrorMessage="required")]
+        [Required(ErrorMessage = "required")]
         public global::System.String Product_Name
         {
             get
@@ -2919,7 +3021,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        [Required(ErrorMessage="required")]
+        [Required(ErrorMessage = "required")]
         public Nullable<global::System.Int32> Category_Id
         {
             get
@@ -3173,7 +3275,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        [Required(ErrorMessage="required")]
+        [Required(ErrorMessage = "required")]
         public global::System.String Seller_Name
         {
             get
@@ -3272,7 +3374,6 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        [Required(ErrorMessage = "required")]
         public global::System.Int32 SellerType_Id
         {
             get
@@ -3588,7 +3689,6 @@ namespace IPAPPM.Web.Portal.Models
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("IPAPPM.Model", "tbl_SellerProductCategories", "tbl_ProductCategory")]
-        
         public EntityCollection<tbl_ProductCategory> tbl_ProductCategory
         {
             get

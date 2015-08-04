@@ -13,6 +13,8 @@
        
 
         <%: Html.HiddenFor(model => model.EndUsage_Id) %>
+        <%: Html.HiddenFor(model => model.CreatedBy) %>
+        <%: Html.HiddenFor(model => model.CreatedDate) %>
 
         <div class="editor-label">
             <%: Html.LabelFor(model => model.EndUsage,"End Usage") %>
