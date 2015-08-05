@@ -23,10 +23,11 @@
         <div class="editor-label">
             <%: Html.LabelFor(model => model.Text) %>
             <span class="field-validation-error">*</span>
+            <%: Html.ValidationMessageFor(model => model.Text) %>
         </div>
         <div class="editor-field">
             <%: Html.TextAreaFor(model => model.Text) %>
-            <%: Html.ValidationMessageFor(model => model.Text) %>
+            
         </div>
         <div class="editor-label">
             <%: Html.LabelFor(model => model.ImagePath) %>

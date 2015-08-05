@@ -41,17 +41,17 @@ namespace IPAPPM.Web.Portal.Controllers
         {
             if (!this.IsCaptchaValid("Captcha is not valid"))
             {
-                ModelState.AddModelError("LoginError", "Captcha is not valid.");
+                ModelState.AddModelError("CaptchError", "Captcha is not valid");
                 return View(model);
             }
            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                tbl_LoginAudit entity=null;
-                var result 
+                tbl_LoginAudit entity = null;
+                var result
                     = from c in db.tbl_LoginAudit
-                       where c.UserName == model.UserName
-                       select c;
-                if(result.Count()>0)
+                      where c.UserName == model.UserName
+                      select c;
+                if (result.Count() > 0)
                     entity = result.Single();
 
                 if (entity == null)
@@ -67,18 +67,19 @@ namespace IPAPPM.Web.Portal.Controllers
                 else
                 {
                     Session["LastLoginTime"] = entity.LoginTime;
+                    Session["CurrentLoginTime"] = DateTime.Now;
                     entity.LoginTime = DateTime.Now;
                     entity.IP = Request.ServerVariables["REMOTE_ADDR"];
                     //entity.LogOutTime = null;
-                    db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
+                   // db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
                 }
                
-                db.SaveChanges();
+                //db.SaveChanges();
                 return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("LoginError", "The user name or password provided is incorrect.");
+            ModelState.AddModelError("LoginError", "user name or password provided is incorrect.");
             return View(model);
         }
 
@@ -94,7 +95,8 @@ namespace IPAPPM.Web.Portal.Controllers
             tbl_LoginAudit entity = (from c in db.tbl_LoginAudit
                                      where c.UserName == User.Identity.Name
                                      select c).SingleOrDefault();
-            
+
+            entity.LoginTime = Convert.ToDateTime(Session["CurrentLoginTime"].ToString());
             entity.LogOutTime = DateTime.Now;
 
             //db.tbl_LoginAudit.Attach(entity);

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IPAPPM.Web.Portal.ViewModels;
+using IPAPPM.Web.Portal.Helpers;
 
 namespace IPAPPM.web.portal.Controllers
 {
-    [Authorize]
+    [Authorize]  
     public class DashBoardController : Controller
     {
         //

@@ -9,6 +9,7 @@ using IPAPPM.Web.Portal.Models;
 using PagedList;
 namespace IPAPPM.Web.Portal.Controllers
 {
+    [Authorize]
     public class CommonPaperTermController : Controller
     {
         private IPAPPMLIVEEntities db = new IPAPPMLIVEEntities();

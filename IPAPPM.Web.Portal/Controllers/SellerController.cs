@@ -68,16 +68,18 @@ namespace IPAPPM.Web.Portal.Controllers
                 tbl_sellerdetails.CreatedBy = User.Identity.Name;
                 tbl_sellerdetails.CreatedDate = DateTime.Now;
                 tbl_sellerdetails.IsActive = true;
-                foreach (var categoryId in Request.Form["ProductCategories"].Split(','))
+                if (Request.Form["ProductCategories"] != null)
                 {
-                    int cid = Convert.ToInt32(categoryId);
-                    tbl_ProductCategory entity = (from c in db.tbl_ProductCategory
-                                                  where c.Category_Id == cid
-                                                  select c
-                                                      ).First();
-                    tbl_sellerdetails.tbl_ProductCategory.Add(entity);
+                    foreach (var categoryId in Request.Form["ProductCategories"].Split(','))
+                    {
+                        int cid = Convert.ToInt32(categoryId);
+                        tbl_ProductCategory entity = (from c in db.tbl_ProductCategory
+                                                      where c.Category_Id == cid
+                                                      select c
+                                                          ).First();
+                        tbl_sellerdetails.tbl_ProductCategory.Add(entity);
+                    }
                 }
-
                 db.tbl_SellerDetails.AddObject(tbl_sellerdetails);
 
                 //Audit 

@@ -950,6 +950,7 @@ namespace IPAPPM.Web.Portal.Models
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         [Required(ErrorMessage="required")]
+        [StringLength(2000,ErrorMessage="Field cannot be more than 2000 characters")]
         public global::System.String Title
         {
             get
@@ -975,6 +976,7 @@ namespace IPAPPM.Web.Portal.Models
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         [Required(ErrorMessage = "required")]
+        [StringLength(2000, ErrorMessage="Field cannot be more than 2000 characters")]
         public global::System.String Description
         {
             get
@@ -1215,6 +1217,7 @@ namespace IPAPPM.Web.Portal.Models
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         [Required(ErrorMessage = "required")]
+        [StringLength(100,ErrorMessage="Company Name cannot be more than 100 characters")]
         public global::System.String CompanyName
         {
             get
@@ -1686,6 +1689,7 @@ namespace IPAPPM.Web.Portal.Models
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         [Required(ErrorMessage = "required")]
+        [StringLength(50,ErrorMessage = "End usage cannot be more than 50 characters")]
         public global::System.String EndUsage
         {
             get
@@ -1710,7 +1714,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        [Required(ErrorMessage = "required")]
+        [StringLength(50, ErrorMessage = "Sub end usage cannot be more than 50 characters")]
         public global::System.String SubEndUsage
         {
             get
@@ -1736,6 +1740,7 @@ namespace IPAPPM.Web.Portal.Models
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         [Required(ErrorMessage = "required")]
+        [StringLength(50, ErrorMessage = "Product cannot be more than 50 characters")]
         public global::System.String Product
         {
             get
@@ -1761,6 +1766,8 @@ namespace IPAPPM.Web.Portal.Models
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         [Required(ErrorMessage = "required")]
+        [StringLength(10, ErrorMessage = "GSM Range cannot be more than 10 characters")]
+        [RegularExpression(@"^\d+-\d+$",ErrorMessage="Invalid GSM Range, only numbers and - allowed")]
         public global::System.String GSMRange
         {
             get
@@ -1786,6 +1793,7 @@ namespace IPAPPM.Web.Portal.Models
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         [Required(ErrorMessage = "required")]
+        [StringLength(50, ErrorMessage = "Availability cannot be more than 50 characters")]
         public global::System.String Availability
         {
             get
@@ -2523,6 +2531,7 @@ namespace IPAPPM.Web.Portal.Models
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         [Required(ErrorMessage = "required")]
+        [StringLength(50,ErrorMessage="Name cannot be more than 50 characters")]
         public global::System.String Category_Name
         {
             get
@@ -2548,6 +2557,7 @@ namespace IPAPPM.Web.Portal.Models
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         [Required(ErrorMessage = "required")]
+        [StringLength(100, ErrorMessage = "Description cannot be more than 100 characters")]
         public global::System.String Description
         {
             get
@@ -2828,6 +2838,7 @@ namespace IPAPPM.Web.Portal.Models
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         [Required(ErrorMessage = "required")]
+        [StringLength(50,ErrorMessage="Name cannot be more than 50 characters")]
         public global::System.String Product_Name
         {
             get
@@ -3276,6 +3287,7 @@ namespace IPAPPM.Web.Portal.Models
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         [Required(ErrorMessage = "required")]
+        [StringLength(20, ErrorMessage="Name cannot be more than 20 characters")]
         public global::System.String Seller_Name
         {
             get
@@ -3300,6 +3312,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        [StringLength(12, ErrorMessage = "Code cannot be more than 12 characters")]
         public global::System.String Seller_code
         {
             get
@@ -3325,6 +3338,7 @@ namespace IPAPPM.Web.Portal.Models
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         [Required(ErrorMessage = "required")]
+        [StringLength(2000, ErrorMessage = "Address cannot be more than 2000 characters")]
         public global::System.String Address
         {
             get
@@ -3350,6 +3364,7 @@ namespace IPAPPM.Web.Portal.Models
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         [Required(ErrorMessage = "required")]
+        [StringLength(100, ErrorMessage = "PhoneNumbers cannot be more than 100 characters")]
         public global::System.String PhoneNumbers
         {
             get
@@ -3374,6 +3389,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        [Required(ErrorMessage="required")]
         public global::System.Int32 SellerType_Id
         {
             get
@@ -4785,6 +4801,7 @@ namespace IPAPPM.Web.Portal.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        [StringLength(2000, ErrorMessage = "Answer cannot be more than 2000 characters")]
         public global::System.String Answer
         {
             get

@@ -2,7 +2,7 @@
 
 <%@ Import Namespace="CaptchaMvc.HtmlHelpers" %>
 <asp:Content ID="loginTitle" ContentPlaceHolderID="TitleContent" runat="server">
-    Log in
+    Login
 </asp:Content>
 <asp:Content ID="loginContent" ContentPlaceHolderID="MainContent" runat="server">
     <% using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
@@ -42,7 +42,8 @@
                     <%: Html.PasswordFor(m => m.Password, new Dictionary<string, object> { {"class","form-control input-sm chat-input"},{"placeholder","password"}})%>
                     <%: Html.ValidationMessageFor(model => model.Password) %>
                     <br />
-                    <%: Html.Captcha(4)%>
+                    <%: Html.Captcha("Try another", "Enter the text you see above:", 4, "Is required field", true)%>
+                    <%: Html.ValidationMessage("CaptchError")%>
                     <br />
                     <input type="submit" class="btn btn-primary btn-md" value="Login" />
                     <br />

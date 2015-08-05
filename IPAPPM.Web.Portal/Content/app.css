@@ -3480,3 +3480,9 @@ ul.support-list li {
     color:Red;
     font-size:medium;
 }
+
+.validation-summary-errors
+{
+    color:Red;
+    font-size:medium;
+}

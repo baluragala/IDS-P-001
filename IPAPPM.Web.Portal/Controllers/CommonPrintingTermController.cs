@@ -10,6 +10,7 @@ using PagedList;
 
 namespace IPAPPM.Web.Portal.Controllers
 {
+    [Authorize]
     public class CommonPrintingTermController : Controller
     {
         private IPAPPMLIVEEntities db = new IPAPPMLIVEEntities();

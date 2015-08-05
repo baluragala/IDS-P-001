@@ -56,9 +56,18 @@ namespace IPAPPM.Web.Portal.Controllers
 
             if (ModelState.IsValid)
             {
-                db.tbl_EndUsage.AddObject(tbl_endusage);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //check if record already exists
+                //tbl_EndUsage entity = db.tbl_EndUsage.Where(e => e.EndUsage == tbl_endusage.EndUsage && e.SubEndUsage==tbl_endusage.SubEndUsage).SingleOrDefault();
+                //if (entity != null)
+                //{
+                //    ModelState.AddModelError("","End Usage and Sub End Usage already exists");
+                //}
+                //else
+                //{
+                    db.tbl_EndUsage.AddObject(tbl_endusage);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                //}
             }
 
             return View(tbl_endusage);
@@ -119,7 +128,7 @@ namespace IPAPPM.Web.Portal.Controllers
                 tbl_EndUsage tbl_endusage = db.tbl_EndUsage.Single(t => t.EndUsage_Id == id);
                 db.tbl_EndUsage.DeleteObject(tbl_endusage);
                 db.SaveChanges();
-                return "End Usage deletd Successfully.";
+                return "End Usage deleted Successfully.";
             }
             catch (Exception ex)
             {
